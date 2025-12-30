@@ -458,12 +458,12 @@ const ChatInterface = () => {
             };
             recognition.start();
         } else {
-            alert("Voice input is not supported in this browser.");
+            window.alert("Voice input is not supported in this browser.");
         }
     };
 
     const clearChatHistory = () => {
-        if (confirm("Clear chat history?")) {
+        if (window.confirm("Clear chat history?")) {
             setMessages([
                 {
                     role: "assistant",
