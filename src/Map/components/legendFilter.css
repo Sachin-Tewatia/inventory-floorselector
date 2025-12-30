@@ -1,0 +1,30 @@
+/* Container to position the legend on the right side */
+.legend-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: flex-end; /* Align to the right */
+    padding-right: 20px; /* Add some padding from the right edge */
+  }
+  
+  /* Styling for the legend content */
+  .legend-content {
+    background: white; /* Add a background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+  }
+  
+  /* Styling for the list */
+  .legend-content ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .legend-content li {
+    margin: 10px 0; /* Add spacing between list items */
+  }

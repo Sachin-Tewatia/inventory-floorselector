@@ -1,0 +1,70 @@
+{
+  "name": "inspire",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.6",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@tippyjs/react": "^4.2.6",
+    "animate.css": "^4.1.1",
+    "antd": "^5.5.0",
+    "axios": "^1.4.0",
+    "cashfree-dropjs": "^1.1.4",
+    "create-react-class": "^15.7.0",
+    "device-detector-js": "^3.0.3",
+    "firebase": "^9.9.0",
+    "framer-motion": "^12.16.0",
+    "lucide-react": "^0.487.0",
+    "rc-slider": "^9.7.5",
+    "react": "^18.2.0",
+    "react-device-detect": "^2.2.3",
+    "react-dom": "^18.2.0",
+    "react-lottie": "^1.2.10",
+    "react-map-interaction": "^2.1.0",
+    "react-modal": "^3.16.1",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-zoom-pan-pinch": "^3.7.0",
+    "socket.io-client": "^4.8.1",
+    "styled-components": "^5.3.11",
+    "svg-path-reverse": "^1.5.0",
+    "swipe-listener": "^1.3.0",
+    "tailwindcss": "^3.3.2",
+    "tippy.js": "^6.3.7",
+    "uuid": "^9.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "winBuild": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.25"
+  }
+}

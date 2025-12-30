@@ -1,0 +1,755 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ 
+}
+
+:root{
+  --clr-available: #53fa53;
+  --clr-mixed-faded: #06da9063;
+  --clr-mixed: #09dc93;
+  --clr-booked: #f86262;
+  --clr-blocked: #faa064;
+  --clr-hold: #1cd2eb;
+  --clr-available-faded: #02d6027a;
+  --clr-booked-faded: #f8626277;
+  --clr-blocked-faded: #faa0646c;
+  --clr-hold-faded: #1cd3eb62;
+  /* --brand-color:#E35205;
+  --brand-color-fadded:#e35305e1; */
+  --brand-color:var(--button_background_blue);
+  --brand-color-fadded:var(--button_background_blue);
+}
+
+
+
+
+.unit-status.Sold {
+  opacity: 0.8;
+  color: var(--clr-booked);
+  font-weight: 600;
+}
+.unit-status.Booked {
+  opacity: 0.8;
+  color: var(--clr-booked);
+  font-weight: 600;
+}
+
+.unit-status.Available {
+  opacity: 0.8;
+  color: var(--clr-available);
+  font-weight: 600;
+}
+.Available:focus {
+  outline: none;
+
+}
+
+.unit-status.Blocked {
+  opacity: 0.8;
+  color: var(--clr-blocked);
+  font-weight: 600;
+}
+
+.unit-status.Hold {
+  opacity: 0.8;
+  color: var(--clr-hold);
+  font-weight: 600;
+}
+
+
+
+
+
+.tippy-box{
+  background-color: transparent !important;
+}
+
+
+.tippy-mark{
+  color: #fff;
+
+  padding: 0.5rem 1rem; 
+  border-radius:20px;
+  border: 1px solid #ffffff; color: #fff;
+  font-weight: 400;
+  font-size: 14px;
+
+  padding: 0.5rem 1rem; 
+  border: 1px solid #ffffff;
+}
+
+.highway.Delhi.Jaipur.Highway{
+  background-color: #FF5454;
+}
+
+.highway.Golf.Course{
+  background-color: #EBBB3F;
+}
+
+.highway.Southern.Peripheral.Road{
+  background-color: #62a324;
+}
+
+.highway.Dwarka.Expressway{
+  background-color: #7c50ce;
+}
+.highway.Sohna.Road{
+  background-color: #AADC49;
+}
+
+.highway{
+  background-color: #C226A9;
+}
+
+.tippy-mark.hotel{
+  background-color: #faa55b;
+}
+
+.tippy-mark.mall{
+  background-color: #4DBCE0;
+}
+
+.tippy-mark.school{
+  background-color: #95C040;
+}
+
+.tippy-mark.hospital{
+  background-color: rgb(173, 23, 23);
+}
+
+.towers-hover-info{
+  background-color: var(--panel_background) !important;
+  color: rgb(224, 219, 219) !important;
+  padding: 1rem !important;
+}
+
+.towers-hover-info .features div{
+  background-color: #5959597a !important;
+  margin: 0.3rem 0 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 5px !important;
+  width: 100% !important;
+  font-size: 14px !important;
+}
+
+/* Mobile responsive styles for towers-hover-info */
+@media screen and (max-width: 860px) {
+  .towers-hover-info {
+    padding: 0.4rem 0.6rem !important;
+    padding-right: 1rem !important;
+    min-width: 160px !important;
+  }
+
+  .towers-hover-info .features div {
+    margin: 0.25rem 0 !important;
+    padding: 0.2rem !important;
+    padding-top: 0.3rem !important;
+    padding-left: 0.3rem !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Medium screen responsive styles (860px - 1080px) */
+@media screen and (min-width: 861px) and (max-width: 1080px) {
+  .towers-hover-info {
+    padding: 0.5rem 0.8rem !important;
+    padding-right: 1.2rem !important;
+    min-width: 200px !important;
+  }
+
+  .towers-hover-info .features div {
+    margin: 0.3rem 0 !important;
+    padding: 0.3rem !important;
+    padding-top: 0.4rem !important;
+    padding-left: 0.5rem !important;
+    font-size: 13px !important;
+  }
+}
+
+
+
+
+.no-dec{
+  text-decoration: none;
+  color: unset;
+}
+
+.button {
+  display: inline-block;
+  border: none;
+  width: 100%;
+  padding: var(--paddings);
+  background: var(--button_background);
+  /* box-shadow: var(--button_shadow); */
+  border-radius: var(--radius);
+  margin-bottom: 5px;
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: center;
+  pointer-events: auto;
+  cursor: pointer;
+  color: var(--button_color);
+  transition: var(--transition);
+}
+
+.no-select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.no-select:focus {
+  outline: none !important;
+}
+
+
+
+.popup-colose-btn {
+  position: absolute;
+  z-index: 101;
+  right: 2rem;
+  top: 1rem;
+  background: white;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  cursor:pointer;
+  opacity: 0.8;
+  transition: all linear 200ms;
+}
+
+.popup-colose-btn:hover{
+  opacity: 1;
+}
+
+.disclaimer-body .header{
+  padding: 1rem 0rem;
+  padding-top: 0rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ffffff71;
+  margin-bottom: 1rem;
+}
+
+.disclaimer-body .text{
+
+  line-height: 28px;
+
+}
+
+.disclaimer-body .text p{
+  padding: 0.3rem 0;
+}
+
+.disclaimer-body .text p a{
+  color: rgb(106, 106, 248);
+}
+
+.ReactModal__Overlay {
+  /* opacity: 0; */
+  transition: opacity 200ms linear;
+  transform: translateY(-200vh);
+}
+
+.ReactModal__Overlay--after-open{
+  /* opacity: 1; */
+  transform: translateY(0vh);
+}
+
+.ReactModal__Overlay--before-close{
+  /* opacity: 0; */
+  transform: translateY(-200vh);
+}
+
+.ReactModal__Content{
+  transition: all 200ms ease-in-out;
+  transform: translate(-50%,-50%) scale(0.6);
+}
+
+.ReactModal__Content--after-open{
+  transform: translate(-50%,-50%) scale(1);
+}
+
+
+.ReactModal__Content--before-close{
+  /* opacity: 0; */
+  transform: translate(-50%,-50%) scale(0.6);
+}
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+:root{
+  --clr-available: #53fa53;
+  --clr-booked: #f86262;
+  --clr-blocked: #faa064;
+  --clr-hold: #1cd2eb;
+  --clr-available-faded: #53fa537a;
+  --clr-booked-faded: #f8626277;
+  --clr-blocked-faded: #faa0646c;
+  --clr-hold-faded: #1cd3eb62;
+}
+
+body{
+  background-color: white;
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: 100;
+  svg {
+    transform: rotate(0deg);
+    &.rotated {
+      transform: rotate(-90deg);
+    }
+  }
+}
+.close-btn {
+  width: 90px;
+  position: relative;
+  top: calc(95%);
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--radius);
+  /* background: var(--panel_background); */
+  backdrop-filter: blur(2px);
+  /* transition: var(--transition); */
+  pointer-events: all;
+  cursor: pointer;
+  overflow: hidden;
+  &.collapsed{
+    width: 50px;
+  }
+
+
+}
+.close-btn svg {
+  width: 16px;
+  height: 8px;
+  transition: var(--transition);
+}
+
+@media (max-width: 480px) {
+  .close-btn {
+    width: 60px; /* Further reduce width */
+    top: calc(85%); /* Adjust position */
+    left: 10px; /* Move even closer to the edge */
+    padding: 6px 10px; /* Further reduce padding */
+  }
+
+  .close-btn.collapsed {
+    width: 40px; /* Further adjust collapsed width */
+  }
+
+  .close-btn svg {
+    width: 12px; /* Further reduce icon size */
+    height: 6px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .close-btn {
+    width: 60px; /* Further reduce width */
+    top: calc(85%); /* Adjust position */
+    right: 100%; /* Move even closer to the edge */
+    padding: 6px 10px; /* Further reduce padding */
+  }
+    .close-btn.collapsed {
+    width: 40px; /* Further adjust collapsed width */
+  }
+
+  .close-btn svg {
+    width: 12px; /* Further reduce icon size */
+    height: 6px;
+  }
+}
+
+.zoom-controls{
+  svg{
+    width: 1rem;
+    height: 1rem;
+    path{  
+      fill: black;
+    }
+  }
+
+  .minus{
+    svg{
+      width: 0.7rem;
+      height: 0.7rem;
+    }
+  }
+}
+
+
+
+
+.tippy-box{
+  background-color: transparent !important;
+}
+
+
+.tippy-mark{
+
+  margin-inline: 1px;
+  color: #fff;
+  font-weight: 400;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0,0.3);
+
+  padding: 0.2rem 0.5rem; 
+  border-radius:8px;
+  font-size: 11px;
+
+}
+
+.highway.Delhi.Jaipur.Highway{
+  background-color: #FF5454;
+}
+
+.highway.Golf.Course{
+  background-color: #EBBB3F;
+}
+
+.highway.Southern.Peripheral.Road{
+  background-color: #62a324;
+}
+
+.highway.Dwarka.Expressway{
+  background-color: #7c50ce;
+}
+
+.highway{
+  background-color: #C226A9;
+}
+
+
+
+.tippy-mark.hospital{
+  background-color: rgb(214, 31, 105);
+  color:rgb(255, 255, 255);
+}
+
+
+.tippy-mark.metrostation{
+  background-color: rgba(255, 12, 12, 0.795);
+  backdrop-filter: blur(2px);
+  color:wheat
+}
+
+.tippy-mark.sports{
+  background-color: #077246;
+  backdrop-filter: blur(2px);
+  
+}
+
+.tippy-mark.landmark  {
+  background-color: #FF5454;
+  backdrop-filter: blur(2px);
+}
+
+
+.tippy-mark.office{
+  background-color: #00B2DD;
+  backdrop-filter: blur(2px);
+}
+.tippy-mark.landmarkk{
+  background-color: #FF5454;
+  backdrop-filter: blur(2px);
+}
+.marks.landmark path:first-child{
+  fill: #FF5454;
+}
+.marks.landmarkk path:first-child{
+  fill: #FF5454;
+}
+.marks.marks.landmark > g{
+  fill: white;
+  :first-child{
+    fill: #FF5454;
+  }
+}
+.marks.marks.metro > g{
+  fill: white;
+  :first-child{
+    fill: white;
+  }
+}
+.tippy-mark.metro{
+  background-color: rgba(255, 12, 12, 0.795);
+  backdrop-filter: blur(2px);
+  color:wheat
+}
+
+.tippy-mark.flyover{
+  background-color: rgba(36, 4, 4 , 0.7);
+  backdrop-filter: blur(2px);
+  color:white
+}
+
+ .tippy-mark.hotel{
+  background-color: rgb(141, 37, 124);
+}
+
+
+ .tippy-mark.temple{
+  background-color: #EDB600;
+  backdrop-filter: blur(2px);
+  
+}
+
+
+
+
+.tippy-mark.mall{
+  background-color: #1E429F;
+  backdrop-filter: blur(2px);
+
+}
+
+/* .marks.malls path:first-child{
+  fill: #4DBCE0;
+} */
+
+.marks.marks.education > g{
+  fill: white;
+  :first-child{
+    fill: #417FC1
+  }
+}
+
+
+
+.tippy-mark.school{
+  background-color: rgb(15, 120, 133);
+  backdrop-filter: blur(2px);
+
+}
+.tippy-mark.busstand{
+  background-color: #EC1E24;
+  backdrop-filter: blur(2px);
+}
+
+.tippy-mark.airport{
+  background-color: rgb(31, 139, 237);
+  backdrop-filter: blur(2px);
+
+}
+.tippy-mark.park{
+  background-color: rgb(7, 114, 70);
+  backdrop-filter: blur(2px);
+
+}
+.tippy-mark.residential{
+  background-color: #C226A9;
+  backdrop-filter: blur(2px);
+
+}
+.tippy-mark.religiousplaces{
+  background-color: #5BB8B8;
+  backdrop-filter: blur(2px);
+
+}
+.tippy-mark.restaurant{
+  background-color: #E94800;
+  backdrop-filter: blur(2px);
+}
+
+/* .marks.schools path:first-child{
+  fill: #417FC1;
+} */
+
+
+.route{
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+
+@keyframes up-down {
+  0%   {transform: translateY(0); }
+  50%  {transform: translateY(-15px);}
+  100% {transform: translateY(0);}
+}
+
+
+@keyframes fadein-fadeout {
+  0%   {opacity: 1; }
+  50%  {opacity: 0.6;}
+  100% {opacity: 1;}
+}
+
+#project-circle{
+  animation-name:  fadein-fadeout;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  &:hover{
+    animation: none;
+  }
+  
+}
+
+#project-location-mark{
+    
+  animation-name:   up-down;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  &:hover{
+    animation: none;
+  }
+}
+
+.overlay-can-hide{
+  transition: all 200ms linear;
+}
+
+
+
+
+
+.no-dec{
+  text-decoration: none;
+  color: unset;
+}
+
+
+.button {
+  display: inline-block;
+  border: none;
+  width: 100%;
+  padding: var(--paddings);
+  background: var(--button_background);
+  /* box-shadow: var(--button_shadow); */
+  border-radius: var(--radius);
+  margin-bottom: 5px;
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  pointer-events: auto;
+  cursor: pointer;
+  color: var(--button_color);
+  transition: var(--transition);
+}
+
+.no-select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.no-select:focus {
+  outline: none !important;
+}
+
+/* :root{
+  --primary_bg: rgba(4, 87, 167, 0.2); 
+  --primary_dark_bg: rgba(0, 87, 183, 0.4);
+  --primary_backdrop_filter: blur(20px);
+  --transparent_backdrop_filter: blur(10px);
+  --secondary_bg: #03DAC5;
+  --secondary_transparent_light_bg: rgba(5, 255, 226, 0.2);
+  --secondary_transparent_bg: rgba(3, 218, 197, 0.1);
+  --box_shadow: rgba(0, 0, 0, 0.25);
+  --secondary_border: #05FFE2;
+  --secondary_text: #03DAC5;
+  --linear_gradient: linear-gradient(to right, #05FFE2,#029AC8,#0057B7);
+  --light_black: #231f20;
+  --transparent_bg: rgba(18, 18, 18, 0.05);
+ --border_radius: 4px;
+ --transparent_linear_gradient_bg: linear-gradient(to bottom, rgba(255,255,255,0.3),rgba(255,255,255,0))
+} */
+
+
+.popup-colose-btn {
+  position: absolute;
+  z-index: 101;
+  right: 2rem;
+  top: 1rem;
+  background: white;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  cursor:pointer;
+  opacity: 0.8;
+  transition: all linear 200ms;
+}
+
+.popup-colose-btn:hover{
+  opacity: 1;
+}
+
+.disclaimer-body .header{
+  padding: 1rem 0rem;
+  padding-top: 0rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ffffff71;
+  margin-bottom: 1rem;
+}
+
+.disclaimer-body .text{
+
+  line-height: 28px;
+
+}
+
+.disclaimer-body .text p{
+  padding: 0.3rem 0;
+}
+
+.disclaimer-body .text p a{
+  color: rgb(106, 106, 248);
+}
+
+.ReactModal__Overlay {
+  /* opacity: 0; */
+  transition: opacity 200ms linear;
+  transform: translateY(-200vh);
+}
+
+.ReactModal__Overlay--after-open{
+  /* opacity: 1; */
+  transform: translateY(0vh);
+}
+
+.ReactModal__Overlay--before-close{
+  /* opacity: 0; */
+  transform: translateY(-200vh);
+}
+
+.ReactModal__Content{
+  transition: all 200ms ease-in-out;
+  transform: translate(-50%,-50%) scale(0.6);
+}
+
+.ReactModal__Content--after-open{
+  transform: translate(-50%,-50%) scale(1);
+}
+
+
+.ReactModal__Content--before-close{
+  /* opacity: 0; */
+  transform: translate(-50%,-50%) scale(0.6);
+}

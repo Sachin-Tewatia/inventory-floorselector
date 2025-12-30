@@ -1,0 +1,3598 @@
+{
+  "AG03": {
+    "SBU": 2651,
+    "status": "Available"
+  },
+  "A101": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "A102": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "A104": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "A201": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "A202": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "A203": {
+    "SBU": 2913,
+    "status": "Available"
+  },
+  "A204": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "A301": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A302": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A303": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A304": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A503": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A601": {
+    "SBU": 2094,
+    "status": "Available"
+  },
+  "A602": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "A603": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "A604": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A701": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A702": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A703": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A801": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "A802": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A803": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A804": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "A901": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A902": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A903": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A904": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1001": {
+    "SBU": 2059,
+    "status": "Booked"
+  },
+  "A1002": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "A1003": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "A1004": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "A1101": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1102": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1103": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A1104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1201": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1202": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1203": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A1204": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1502": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1503": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1601": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1603": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1604": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1701": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1702": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1703": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1801": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1802": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1803": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A1804": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1901": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A1902": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1903": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A1904": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2001": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2002": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2003": {
+    "SBU": 2057,
+    "status": "Available"
+  },
+  "A2004": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2101": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2102": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2103": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2201": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2202": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A2203": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A2204": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2301": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2302": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2303": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2304": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2502": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2503": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A2504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2601": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "A2603": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "A2604": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "A2701": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "A2702": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "A2703": {
+    "SBU": 2913,
+    "status": "Available"
+  },
+  "A2704": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "A2801": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "A2802": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "A2803": {
+    "SBU": 2913,
+    "status": "Available"
+  },
+  "A2804": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "A2901": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "A2902": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "A2903": {
+    "SBU": 2384,
+    "status": "Available"
+  },
+  "A2904": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "BG02": {
+    "SBU": 2651,
+    "status": "Available"
+  },
+  "B101": {
+    "SBU": 2092,
+    "status": "Booked"
+  },
+  "B102": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "B103": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "B104": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "B201": {
+    "SBU": 2067,
+    "status": "Booked"
+  },
+  "B202": {
+    "SBU": 2913,
+    "status": "Available"
+  },
+  "B203": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "B204": {
+    "SBU": 2067,
+    "status": "Available"
+  },
+  "B301": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B302": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B303": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B304": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "B503": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "B504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B601": {
+    "SBU": 2067,
+    "status": "Booked"
+  },
+  "B602": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "B603": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "B604": {
+    "SBU": 2067,
+    "status": "Booked"
+  },
+  "B701": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B702": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "B703": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B801": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "B802": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "B803": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "B804": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "B901": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B902": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "B903": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "B904": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1001": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1002": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1003": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "B1004": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1101": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1102": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1103": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1201": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1202": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1203": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1204": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1502": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1503": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1601": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1603": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1604": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1701": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1702": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1703": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1801": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1802": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1803": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1804": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1901": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B1902": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1903": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B1904": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2001": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2002": {
+    "SBU": 2057,
+    "status": "Available"
+  },
+  "B2003": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2004": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2101": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2102": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2103": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2201": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2202": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2203": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2204": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2301": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2302": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2303": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2304": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2502": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2503": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2601": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2603": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "B2604": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "B2701": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "B2702": {
+    "SBU": 2913,
+    "status": "Available"
+  },
+  "B2703": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "B2704": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "B2801": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "B2802": {
+    "SBU": 2913,
+    "status": "Available"
+  },
+  "B2803": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "B2804": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "B2901": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "B2902": {
+    "SBU": 2384,
+    "status": "Available"
+  },
+  "B2903": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "B2904": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "C101": {
+    "SBU": 1727,
+    "status": "Available"
+  },
+  "C102": {
+    "SBU": 2037,
+    "status": "Available"
+  },
+  "C103": {
+    "SBU": 1952,
+    "status": "Available"
+  },
+  "C104": {
+    "SBU": 2151,
+    "status": "Available"
+  },
+  "C201": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "C202": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "C203": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "C204": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "C301": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C304": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C401": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C404": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C501": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C504": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C601": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "C602": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "C603": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "C604": {
+    "SBU": 1930,
+    "status": "Booked"
+  },
+  "C701": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C704": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C801": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "C802": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "C803": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "C804": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "C901": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C904": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1001": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1002": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1003": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1004": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1101": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1104": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1201": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1204": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1401": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1404": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1501": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1504": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1601": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1604": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1701": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1704": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1801": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1802": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1803": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1804": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1901": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C1902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C1904": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2001": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2002": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2003": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2004": {
+    "SBU": 1477,
+    "status": "Booked"
+  },
+  "C2101": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2104": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2201": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2204": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2301": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2304": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2401": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2404": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2501": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2502": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "C2503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2504": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2601": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "C2602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2604": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "C2701": {
+    "SBU": 1430,
+    "status": "Available"
+  },
+  "C2702": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "C2703": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "C2704": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "C2801": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "C2802": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "C2803": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "C2804": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "C2901": {
+    "SBU": 1430,
+    "status": "Available"
+  },
+  "C2902": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "C2903": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "C2904": {
+    "SBU": 1602,
+    "status": "Available"
+  },
+  "D101": {
+    "SBU": 2151,
+    "status": "Available"
+  },
+  "D102": {
+    "SBU": 1952,
+    "status": "Available"
+  },
+  "D103": {
+    "SBU": 2037,
+    "status": "Available"
+  },
+  "D104": {
+    "SBU": 1727,
+    "status": "Booked"
+  },
+  "D201": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "D202": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "D203": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "D204": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "D301": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D302": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "D303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D304": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D401": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D402": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "D403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D404": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D501": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D504": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D601": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D602": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "D603": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "D604": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D701": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D704": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D801": {
+    "SBU": 1930,
+    "status": "Booked"
+  },
+  "D802": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D803": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D804": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "D901": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D904": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1001": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "D1002": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "D1003": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "D1004": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "D1101": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1104": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1201": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1204": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1401": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1404": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1501": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1504": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1601": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1604": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1701": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1704": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1801": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1802": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1803": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1804": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D1901": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1902": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "D1903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D1904": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2001": {
+    "SBU": 1477,
+    "status": "Booked"
+  },
+  "D2002": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2003": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2004": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2101": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2104": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2201": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2204": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2301": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2304": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2401": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2404": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2501": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2504": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2601": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2602": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "D2603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "D2604": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "D2701": {
+    "SBU": 1930,
+    "status": "Booked"
+  },
+  "D2702": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "D2703": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "D2704": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "D2801": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "D2802": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "D2803": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "D2804": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "D2901": {
+    "SBU": 1602,
+    "status": "Available"
+  },
+  "D2902": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "D2903": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "D2904": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "E101": {
+    "SBU": 1727,
+    "status": "Available"
+  },
+  "E102": {
+    "SBU": 2037,
+    "status": "Available"
+  },
+  "E103": {
+    "SBU": 1952,
+    "status": "Available"
+  },
+  "E104": {
+    "SBU": 2151,
+    "status": "Available"
+  },
+  "E201": {
+    "SBU": 1430,
+    "status": "Available"
+  },
+  "E202": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "E203": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "E204": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "E301": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E304": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E401": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E404": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E501": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E504": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E601": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E602": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "E603": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "E604": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E701": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E704": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E801": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "E802": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E803": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E804": {
+    "SBU": 1930,
+    "status": "Booked"
+  },
+  "E901": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E904": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1001": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "E1002": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "E1003": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "E1004": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "E1101": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1104": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1201": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1204": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1401": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1404": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "E1501": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1504": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1601": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1604": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1701": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1704": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1801": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1802": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1803": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1804": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1901": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E1902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E1904": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2001": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2002": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2003": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2004": {
+    "SBU": 1477,
+    "status": "Booked"
+  },
+  "E2101": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2104": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2201": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2204": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2301": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2304": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2401": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2404": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2501": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2504": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2601": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "E2602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2604": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "E2701": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "E2702": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "E2703": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "E2704": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "E2801": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "E2802": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "E2803": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "E2804": {
+    "SBU": 1930,
+    "status": "Booked"
+  },
+  "E2901": {
+    "SBU": 1430,
+    "status": "Available"
+  },
+  "E2902": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "E2903": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "E2904": {
+    "SBU": 1602,
+    "status": "Available"
+  },
+  "F101": {
+    "SBU": 2151,
+    "status": "Available"
+  },
+  "F102": {
+    "SBU": 1952,
+    "status": "Booked"
+  },
+  "F103": {
+    "SBU": 2037,
+    "status": "Available"
+  },
+  "F104": {
+    "SBU": 1727,
+    "status": "Available"
+  },
+  "F201": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "F202": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "F203": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "F204": {
+    "SBU": 1430,
+    "status": "Available"
+  },
+  "F301": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F304": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F401": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F404": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F501": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F504": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F601": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "F602": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "F603": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "F604": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "F701": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F704": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F801": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "F802": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "F803": {
+    "SBU": 1872,
+    "status": "Booked"
+  },
+  "F804": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "F901": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F904": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1001": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1002": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1003": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1004": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1101": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "F1102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1104": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1201": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1204": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1401": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "F1402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1404": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1501": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1504": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1601": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1604": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1701": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1702": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1703": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1704": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1801": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1802": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1803": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1804": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F1901": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1902": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1903": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F1904": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2001": {
+    "SBU": 1477,
+    "status": "Booked"
+  },
+  "F2002": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2003": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2004": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2101": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2102": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2103": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2104": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2201": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2202": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2203": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2204": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2301": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "F2302": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2303": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2304": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2401": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2402": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2403": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2404": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2501": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "F2502": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2503": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2504": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2601": {
+    "SBU": 1806,
+    "status": "Available"
+  },
+  "F2602": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2603": {
+    "SBU": 1806,
+    "status": "Booked"
+  },
+  "F2604": {
+    "SBU": 1377,
+    "status": "Booked"
+  },
+  "F2701": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "F2702": {
+    "SBU": 1932,
+    "status": "Booked"
+  },
+  "F2703": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "F2704": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "F2801": {
+    "SBU": 1930,
+    "status": "Available"
+  },
+  "F2802": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "F2803": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "F2804": {
+    "SBU": 1430,
+    "status": "Booked"
+  },
+  "F2901": {
+    "SBU": 1602,
+    "status": "Available"
+  },
+  "F2902": {
+    "SBU": 1932,
+    "status": "Available"
+  },
+  "F2903": {
+    "SBU": 1872,
+    "status": "Available"
+  },
+  "F2904": {
+    "SBU": 1430,
+    "status": "Available"
+  },
+  "GG03": {
+    "SBU": 2651,
+    "status": "Available"
+  },
+  "G101": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "G102": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "G103": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "G104": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "G201": {
+    "SBU": 2067,
+    "status": "Available"
+  },
+  "G202": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "G203": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "G204": {
+    "SBU": 2067,
+    "status": "Available"
+  },
+  "G301": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G302": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G303": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G304": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G402": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G403": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G503": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G601": {
+    "SBU": 2067,
+    "status": "Available"
+  },
+  "G602": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "G603": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "G604": {
+    "SBU": 2067,
+    "status": "Available"
+  },
+  "G701": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G702": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G703": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G801": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "G802": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "G803": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "G804": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "G901": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G902": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G903": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G904": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1001": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1002": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1003": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1004": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1101": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1102": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1103": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1201": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1202": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1203": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1204": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1401": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G1402": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1403": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1503": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1504": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1601": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G1603": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1604": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1701": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1702": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1703": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G1801": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G1802": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1803": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1804": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G1901": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G1902": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1903": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G1904": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2001": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "G2002": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2003": {
+    "SBU": 2057,
+    "status": "Booked"
+  },
+  "G2004": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2101": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2102": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G2103": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2104": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2201": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2202": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2203": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2204": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2301": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2302": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G2303": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2304": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2401": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2402": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G2403": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2404": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2501": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2503": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "G2504": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2601": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G2603": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "G2604": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "G2701": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "G2702": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "G2703": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "G2704": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "G2801": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "G2802": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "G2803": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "G2804": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "G2901": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "G2902": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "G2903": {
+    "SBU": 2384,
+    "status": "Available"
+  },
+  "G2904": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "HG02": {
+    "SBU": 2651,
+    "status": "Available"
+  },
+  "H101": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "H102": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "H103": {
+    "SBU": 2639,
+    "status": "Available"
+  },
+  "H104": {
+    "SBU": 2092,
+    "status": "Available"
+  },
+  "H201": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H202": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "H203": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "H204": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H301": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H302": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H303": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H304": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H402": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H403": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H404": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H501": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H503": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H504": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H601": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H602": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "H603": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "H604": {
+    "SBU": 2094,
+    "status": "Booked"
+  },
+  "H701": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H702": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H703": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H704": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H801": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H802": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H803": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H804": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H901": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H902": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H903": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H904": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H1001": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H1002": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "H1003": {
+    "SBU": 2745,
+    "status": "Booked"
+  },
+  "H1004": {
+    "SBU": 2059,
+    "status": "Available"
+  },
+  "H1101": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H1102": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1103": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H1104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H1201": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1202": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1203": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1204": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1401": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H1402": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1403": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1404": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1501": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1502": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1503": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1504": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1601": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1602": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1603": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H1604": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1701": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1702": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1703": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1704": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1801": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1802": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H1803": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H1804": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H1901": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H1902": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1903": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H1904": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2001": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2002": {
+    "SBU": 2057,
+    "status": "Booked"
+  },
+  "H2003": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2004": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2101": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2102": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2103": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2104": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H2201": {
+    "SBU": 2015,
+    "status": "Booked"
+  },
+  "H2202": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2203": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2204": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2301": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2302": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2303": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H2304": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2401": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2402": {
+    "SBU": 2597,
+    "status": "Booked"
+  },
+  "H2403": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H2404": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2501": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2502": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H2503": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H2504": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2601": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2602": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H2603": {
+    "SBU": 2597,
+    "status": "Available"
+  },
+  "H2604": {
+    "SBU": 2015,
+    "status": "Available"
+  },
+  "H2701": {
+    "SBU": 2138,
+    "status": "Booked"
+  },
+  "H2702": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "H2703": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "H2704": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H2801": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H2802": {
+    "SBU": 2913,
+    "status": "Booked"
+  },
+  "H2803": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "H2804": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H2901": {
+    "SBU": 2138,
+    "status": "Available"
+  },
+  "H2902": {
+    "SBU": 2384,
+    "status": "Available"
+  },
+  "H2903": {
+    "SBU": 2745,
+    "status": "Available"
+  },
+  "H2904": {
+    "SBU": 2138,
+    "status": "Available"
+  }
+}

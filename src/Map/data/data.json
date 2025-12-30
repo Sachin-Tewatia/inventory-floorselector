@@ -1,0 +1,46 @@
+{
+   "Landamrks": [
+        {
+            "id": "1",
+            "map_element_id": "silveroak_estate",
+            "name": "SilverOak Estate",
+            "distance": 1,
+            "description": "Silver Oak Estate, located in Kolkata, is a luxurious residential complex known for its elegant architecture, lush greenery, and modern amenities."
+        },
+        {
+            "id": "2",
+            "map_element_id": "city_center_ii",
+            "name": "City Center II",
+            "distance": 1.2,
+            "description": "City Centre II is a shopping mall and lifestyle destination located in Rajarhat, a part of the New Town area of Kolkata, known for its INOX multiplex and various cafes, ice-cream parlors."
+        },
+        {
+            "id": "3",
+            "map_element_id": "eco_park",
+            "name": "Eco Park",
+            "distance": 4.2,
+            "description": "Eco Tourism Park, located in Kolkata, India, is a vast urban park spanning over 475 acres. It features themed gardens, water bodies, cycling tracks, and eco-friendly attractions."
+        },
+        {
+            "id": "4",
+            "map_element_id": "nscb_international_airport",
+            "name": "NSCB International Airport",
+            "distance": 5.5,
+            "description": "Kolkata's primary airport, offering domestic and international flights, ensuring convenient travel for business and leisure."
+        },
+        {
+            "id": "5",
+            "map_element_id": "biswa_bangla_gate",
+            "name": "Biswa Bangla Gate",
+            "distance": 8.3,
+            "description": "Biswa Bangla Gate, Kolkata's iconic skywalk, offers panoramic city views. This architectural marvel features a glass-enclosed gallery."
+        },
+        {
+            "id": "6",
+            "map_element_id": "salt_lake_stadium",
+            "name": "Salt Lake Stadium",
+            "distance": 13.8,
+            "description": "Salt Lake Stadium, Kolkata, is a historic sports venue known for hosting football matches and other events. With a seating capacity of over 85,000, it is one of the largest stadiums in India."
+        }
+    ]
+}

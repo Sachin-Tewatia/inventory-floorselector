@@ -1,0 +1,22 @@
+.input-group label {
+  color: var(--input_label_text_color);
+  position: relative;
+  cursor: pointer;
+}
+
+.input-group input {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.input-group-label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+}
+
+.title {
+  margin-bottom: 5px;
+  cursor: pointer;
+} 
