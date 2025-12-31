@@ -32,6 +32,7 @@ import VRTours from "./VRTours/App";
 import VrHome from "./Pages/VrHome";
 import SocketRoomManager from "./Components/SocketRoomManager";
 import Disclaimer from "./Components/Molecules/Disclaimer";
+import ChatContainer from "./Components/Chat/ChatContainer";
 
 import TwentyKm from "./Map/pages/TwentyKm.jsx";
 import Earth_Video from "./Map/pages/Earth_Video.jsx";
@@ -58,6 +59,7 @@ function Router(props) {
       {/* Manages socket room connections based on URL roomId */}
       <SocketRoomManager />
       <Disclaimer />
+      <ChatContainer />
       <Routes>
         <Route
           path="/dashboard"
@@ -95,7 +97,7 @@ function Router(props) {
         />
 
 
-         {/* Map Dashboard */}
+        {/* Map Dashboard */}
         {/* <Route
           path="/dashboard"
           element={
@@ -112,7 +114,7 @@ function Router(props) {
             </LoginRequired>
           }
         /> */}
-         <Route
+        <Route
           path=""
           element={
             <Navigate to="/inspire" />
@@ -245,6 +247,7 @@ function Router(props) {
   ) : (
     <BrowserRouter>
       <Disclaimer />
+      <ChatContainer />
       <Loader />
       {/* <DelhiMap /> */}
     </BrowserRouter>

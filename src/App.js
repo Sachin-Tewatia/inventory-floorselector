@@ -81,7 +81,6 @@ function App() {
         {/* <FullScreenModeAlert /> */}
         <RotateInstruction />
         <Router />
-        <ChatContainer />
         {/* <Payment /> */}
         {/* <HoverInfo features={["3 BHK", "Available", "232342"]}/> */}
         <Blackout />

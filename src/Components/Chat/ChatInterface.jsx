@@ -119,7 +119,7 @@ const ChatInterface = () => {
     const location = useLocation();
     const pathname = location.pathname;
 
-    const API_URL = "https://api.floorselector.convrse.ai/chat";
+    const API_URL = "https://api.floorselector.convrse.ai/api/chat";
     const PROJECT_ID = "salarpuria";
 
     const [messages, setMessages] = useState([]);
@@ -345,7 +345,7 @@ const ChatInterface = () => {
                     language_code: selectedLanguage,
                     map_type: "inventory",
                     project_id: PROJECT_ID,
-                    current_path: pathname,
+                    current_slug: pathname,
                     user_id: localStorage.getItem("chat_user_id") || "guest",
                     session_id:
                         localStorage.getItem("chat_session_id") || `session_${Date.now()}`,
