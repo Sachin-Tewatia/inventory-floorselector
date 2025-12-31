@@ -12,13 +12,13 @@ export const AppContextProvider = ({ children }) => {
   const [flatFilterPriceValues, setFlatFilterPriceValues] = useState([]); // price range
   const [flatFilterSizeValues, setFlatFilterSizeValues] = useState([]); // size range
   const [isSingleSelect, setIsSingleSelect] = useState(false);
-  const [label , setLabel] = useState(null);
-  const [showAll,setShowAll] = useState(false);
+  const [label, setLabel] = useState(null);
+  const [showAll, setShowAll] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLandmarkId, setSelectedLandmarkId] = useState(null);
   const [showRadius, setShowRadius] = useState(false);
   const [satelliteView, setSatelliteView] = useState(true);
-  const [isFullScreen,setFullScreen] = useState(false);
+  const [isFullScreen, setFullScreen] = useState(false);
 
   // Listen for fullscreen changes (e.g., when user presses Escape)
   useEffect(() => {
@@ -63,44 +63,44 @@ export const AppContextProvider = ({ children }) => {
 
   const INVENTORY_UPDATE_INTERVAL = 1 * 60 * 1000; // 1 minute
 
- useEffect(() => {
-   
+  useEffect(() => {
+
     setInventoriesChangeCallback((newInventories) => {
-    
+
       const now = Date.now();
       const timeSinceLastUpdate = now - lastUpdateRef.current;
-      
+
       // Debounce rapid updates (less than 200ms apart for slow internet)
       if (timeSinceLastUpdate < 200) {
         console.log("🔄 AppContext: Skipping rapid inventory update");
         return;
       }
-      
+
       lastUpdateRef.current = now;
-      
+
       console.log("🔄 AppContext: Received inventory update from inventories.js");
       console.log("📊 AppContext: New inventories count:", newInventories.length);
-      
+
       // Update inventories state
       setInventories([...newInventories]); // Create new array reference
-      
+
       // Update trigger with timestamp for unique value
       setInventoryRefreshTrigger(now);
-      
+
       console.log("✅ AppContext: React state updated with timestamp trigger");
-     
+
     });
     console.log("✅ AppContext: Inventory change callback registered");
   }, []);
-  
+
   // Function to refresh inventory data and update state
   const refreshInventories = async () => {
     console.log("🔄 AppContext: Refreshing inventory data");
-    
+
     // Add retry mechanism for slow connections
     let retries = 3;
     let success = false;
-    
+
     while (retries > 0 && !success) {
       try {
         success = await fetchAndGetInventories();
@@ -123,14 +123,14 @@ export const AppContextProvider = ({ children }) => {
         }
       }
     }
-    
+
     if (!success) {
       console.log("❌ AppContext: Failed to refresh inventory data after all retries");
     }
-    
+
     return success;
   };
-  
+
   // Function to manually trigger socket callback (for testing)
   const triggerSocketCallback = async () => {
     console.log("🧪 AppContext: Manually triggering socket callback");
@@ -141,13 +141,13 @@ export const AppContextProvider = ({ children }) => {
       console.error("❌ AppContext: Manual socket callback failed:", error);
     }
   };
-  
+
   // Socket connection management
   // useEffect(() => {
-  
-    
+
+
   //   if (!user) {
-     
+
   //     // Disconnect socket when user logs out
   //     if (socketConnectedRef.current) {
   //       socketDisconnect();
@@ -160,40 +160,40 @@ export const AppContextProvider = ({ children }) => {
   //     }
   //     return;
   //   }
-    
+
   //   // Connect socket when user logs in (only once)
   //   if (!socketConnectedRef.current) {
-      
+
   //     socketConnectedRef.current = true;
   //     socketConnect(async () => {
-        
+
   //       await refreshInventories();
-        
+
   //     });
   //   } else {
   //     console.log("🔌 AppContext: Socket already connected or connecting");
   //   }
   // }, [user]);
   useEffect(() => {
-  // Always connect (without roomId initially)
-  // Room joining will be handled by SocketRoomManager component
-  if (!socketConnectedRef.current) {
-    socketConnectedRef.current = true;
-    socketConnect(async () => {
-      await refreshInventories();
-    });
-  }
-
-  // optional: clean up on unmount
-  return () => {
-    if (socketConnectedRef.current) {
-      socketDisconnect();
-      socketConnectedRef.current = false;
+    // Always connect (without roomId initially)
+    // Room joining will be handled by SocketRoomManager component
+    if (!socketConnectedRef.current) {
+      socketConnectedRef.current = true;
+      socketConnect(async () => {
+        await refreshInventories();
+      });
     }
-  };
-}, []); // ✅ Only run once
 
-  
+    // optional: clean up on unmount
+    return () => {
+      if (socketConnectedRef.current) {
+        socketDisconnect();
+        socketConnectedRef.current = false;
+      }
+    };
+  }, []); // ✅ Only run once
+
+
   useEffect(() => {
     if (!user) return;
     (async () => {
@@ -223,7 +223,7 @@ export const AppContextProvider = ({ children }) => {
       }
       setUser(null);
     };
-    
+
     fetchAndSetUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run on mount
@@ -277,7 +277,7 @@ export const AppContextProvider = ({ children }) => {
         setIsSingleSelect,
         label,
         setLabel,
-        isDropdownOpen, 
+        isDropdownOpen,
         setIsDropdownOpen,
         satelliteView,
         setSatelliteView,

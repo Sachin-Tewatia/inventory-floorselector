@@ -224,6 +224,8 @@ export const testMapAPIConnectivity = async () => {
 };
 
 export const baseURL = "https://api.floorselector.convrse.ai/api";
+// export const chatURL = "https://api.agent.convrsespaces.com";
+export const chatURL = "http://localhost:8001";
 // export const baseURL = "http://localhost:8000/api";
 
 export const fetchUserFromToken = async () => {
@@ -502,4 +504,17 @@ export const getOtpStatus = async (phone, otp) => {
     .catch(function (error) {
       console.error(error);
     });
+};
+
+export const sendChatMessage = async (payload) => {
+  try {
+    const res = await axios.post(`${chatURL}/chat`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
 };

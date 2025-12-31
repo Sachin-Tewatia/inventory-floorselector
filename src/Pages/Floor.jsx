@@ -71,8 +71,8 @@ function Floor() {
   const params = useParams();
   const { floor, tower, unit } = params;
   const { roomId } = useRoomId();
-  
-  const combinedTower = getTowerFromCombinedTowersAndIndex(tower,0);
+
+  const combinedTower = getTowerFromCombinedTowersAndIndex(tower, 0);
   const UNITS = getAllFlatsInFloor(combinedTower, floor);
   const currentFloor = (floor);
   const currentTower = tower;
@@ -124,7 +124,7 @@ function Floor() {
   const handleUnitClick = useCallback((navPath) => {
     setPendingNavigation(navPath);
     setZoomOutAnimation(true);
-    
+
     // Navigate after animation completes
     setTimeout(() => {
       if (navPath) {
@@ -187,7 +187,7 @@ function Floor() {
   }));
 
   useEffect(() => {
-    if (["T14"].includes(combinedTower) && ["g","G"].includes(floor)) {
+    if (["T14"].includes(combinedTower) && ["g", "G"].includes(floor)) {
       navigate(`/inspire/tower/${tower}/floor/1`);
     }
   }, [floor, tower]);
@@ -223,7 +223,7 @@ function Floor() {
             path: "/inspire",
           },
           {
-            title: `Tower ${combinedTower.replace("T",'')}`,
+            title: `Tower ${combinedTower.replace("T", '')}`,
             path: `/inspire/tower/${tower}`,
           },
         ]}
@@ -243,7 +243,7 @@ function Floor() {
           currentTower={currentTower}
           selectedTower={selectedTower}
           setSelectedTower={setSelectedTower}
-          
+
           floor
           filter
         />
@@ -267,9 +267,9 @@ function Floor() {
           </CollapsiblePanel>
         </div>
       </>
-       <div className="col flex j-end">
-          <Compass angle={COMPASS_ANGLES.TOWERS[tower]} />
-        </div>
+      <div className="col flex j-end">
+        <Compass angle={COMPASS_ANGLES.TOWERS[tower]} />
+      </div>
       <div className="right-btn-group absolute flex gap-2  z-10 right-0 top-0">
         <IconButton
           className=""
@@ -279,7 +279,7 @@ function Floor() {
           onClick={() => {
             const newShowOverlays = !showOverlays;
             setShowOverlays(newShowOverlays);
-            
+
             // Sync overlay visibility if not receiving sync
             if (!getReceivingSync() && roomId) {
               emitSync(SYNC_EVENTS.OVERLAY_VISIBILITY, {
@@ -299,7 +299,7 @@ function Floor() {
               const newFullScreenState = !isFullScreen;
               setFullScreen(newFullScreenState);
               toggleFullScreen();
-              
+
               // Sync fullscreen state if not receiving sync
               if (!getReceivingSync() && roomId) {
                 emitSync(SYNC_EVENTS.FULLSCREEN, {
@@ -328,14 +328,13 @@ function Floor() {
       <Zoomable>
         <div className="zoomable-container" ref={ref}>
           <div className={`img-wrapper ${imageAnimation ? "zoom-fade-animation" : ""} ${zoomOutAnimation ? "zoom-out-fade-animation" : ""}`}>
-         
+
             <img
               ref={imgRef}
-              src={`${
-                process.env.PUBLIC_URL
-              // }/floor/${`${getTowerNumber(tower,floor)}`}/${getFloorType(combinedTower,floor)}.webp`}
-              }/floor/${getFloorType(combinedTower,floor)}.webp`}
-              
+              src={`${process.env.PUBLIC_URL
+                // }/floor/${`${getTowerNumber(tower,floor)}`}/${getFloorType(combinedTower,floor)}.webp`}
+                }/floor/${getFloorType(combinedTower, floor)}.webp`}
+
               alt="floor"
               onLoad={() => setLoading(false)}
             />

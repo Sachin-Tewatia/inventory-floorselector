@@ -87,7 +87,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
   useEffect(() => {
     if (!ref.current) return;
     const towersRef = ref.current.children[1].children;
-    
+
     // Get the tower code from URL
     const towerCode = getTowerCodeFromURL();
 
@@ -104,7 +104,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
         const floor = floors[i];
         // Use the towerCode to construct the unit ID
         const unitID = `${towerCode}_${floor.id}`;
-        
+
         const flat = getUnitById(unitID);
         let floorNo = parseInt(getSVGID(floor.id));
 
@@ -125,12 +125,12 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     rotation,
     location.pathname,
   ]);
-  
+
   const handlePrevImage = () => {
     // Go to previous rotation (decrement)
     const newRotation = rotation <= 0 ? totalRoation : rotation - 1;
     setRotation(newRotation);
-    
+
     // Sync rotation navigation if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSync(SYNC_EVENTS.IMAGE_NAVIGATION, {
@@ -141,12 +141,12 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
       }, roomId);
     }
   };
-  
+
   const handleNextImage = () => {
     // Go to next rotation (increment)
     const newRotation = rotation >= totalRoation ? 0 : rotation + 1;
     setRotation(newRotation);
-    
+
     // Sync rotation navigation if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSync(SYNC_EVENTS.IMAGE_NAVIGATION, {
@@ -157,7 +157,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
       }, roomId);
     }
   };
-  
+
   // Handle rotation navigation sync events via context (no window events)
   useImageNavigationSync({
     page: 'tower',
@@ -183,7 +183,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
           tippyInstance.hide();
         }
       });
-      
+
       // Method 2: Find all elements with tippy instances and hide them
       const allElements = document.querySelectorAll('*');
       allElements.forEach(el => {
@@ -191,7 +191,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
           el._tippy.hide();
         }
       });
-      
+
       // Method 3: Hide tippy root containers
       const tippyRoots = document.querySelectorAll('[data-tippy-root]');
       tippyRoots.forEach(root => {
@@ -203,7 +203,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
           tippyInstance.hide();
         }
       });
-      
+
       // Method 4: Remove tippy elements from DOM after a short delay
       setTimeout(() => {
         const remainingTippyBoxes = document.querySelectorAll('.tippy-box');
@@ -236,19 +236,19 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     setPendingNavigation(navPath);
     setHideSvg(true); // Hide SVG elements when video starts
     setHideImage(true); // Start fade-out animation for image
-    
+
     // Hide all tippy instances immediately
     hideAllTippyInstances();
-    
+
     // Wait for fade animation to complete (0.5s) before showing video
     setTimeout(() => {
       setIsPlayingVideo(true); // Show video after fade completes
-      
+
       // Hide tippy again after video appears (in case any reappeared)
       setTimeout(() => {
         hideAllTippyInstances();
       }, 100);
-      
+
       // Start video playback after video element is rendered
       setTimeout(() => {
         if (videoRef.current) {
@@ -267,7 +267,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
   const handleFloorClick = useCallback((navPath) => {
     // Play video locally
     playVideo(navPath);
-    
+
     // Sync video playback if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSync(SYNC_EVENTS.VIDEO_PLAYBACK, {
@@ -287,7 +287,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
       hideAllTippyInstances();
       // Small delay to ensure tippy is hidden before video starts
       setTimeout(() => {
-      playVideo(navPath);
+        playVideo(navPath);
       }, 50);
     }
   }, [playVideo]);
@@ -303,16 +303,16 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     if (videoRef.current) {
       videoRef.current.preload = 'auto';
       videoRef.current.load();
-      
+
       // Ensure video is ready to play
       const handleCanPlay = () => {
         if (videoRef.current) {
           videoRef.current.removeEventListener('canplay', handleCanPlay);
         }
       };
-      
+
       videoRef.current.addEventListener('canplay', handleCanPlay);
-      
+
       return () => {
         if (videoRef.current) {
           videoRef.current.removeEventListener('canplay', handleCanPlay);
@@ -326,15 +326,14 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
       handleVideoComplete(pendingNavigation);
     }
   };
-  
+
   return tower ? (
     <>
       {loading && <Loading />}
       <ArrowButtonsWrapper className="overlay-can-fade-out">
         <button
-          className={`absolute top-[55%] right-[30%] rounded-2xl cursor-pointer z-30 bg-[#363636] px-2 py-3  ${
-            "imageNumber" > 2 && "opacity-50"
-          }`}
+          className={`absolute top-[55%] right-[30%] rounded-2xl cursor-pointer z-30 bg-[#363636] px-2 py-3  ${"imageNumber" > 2 && "opacity-50"
+            }`}
           onClick={handleNextImage}
         >
           {" "}
@@ -345,9 +344,8 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
           />
         </button>
         <button
-          className={`absolute top-[55%] left-[30%] rounded-2xl cursor-pointer z-30  bg-[#363636] px-2 py-3  ${
-            "imageNumber" < 2 && "opacity-50"
-          }`}
+          className={`absolute top-[55%] left-[30%] rounded-2xl cursor-pointer z-30  bg-[#363636] px-2 py-3  ${"imageNumber" < 2 && "opacity-50"
+            }`}
           onClick={handlePrevImage}
         >
           {" "}
@@ -388,39 +386,39 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
             }
           }}
         />
-      <Style
-        viewBox="0 0 1920 1080"
-        fill="none"
-        preserveAspectRatio="xMidYMid slice"
-        ref={ref}
-      >
-        <g id="rotation-images">
+        <Style
+          viewBox="0 0 1920 1080"
+          fill="none"
+          preserveAspectRatio="xMidYMid slice"
+          ref={ref}
+        >
+          <g id="rotation-images">
             {/* Always render images - fade out when hideImage is true */}
-          {Object.keys(tower_floor_svgs[tower]).map((val, index) => (
-            <image
+            {Object.keys(tower_floor_svgs[tower]).map((val, index) => (
+              <image
                 key={index}
-              draggable="false"
-              hidden={val !== rotation.toString()}
-              xlinkHref={`${process.env.PUBLIC_URL}/towers/${tower}/${val}.webp`}
-              alt="rotate tower"
+                draggable="false"
+                hidden={val !== rotation.toString()}
+                xlinkHref={`${process.env.PUBLIC_URL}/towers/${tower}/${val}.webp`}
+                alt="rotate tower"
                 className={hideImage ? "fade-out-animation" : ""}
                 style={hideImage ? { pointerEvents: 'none' } : {}}
-              onLoad={() => setLoading(false)}
-            />
-          ))}
-        </g>
+                onLoad={() => setLoading(false)}
+              />
+            ))}
+          </g>
 
           {floorsData && !hideSvg && (
-          <FloorsWithTippy
-            floorsData={floorsData}
-            tower={tower}
-            rotation={rotation}
+            <FloorsWithTippy
+              floorsData={floorsData}
+              tower={tower}
+              rotation={rotation}
               onFloorClick={handleFloorClick}
-          >
-            {tower_floor_svgs[tower][rotation]}
-          </FloorsWithTippy>
-        )}
-      </Style>
+            >
+              {tower_floor_svgs[tower][rotation]}
+            </FloorsWithTippy>
+          )}
+        </Style>
       </VideoWrapper>
     </>
   ) : (

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Mic, Trash2, Send } from "lucide-react";
 import "./ChatInterface.css";
+import { sendChatMessage, PROJECT_ID, baseURL } from "../../APIs";
 
 // Constants for storage
 const CHAT_HISTORY_KEY = "convrse_inventory_chat_history";
@@ -119,8 +120,8 @@ const ChatInterface = () => {
     const location = useLocation();
     const pathname = location.pathname;
 
-    const API_URL = "https://api.floorselector.convrse.ai/api/chat";
-    const PROJECT_ID = "salarpuria";
+    // const API_URL = "https://api.floorselector.convrse.ai/api/chat";
+    // const PROJECT_ID = "salarpuria";
 
     const [messages, setMessages] = useState([]);
     const [history, setHistory] = useState([]);
@@ -336,24 +337,22 @@ const ChatInterface = () => {
         setError(null);
 
         try {
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    message: text,
-                    history: history,
-                    language_code: selectedLanguage,
-                    map_type: "inventory",
-                    project_id: PROJECT_ID,
-                    current_slug: pathname,
-                    user_id: localStorage.getItem("chat_user_id") || "guest",
-                    session_id:
-                        localStorage.getItem("chat_session_id") || `session_${Date.now()}`,
-                }),
+            const response = await sendChatMessage({
+                message: text,
+                history: history,
+                language_code: selectedLanguage,
+                map_type: "inventory",
+                project_id: PROJECT_ID,
+                floor_selector_url: baseURL,
+                current_slug: pathname,
+                user_id: localStorage.getItem("chat_user_id") || "guest",
+                session_id:
+                    localStorage.getItem("chat_session_id") || `session_${Date.now()}`,
             });
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
+            if (response.status !== 200) {
+                // axios throws on 4xx/5xx usually, but if we handle it:
+                const errorData = response.data || {};
                 if (response.status === 429) {
                     const retryAfter = errorData.retry_after || 60;
                     throw new QuotaExceededError(
@@ -366,7 +365,7 @@ const ChatInterface = () => {
                 throw new Error(backendMessage || `API Error: ${response.status}`);
             }
 
-            const data = await response.json();
+            const data = response.data;
 
             const assistantMsg = {
                 role: "assistant",
@@ -381,7 +380,16 @@ const ChatInterface = () => {
             }
 
             if (data.navigation_target) {
-                navigate(data.navigation_target);
+                let target = data.navigation_target;
+                if (target.startsWith(`/${PROJECT_ID}`)) {
+                    target = target.replace(`/${PROJECT_ID}`, "/inspire");
+                }
+                // Fix for bot returning "tower%2011" instead of "cluster11"
+                target = target.replace(/tower%20/gi, "cluster");
+                target = target.replace(/tower\s+/gi, "cluster");
+                // Fix for bot returning "tower/10" instead of "tower/cluster10"
+                target = target.replace(/\/tower\/(\d+)/i, "/tower/cluster$1");
+                navigate(target);
             }
 
             if (data.external_url) {
