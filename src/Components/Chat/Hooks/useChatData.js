@@ -128,28 +128,28 @@ export const useChatData = () => {
         return () => clearTimeout(timeoutId);
     }, [managedMessages, managedHistory, selectedLanguage]);
 
-    // Cache management methods
-    const getCachedResponse = useCallback((message, context) => {
-        const key = cacheRef.current.generateKey(message, context);
-        const cached = cacheRef.current.get(key);
-        if (cached) {
-            performanceMonitorRef.current.recordCacheHit();
-        }
-        return cached;
-    }, []);
+    // Cache management methods (kept for potential future use)
+    // const getCachedResponse = useCallback((message, context) => {
+    //     const key = cacheRef.current.generateKey(message, context);
+    //     const cached = cacheRef.current.get(key);
+    //     if (cached) {
+    //         performanceMonitorRef.current.recordCacheHit();
+    //     }
+    //     return cached;
+    // }, []);
 
-    const setCachedResponse = useCallback((message, context, response) => {
-        const key = cacheRef.current.generateKey(message, context);
-        cacheRef.current.set(key, response);
-    }, []);
+    // const setCachedResponse = useCallback((message, context, response) => {
+    //     const key = cacheRef.current.generateKey(message, context);
+    //     cacheRef.current.set(key, response);
+    // }, []);
 
-    const clearCache = useCallback(() => {
-        cacheRef.current.clear();
-    }, []);
+    // const clearCache = useCallback(() => {
+    //     cacheRef.current.clear();
+    // }, []);
 
-    const getPerformanceStats = useCallback(() => {
-        return performanceMonitorRef.current.getStats();
-    }, []);
+    // const getPerformanceStats = useCallback(() => {
+    //     return performanceMonitorRef.current.getStats();
+    // }, []);
 
     const clearChatHistory = useCallback(() => {
         if (window.confirm("Clear chat history?")) {

@@ -8,7 +8,6 @@ export const useVoiceRecognition = (selectedLanguage, onResult, stopAudio) => {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
   const retryCountRef = useRef(0);
-  const maxRetries = 2;
 
   // Helper function to sanitize language code
   const sanitizeLanguage = useCallback((lang) => {
