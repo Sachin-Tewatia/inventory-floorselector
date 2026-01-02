@@ -27,7 +27,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
   const { getUnitById } = useInventories();
   const { roomId } = useRoomId();
   const roomIdRef = useRef(roomId);
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || 
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 ||
     (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
         const flatDetails = getUnitById(unitID);
         const floorNo = flatDetails?.floor;
         if (flatDetails?.status) floor.classList.add(flatDetails.status);
-        
+
         const instance = tippy(floor, {
           offset: [0, 35],
           content: ReactDOMServer.renderToStaticMarkup(
@@ -120,14 +120,14 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
         hoverHandlers.set(floor.id, { element: floor, enter: handleMouseEnter, leave: handleMouseLeave });
 
         const navPath = `/inspire/tower/cluster${towerNumber}/floor/${floorNo}`;
-        
+
         if (isTouchDevice) {
           floor.onclick = (e) => {
             e.preventDefault();
             e.stopPropagation();
             const now = Date.now();
             const lastClick = clickTimers.current[floor.id];
-            
+
             if (lastClick && now - lastClick < 300) {
               clearTimeout(clickTimers.current[floor.id + '_timeout']);
               delete clickTimers.current[floor.id];
@@ -137,7 +137,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
               if (singleton) {
                 singleton.show(instance);
               } else {
-              instance.show();
+                instance.show();
               }
               setTippyShowing(floor, floor.id, true);
               emitSyncEvent(SYNC_EVENTS.TIPPY_SHOW, { elementId: floor.id });
@@ -178,7 +178,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
       try {
         singleton.hide();
         singleton.destroy();
-      } catch (e) {}
+      } catch (e) { }
       singleton = false;
     }
     currentShowingElementId = null;
@@ -195,13 +195,13 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
         try {
           singleton.hide();
           singleton.destroy();
-        } catch (e) {}
+        } catch (e) { }
         singleton = false;
       }
       currentShowingElementId = null;
 
       if (!ref.current) return;
-      
+
       hoverHandlers.forEach(({ element, enter, leave }) => {
         element?.removeEventListener('mouseenter', enter);
         element?.removeEventListener('mouseleave', leave);
@@ -245,29 +245,29 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
     onSync: ({ elementId }) => {
       if (!elementId) return;
       retryUntilReady(() => {
-          const towersRef = ref.current.children;
-          let targetFloor = null;
-          for (const towerRef of towersRef) {
+        const towersRef = ref.current.children;
+        let targetFloor = null;
+        for (const towerRef of towersRef) {
           targetFloor = Array.from(towerRef.children).find(f => f.id === elementId);
-            if (targetFloor) break;
+          if (targetFloor) break;
+        }
+
+        const instance = tippyInstanceMap.get(elementId);
+        if (instance && singleton) {
+          if (currentShowingElementId && currentShowingElementId !== elementId && ref.current) {
+            const prevFloor = document.getElementById(currentShowingElementId);
+            if (prevFloor && ref.current.contains(prevFloor)) {
+              prevFloor.classList.remove('tippy-showing');
+            }
           }
-          
-          const instance = tippyInstanceMap.get(elementId);
-          if (instance && singleton) {
-            if (currentShowingElementId && currentShowingElementId !== elementId && ref.current) {
-              const prevFloor = document.getElementById(currentShowingElementId);
-              if (prevFloor && ref.current.contains(prevFloor)) {
-                prevFloor.classList.remove('tippy-showing');
-              }
-            }
           if (targetFloor) targetFloor.classList.add('tippy-showing');
-            currentShowingElementId = elementId;
-            try {
-              singleton.show(instance);
-            } catch (error) {
+          currentShowingElementId = elementId;
+          try {
+            singleton.show(instance);
+          } catch (error) {
             instance?.show();
-              }
-            }
+          }
+        }
       });
     }
   });
@@ -278,12 +278,12 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
     onSync: ({ elementId }) => {
       if (!elementId) return;
       retryUntilReady(() => {
-          if (singleton) {
+        if (singleton) {
           ref.current.querySelectorAll('.tippy-showing').forEach(floor => floor.classList.remove('tippy-showing'));
-            currentShowingElementId = null;
-            try {
-              singleton.hide();
-          } catch (error) {}
+          currentShowingElementId = null;
+          try {
+            singleton.hide();
+          } catch (error) { }
         }
       });
     }
@@ -302,8 +302,8 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
           setTimeout(() => {
             const retryElement = document.getElementById(elementId);
             if (retryElement) retryElement.classList.toggle('tippy-showing', tippyShowing);
-        }, 100);
-      }
+          }, 100);
+        }
       }, 0);
     }
   });

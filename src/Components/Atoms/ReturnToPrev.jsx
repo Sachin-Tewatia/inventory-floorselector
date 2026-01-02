@@ -7,7 +7,7 @@ function ReturnToPrev({ text = "Return To Tower", to = "" }) {
     <Link to={to} onClick={(e) => e.stopPropagation()} className="no-dec">
       <Style id="return-to-tower">
         <div>{text}</div>
-        <div class="back__icon">
+        <div className="back__icon">
           <svg
             width="17"
             height="17"

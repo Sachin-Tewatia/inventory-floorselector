@@ -177,7 +177,7 @@ function BookNow({
         />
       )}
       <Style onClick={(e) => setIsOpen(false)}>
-        <div class="background "></div>
+        <div className="background "></div>
 
         <div
           className="form-wrapper animate__animated animate__fadeInDown animate__fast"
@@ -188,36 +188,36 @@ function BookNow({
               setIsOpen(!isOpen);
               // setIsConfirmVisible(false);
             }}
-            class="close-popup"
+            className="close-popup"
           >
             <CloseButton />
           </div>{" "}
-          <div class="description ">
-            <div class="description-secondary-wrapper">
-              <span class="">
-                <span class="title ">Unit Number:</span>{" "}
+          <div className="description ">
+            <div className="description-secondary-wrapper">
+              <span className="">
+                <span className="title ">Unit Number:</span>{" "}
                 <span className="desc-value">{unitDetails?.unit_number}</span>
               </span>{" "}
               {unitDetails?.unit_type && (
-                <span class="">
-                  <span class="title ">Unit Type:</span>{" "}
+                <span className="">
+                  <span className="title ">Unit Type:</span>{" "}
                   <span className="desc-value">{unitDetails?.unit_type}</span>
                 </span>
               )}
               {
-                <span class="">
-                  <span class="title ">Total BUA:</span>{" "}
-                  <span class="area svelte-wv78a7">
+                <span className="">
+                  <span className="title ">Total BUA:</span>{" "}
+                  <span className="area svelte-wv78a7">
                     <span className="desc-value">
                       {Number(unitDetails?.bua).toFixed(2)}
                     </span>
                   </span>{" "}
-                  <span class="area-change svelte-wv78a7">Sq. Ft.</span>
+                  <span className="area-change svelte-wv78a7">Sq. Ft.</span>
                 </span>
               }
             </div>
           </div>
-          <div class="content  " dir="" onClick={(e) => e.stopPropagation()}>
+          <div className="content  " dir="" onClick={(e) => e.stopPropagation()}>
             {reviewDetails && (
               <ReviewBooking
                 onEdit={() => setValues(null)}
@@ -233,9 +233,9 @@ function BookNow({
               <FormSteps
                 steps={formSteps}
                 current={currentStep}
-                // onChange={(current) => {
-                //   handleStepChange(current);
-                // }}
+              // onChange={(current) => {
+              //   handleStepChange(current);
+              // }}
               />
             )}
             <MultiForm
@@ -257,7 +257,7 @@ function BookNow({
                 setReviewDetails(null);
               }}
             >
-              {/* {!reviewDetails && <h2 class="form-title ">Block Now</h2>} */}
+              {/* {!reviewDetails && <h2 className="form-title ">Block Now</h2>} */}
             </MultiForm>
           </div>
         </div>

@@ -17,7 +17,7 @@ function Navigator({
   const { roomId } = useRoomId();
 
   const navigate = useNavigate();
-  
+
   // Helper function to navigate while preserving roomId
   const navigateWithRoomId = (path) => {
     if (roomId) {
@@ -41,8 +41,8 @@ function Navigator({
           }
         }}
       />
-      <div class="path">
-        <div class="path__scroll">
+      <div className="path">
+        <div className="path__scroll">
           {/* prev pages */}
           {prevPages.map((page, index) => (
             <Path
@@ -84,7 +84,7 @@ function Navigator({
             )}
         </div>
       </div>
-      {}
+      { }
       <CollapseButton
         isCollapsed={isCollapsed}
         onClick={() => setIsCollapsed((collapsed) => !collapsed)}
@@ -432,8 +432,8 @@ const Path = ({ collapsed, isFirst, isActive, title, onClick }) => (
             ? "path__item active animate__animated animate__fadeInLeft animate__faster"
             : "path__item animate__animated animate__fadeOutLeft hidden"
           : isActive
-          ? "path__item active animate__animated animate__fadeInLeft"
-          : "path__item animate__animated animate__fadeInLeft"
+            ? "path__item active animate__animated animate__fadeInLeft"
+            : "path__item animate__animated animate__fadeInLeft"
       }
     >
       {title}
@@ -442,8 +442,8 @@ const Path = ({ collapsed, isFirst, isActive, title, onClick }) => (
 );
 
 const BackButton = ({ onClick }) => (
-  <button class="back" onClick={onClick}>
-    <div class="back__icon">
+  <button className="back" onClick={onClick}>
+    <div className="back__icon">
       <svg
         width="17"
         height="17"
@@ -454,7 +454,7 @@ const BackButton = ({ onClick }) => (
         <path d="M6.60209 7.94657C6.60209 8.70348 6.59248 9.38368 6.60689 10.0632C6.61307 10.3612 6.52455 10.6023 6.28509 10.7287C6.02435 10.8668 5.754 10.8866 5.50081 10.6469C4.79612 9.9784 4.08046 9.32304 3.3696 8.66184C2.49681 7.85012 1.62402 7.03914 0.752597 6.22597C0.624286 6.10615 0.494602 5.98341 0.383445 5.84605C0.124763 5.52677 0.185831 5.08913 0.531655 4.76474C1.86966 3.50736 3.20973 2.25289 4.54979 0.998427C4.8764 0.693031 5.18792 0.362793 5.54541 0.104886C5.70185 -0.00762815 5.96465 -0.0178567 6.16364 0.0194046C6.44016 0.0712782 6.60552 0.284617 6.60278 0.614124C6.59797 1.22273 6.61101 1.83133 6.5966 2.43993C6.59043 2.69564 6.69609 2.76724 6.91223 2.79208C9.54433 3.09017 12.0282 3.85659 14.2178 5.50047C15.3575 6.35602 16.2673 7.4176 16.6955 8.87664C17.1641 10.4738 16.8272 11.9094 15.9139 13.2121C14.7715 14.8406 13.1782 15.7963 11.4416 16.524C11.3688 16.5547 11.2934 16.5788 11.2213 16.6116C10.9736 16.7256 10.7334 16.7227 10.6141 16.4378C10.494 16.1521 10.6154 15.9417 10.8789 15.7897C11.2652 15.5676 11.6488 15.3331 12.0097 15.0671C12.7123 14.5477 13.2489 13.8879 13.4836 12.9827C13.7285 12.0373 13.4506 11.2409 12.8791 10.5373C11.9891 9.43994 10.7952 8.87518 9.52306 8.50037C8.8026 8.28849 8.05194 8.19278 7.31432 8.05031C7.09544 8.00867 6.87312 7.98529 6.60209 7.94657Z"></path>
       </svg>
     </div>{" "}
-    <div class="back__text">Up</div>
+    <div className="back__text">Up</div>
   </button>
 );
 
@@ -501,13 +501,13 @@ const Delimiter = ({ className }) => (
 const Logo = () => {
   const { roomId } = useRoomId();
   const navigate = useNavigate();
-  
+
   const handleLogoClick = (e) => {
     e.preventDefault();
     const targetPath = roomId ? `/?roomId=${roomId}` : '/';
     navigate(targetPath);
   };
-  
+
   return (
     <div className="logo-wrapper">
       <a href="/" onClick={handleLogoClick}>
@@ -522,11 +522,11 @@ export const RouteDetails = ({ landMarkRouteDetails }) => {
 
   return (
     <>
-      <div class="route svelte-1puig2g">
-        <div class="route__time svelte-1puig2g">&nbsp; {time} &nbsp;</div>{" "}
-        <div class="route__delimiter svelte-1puig2g">
-          <div class="route__line svelte-1puig2g"></div>{" "}
-          <div class="route__icon svelte-1puig2g">
+      <div className="route svelte-1puig2g">
+        <div className="route__time svelte-1puig2g">&nbsp; {time} &nbsp;</div>{" "}
+        <div className="route__delimiter svelte-1puig2g">
+          <div className="route__line svelte-1puig2g"></div>{" "}
+          <div className="route__icon svelte-1puig2g">
             <svg
               width="7"
               height="13"
@@ -537,11 +537,11 @@ export const RouteDetails = ({ landMarkRouteDetails }) => {
             </svg>
           </div>
         </div>{" "}
-        <div class="route__distance svelte-1puig2g">
+        <div className="route__distance svelte-1puig2g">
           &nbsp; {distance} &nbsp;
         </div>
       </div>
-      <button class="path__item disabled">{landmark_name}</button>
+      <button className="path__item disabled">{landmark_name}</button>
     </>
   );
 };

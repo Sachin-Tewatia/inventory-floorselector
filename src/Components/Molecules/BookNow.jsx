@@ -7,15 +7,15 @@ import { CHANNEL_PARTNER_LIST } from "../../Data/channelPartners";
 
 const RadioInput = ({ label, value, checked, setter }) => {
   return (
-    <div class="input-group">
-      <label class="fake-radio-label">
+    <div className="input-group">
+      <label className="fake-radio-label">
         <input
-          class="input-radio"
+          className="input-radio"
           type="radio"
           checked={checked == value}
           onChange={() => setter(value)}
         />{" "}
-        <div class="fake-radio"></div>
+        <div className="fake-radio"></div>
         <span>{label}</span>
       </label>
     </div>
@@ -46,18 +46,18 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
   if (!isOpen) return null;
   return (
     <Style onClick={(e) => setIsOpen(false)}>
-      <div class={`${"form-wrapper svelte-tipeeb"}`} ref={ref}>
-        <div class="background svelte-tipeeb"></div>{" "}
-        <div class="content svelte-tipeeb" dir="">
+      <div className={`${"form-wrapper svelte-tipeeb"}`} ref={ref}>
+        <div className="background svelte-tipeeb"></div>{" "}
+        <div className="content svelte-tipeeb" dir="">
           <div
-            class="enquiry-form  svelte-tipeeb"
+            className="enquiry-form  svelte-tipeeb"
             onClick={(e) => e.stopPropagation()}
           >
             {" "}
-            <h2 class="form-title svelte-tipeeb">Block Now</h2>{" "}
+            <h2 className="form-title svelte-tipeeb">Block Now</h2>{" "}
             <div
-              onClick={()=>setIsOpen(!isOpen)}
-              class="close-popup svelte-tipeeb"
+              onClick={() => setIsOpen(!isOpen)}
+              className="close-popup svelte-tipeeb"
             >
               <CloseButton />
             </div>{" "}
@@ -77,31 +77,31 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                 });
               }}
             >
-              <div class="description svelte-tipeeb">
-                
-                <div class="description-secondary svelte-tipeeb">
-                  <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Unit Number:</span>{" "}
+              <div className="description svelte-tipeeb">
+
+                <div className="description-secondary svelte-tipeeb">
+                  <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Unit Number:</span>{" "}
                     {unitDetails?.FlatNumber}
                   </span>{" "}
-                  <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Unit Type:</span>{" "}
+                  <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Unit Type:</span>{" "}
                     {unitDetails?.UnitType}
                   </span>{" "}
-                  <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Total Area:</span>{" "}
-                    <span class="area svelte-wv78a7">{Math.ceil(parseFloat(unitDetails?.SBU))} </span>{" "}
-                    <span class="area-change svelte-wv78a7">Sq. Ft.</span>
+                  <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Total Area:</span>{" "}
+                    <span className="area svelte-wv78a7">{Math.ceil(parseFloat(unitDetails?.SBU))} </span>{" "}
+                    <span className="area-change svelte-wv78a7">Sq. Ft.</span>
                   </span>{" "}
-                 
+
                 </div>
               </div>{" "}
-              <div class="gender-group svelte-tipeeb">
-             
+              <div className="gender-group svelte-tipeeb">
+
               </div>{" "}
-              <div class="form-row">
-                <div class="input-group">
-                  <label class="input-group-label">
+              <div className="form-row">
+                <div className="input-group">
+                  <label className="input-group-label">
                     <span>First Name</span>{" "}
                     <input
                       type="text"
@@ -113,8 +113,8 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                     />
                   </label>
                 </div>{" "}
-                <div class="input-group">
-                  <label class="input-group-label">
+                <div className="input-group">
+                  <label className="input-group-label">
                     <span>Last Name</span>{" "}
                     <input
                       type="text"
@@ -127,8 +127,8 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                   </label>
                 </div>
               </div>{" "}
-              <div class="form-row">
-                <div class="input-group">
+              <div className="form-row">
+                <div className="input-group">
                   <label>
                     <span>Email</span>{" "}
                     <input
@@ -140,11 +140,11 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                     />
                   </label>
                 </div>{" "}
-                <div class="input-group">
-                  <label class="combo-input">
+                <div className="input-group">
+                  <label className="combo-input">
                     <span>Phone Number</span>
-                    <div class="row">
-                      <div class="code-input" style={{ marginRight: "5px" }}>
+                    <div className="row">
+                      <div className="code-input" style={{ marginRight: "5px" }}>
                         <select name="phone_code" id="booking_form_phone_code">
                           <option value="+91">+91</option>
                           <option value="+971">+971</option>
@@ -152,7 +152,7 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                           <option value="+944">+944</option>
                         </select>
                       </div>{" "}
-                      <div class="phone-input">
+                      <div className="phone-input">
                         <input
                           type="text"
                           name="phone_number"
@@ -167,8 +167,8 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                 </div>
               </div>
               <div className="form-row">
-                <div class="input-group">
-                  <label class="input-group-label">
+                <div className="input-group">
+                  <label className="input-group-label">
                     <span>Channel Partner</span>
                   </label>
                   <Select
@@ -187,25 +187,24 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                   />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="input-group payment-info">
+              <div className="form-row">
+                <div className="input-group payment-info">
                   Please pay the Blocking amount to Block your Unit. Please note
                   that the Unit will be blocked for 48 hours. To confirm your
                   booking, please contact our Sales Team now - 1234567890.
                 </div>
               </div>{" "}
-              <div class="submit-btn svelte-tipeeb">
+              <div className="submit-btn svelte-tipeeb">
                 <button
-                  class={`button submit svelte-ynf51n ${
-                    validateName(firstName) &&
-                    validateName(lastName) &&
-                    validateEmail(email) &&
-                    phoneNumber.length === 10
+                  className={`button submit svelte-ynf51n ${validateName(firstName) &&
+                      validateName(lastName) &&
+                      validateEmail(email) &&
+                      phoneNumber.length === 10
                       ? // &&
-                        // gender
-                        "enabled"
+                      // gender
+                      "enabled"
                       : "disabled"
-                  } `}
+                    } `}
                   value=""
                   style={{ paddings: "5px 8px" }}
                 >

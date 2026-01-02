@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ImageLoader = () => {
   return (
     <Style>
-      <span class="loader"></span>
+      <span className="loader"></span>
     </Style>
   );
 };

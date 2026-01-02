@@ -38,11 +38,11 @@ function Login({ setIsLogin, credentials, title }) {
   return (
     <Style>
       {invalidLogin && <Alert message="Invalid Login" type="error" closable />}
-      <div class="login-page">
-        <div class="form">
+      <div className="login-page">
+        <div className="form">
           <div className="title">{title}</div>
           <form
-            class="login-form"
+            className="login-form"
             onSubmit={(e) => {
               e.preventDefault();
               handleLogin(_username, _password);

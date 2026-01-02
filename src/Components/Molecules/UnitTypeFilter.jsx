@@ -31,7 +31,7 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
       newFilters = [...unitTypeFilters.map((filter) => filter.id)];
       setActiveMapFilterIds(newFilters);
     }
-    
+
     // Sync filter changes if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSyncDebounced(SYNC_EVENTS.FILTERS, {
@@ -64,7 +64,7 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
         return newFilters;
       });
     }
-    
+
     // Sync filter changes if not receiving sync
     if (!getReceivingSync() && roomId) {
       setTimeout(() => {
@@ -79,7 +79,7 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
   //size handler
   const handleSizeOnSliderChange = (value) => {
     setFlatFilterSizeValues(value);
-    
+
     // Sync size filter changes with debouncing (since slider changes rapidly)
     if (!getReceivingSync() && roomId) {
       emitSyncDebounced(SYNC_EVENTS.FILTERS, {
@@ -92,19 +92,18 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
   return (
     <Style>
       <div
-        class="filters-control align-start"
+        className="filters-control align-start"
         style={{ minHeight: "250px", height: "fit-content" }}
       >
-        <div class="main-controls">
+        <div className="main-controls">
           {" "}
-          <div class="available-title">{totalUnits} Units Total</div>{" "}
-          <div class="button-group">
+          <div className="available-title">{totalUnits} Units Total</div>{" "}
+          <div className="button-group">
             {unitTypeFilters.map((filter) => (
               <button
                 onClick={() => handleFilterClick(filter.id)}
-                class={`button green ${
-                  isFilterActive(filter.id) ? "active" : ""
-                }`}
+                className={`button green ${isFilterActive(filter.id) ? "active" : ""
+                  }`}
                 value=""
                 style={{ "--paddings": "5px 8px" }}
               >
@@ -160,12 +159,12 @@ export const DoubleSlider = ({
   labelValues,
 }) => {
   return (
-    <div class="slider-group">
-      <div class="slider-group__title">{title + " " + rangeLabel}</div>{" "}
-      <div class="slider-group__body">
-        <div class="slider-group__body--prices">
-          <div class="input-minprice">{labelValues[0]}</div>{" "}
-          <div class="input-maxprice">{labelValues[1]}</div>
+    <div className="slider-group">
+      <div className="slider-group__title">{title + " " + rangeLabel}</div>{" "}
+      <div className="slider-group__body">
+        <div className="slider-group__body--prices">
+          <div className="input-minprice">{labelValues[0]}</div>{" "}
+          <div className="input-maxprice">{labelValues[1]}</div>
         </div>{" "}
         <div style={{ marginTop: "10px" }}>
           <Range

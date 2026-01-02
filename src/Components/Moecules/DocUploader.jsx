@@ -55,7 +55,7 @@ function DocUploader({ title, onChange, value }) {
       <div
         className={`input-group docs-uploader ${docs.length > 0 && "valid"}`}
       >
-        <label class="input-group-label">
+        <label className="input-group-label">
           <span className="title">{title}</span>{" "}
         </label>
 

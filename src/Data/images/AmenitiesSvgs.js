@@ -62,9 +62,9 @@ export const arrowUp = (
         <path
             d="M3 10L8 5L13 10"
             stroke="#eeeeee"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         ></path>
     </svg>
 )

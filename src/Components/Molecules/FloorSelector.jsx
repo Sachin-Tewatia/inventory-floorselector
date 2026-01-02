@@ -9,19 +9,19 @@ import { useInventories } from "../../Hooks";
 
 function FloorSelector({ currentTower, currentFloor }) {
   const [selectedFloor, setSelectedFloor] = useState(currentFloor);
-  const [selectedTower, setSelectedTower] = useState(getTowerFromCombinedTowersAndIndex(currentTower,0));
+  const [selectedTower, setSelectedTower] = useState(getTowerFromCombinedTowersAndIndex(currentTower, 0));
 
   const { getAllFloorsInTower } = useInventories();
 
   const [isOpen, setIsOpen] = useState(true);
   const [availableFloorsToggle, setAvailableFloorsToggle] = useState(false);
-  const floorsOneToTen = ["G",1,2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
+  const floorsOneToTen = ["G", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const floorsElevenToTwenty = [11, 12, 14, 15, 16, 17, 18, 19, 20];
   const floors21To30 = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-  
+
   useEffect(() => {
     setSelectedFloor(currentFloor);
-    setSelectedTower(getTowerFromCombinedTowersAndIndex(currentTower,0));
+    setSelectedTower(getTowerFromCombinedTowersAndIndex(currentTower, 0));
   }, [currentFloor, currentTower]);
 
   const handleSelectedFloor = (e, floor) => {
@@ -38,28 +38,28 @@ function FloorSelector({ currentTower, currentFloor }) {
 
   return (
     <Style>
-      <div class="body info svelte-9mhvmf">
+      <div className="body info svelte-9mhvmf">
         {" "}
-        <div class="floor-switcher-wrapper">
-          <div class="panel floor-switcher svelte-1shyvx4">
-            <div class="title svelte-1shyvx4">
-              <h2 class="titleFloor" slot="title">
+        <div className="floor-switcher-wrapper">
+          <div className="panel floor-switcher svelte-1shyvx4">
+            <div className="title svelte-1shyvx4">
+              <h2 className="titleFloor" slot="title">
                 {getFormalNameFromNumber(currentFloor)}
                 <span>{` FLOOR`}</span>
               </h2>
             </div>{" "}
             <div
-              class={
+              className={
                 isOpen
                   ? "body active svelte-1shyvx4 body--margin"
                   : "body svelte-1shyvx4 body--margin"
               }
             >
-              <div slot="body" class="floor__wrap svelte-6keq0u">
-                <div class="inputs-container">
-                  <div class="notBack">
-                    <div class="input-group">
-                      <label class="input-group-label">
+              <div slot="body" className="floor__wrap svelte-6keq0u">
+                <div className="inputs-container">
+                  <div className="notBack">
+                    <div className="input-group">
+                      <label className="input-group-label">
                         <span></span>{" "}
                         <input
                           type="text"
@@ -67,18 +67,17 @@ function FloorSelector({ currentTower, currentFloor }) {
                           name="floor_number"
                           placeholder={
                             selectedFloor !== currentFloor ||
-                            selectedTower !== currentTower
+                              selectedTower !== currentTower
                               ? `Tower ${selectedTower.slice(-1).toUpperCase()}  ${getFormalNameFromNumber(
-                                  selectedFloor
-                                )} Floor`
+                                selectedFloor
+                              )} Floor`
                               : "Enter or select a floor"
                           }
-                          class={`${
-                            selectedFloor !== currentFloor ||
-                            selectedTower !== currentTower
+                          className={`${selectedFloor !== currentFloor ||
+                              selectedTower !== currentTower
                               ? "input-floor floor-selected"
                               : "input-floor"
-                          }`}
+                            }`}
                           onChange={(e) => {
                             if (e.key !== "Enter")
                               setSelectedFloor(e.target.value);
@@ -94,13 +93,13 @@ function FloorSelector({ currentTower, currentFloor }) {
                       </label>
                     </div>
                   </div>{" "}
-                  <div class="notBack">
-                    {/* <div class="input-group">
-                      <label class="fake-checkbox-label">
+                  <div className="notBack">
+                    {/* <div className="input-group">
+                      <label className="fake-checkbox-label">
                         <input name="available" type="checkbox" />{" "}
                         <div
                           onClick={handleAvailableFloorsToggle}
-                          class={`fake-checkbox toggle-button ${
+                          className={`fake-checkbox toggle-button ${
                             availableFloorsToggle
                               ? "toggle-button--checked"
                               : ""
@@ -118,9 +117,8 @@ function FloorSelector({ currentTower, currentFloor }) {
                           getTowerNumberFromName(a) - getTowerNumberFromName(b)
                       ).map((tower) => (
                         <div
-                          className={`tower ${
-                            tower === selectedTower ? " active" : ""
-                          }`}
+                          className={`tower ${tower === selectedTower ? " active" : ""
+                            }`}
                           onClick={(e) => {
                             e.stopPropagation();
                             setSelectedTower(tower);
@@ -133,35 +131,32 @@ function FloorSelector({ currentTower, currentFloor }) {
                   </div>
                 </div>{" "}
                 <div className="section-title">Floors</div>
-                <div class="floor__buttons svelte-6keq0u">
+                <div className="floor__buttons svelte-6keq0u">
                   <div
-                    class={`floors__group notBack svelte-6keq0u ${
-                      availableFloorsToggle ? "hide-ground-floor" : ""
-                    }`}
+                    className={`floors__group notBack svelte-6keq0u ${availableFloorsToggle ? "hide-ground-floor" : ""
+                      }`}
                   >
                     {/* <div
-                      class={`floors__group--item ground-floor color_retails available svelte-6keq0u`}
+                      className={`floors__group--item ground-floor color_retails available svelte-6keq0u`}
                     >
-                      <button class="button__gf">GF</button>
+                      <button className="button__gf">GF</button>
                     </div> */}
                   </div>{" "}
-                  <div class="floors__group svelte-6keq0u">
-                    <div class="floors__group--numbers svelte-6keq0u">
+                  <div className="floors__group svelte-6keq0u">
+                    <div className="floors__group--numbers svelte-6keq0u">
                       G - 12
                     </div>
                     {floorsOneToTen.map((floor) => {
                       return (
                         <div
                           onClick={(e) => handleSelectedFloor(e, floor)}
-                          class={`floors__group--item notBack svelte-6keq0u available ${
-                            selectedFloor == floor ? "selected" : ""
-                          }`}
+                          className={`floors__group--item notBack svelte-6keq0u available ${selectedFloor == floor ? "selected" : ""
+                            }`}
                         >
                           <button
                             value={floor}
-                            class={`floors__group--button notBack svelte-6keq0u ${
-                              selectedFloor == floor ? "selected" : ""
-                            }`}
+                            className={`floors__group--button notBack svelte-6keq0u ${selectedFloor == floor ? "selected" : ""
+                              }`}
                           >
                             {floor}
                           </button>{" "}
@@ -169,21 +164,21 @@ function FloorSelector({ currentTower, currentFloor }) {
                       );
                     })}{" "}
                   </div>{" "}
-                  {/* <div class="floors__group svelte-6keq0u">
-                    <div class="floors__group--numbers svelte-6keq0u">
+                  {/* <div className="floors__group svelte-6keq0u">
+                    <div className="floors__group--numbers svelte-6keq0u">
                       10 - 20
                     </div>{" "}
                     {floorsElevenToTwenty.map((floor) => {
                       return (
                         <div
                           onClick={(e) => handleSelectedFloor(e, floor)}
-                          class={`floors__group--item notBack svelte-6keq0u available ${
+                          className={`floors__group--item notBack svelte-6keq0u available ${
                             selectedFloor == floor ? "selected" : ""
                           }`}
                         >
                           <button
                             value={floor}
-                            class="floors__group--button notBack svelte-6keq0u"
+                            className="floors__group--button notBack svelte-6keq0u"
                           >
                             {floor}
                           </button>{" "}
@@ -191,21 +186,21 @@ function FloorSelector({ currentTower, currentFloor }) {
                       );
                     })}{" "}
                   </div> */}
-                  {/* <div class="floors__group svelte-6keq0u">
-                    <div class="floors__group--numbers svelte-6keq0u">
+                  {/* <div className="floors__group svelte-6keq0u">
+                    <div className="floors__group--numbers svelte-6keq0u">
                       20 - 30
                     </div>{" "}
                     {floors21To30.map((floor) => {
                       return (
                         <div
                           onClick={(e) => handleSelectedFloor(e, floor)}
-                          class={`floors__group--item notBack svelte-6keq0u available ${
+                          className={`floors__group--item notBack svelte-6keq0u available ${
                             selectedFloor == floor ? "selected" : ""
                           }`}
                         >
                           <button
                             value={floor}
-                            class="floors__group--button notBack svelte-6keq0u"
+                            className="floors__group--button notBack svelte-6keq0u"
                           >
                             {floor}
                           </button>{" "}
@@ -213,8 +208,8 @@ function FloorSelector({ currentTower, currentFloor }) {
                       );
                     })}{" "}
                   </div> */}
-                  {/* <div class="floors__group svelte-6keq0u">
-                    <div class="floors__group--numbers svelte-6keq0u">
+                  {/* <div className="floors__group svelte-6keq0u">
+                    <div className="floors__group--numbers svelte-6keq0u">
                       31 &lt;{" "}
                     </div>{" "}
 
@@ -224,13 +219,13 @@ function FloorSelector({ currentTower, currentFloor }) {
                         return (
                           <div
                             onClick={(e) => handleSelectedFloor(e, floor)}
-                            class={`floors__group--item notBack svelte-6keq0u available ${
+                            className={`floors__group--item notBack svelte-6keq0u available ${
                               selectedFloor == floor ? "selected" : ""
                             }`}
                           >
                             <button
                               value={floor}
-                              class="floors__group--button notBack svelte-6keq0u"
+                              className="floors__group--button notBack svelte-6keq0u"
                             >
                               {floor}
                             </button>{" "}
@@ -241,18 +236,17 @@ function FloorSelector({ currentTower, currentFloor }) {
                 </div>
               </div>
             </div>
-            <div class="alwaysVisible">
+            <div className="alwaysVisible">
               <div slot="alwaysVisible">
-                <div class="">
+                <div className="">
                   <button
-                    class={`button active toggleButton svelte-ynf51n ${
-                      selectedFloor !== currentFloor ||
-                      selectedTower !== currentTower
+                    className={`button active toggleButton svelte-ynf51n ${selectedFloor !== currentFloor ||
+                        selectedTower !== currentTower
                         ? "explore"
                         : isOpen
-                        ? "select-floor"
-                        : "select-floor"
-                    } `}
+                          ? "select-floor"
+                          : "select-floor"
+                      } `}
                     value=""
                     onClick={(e) => {
                       e.stopPropagation();
@@ -266,11 +260,11 @@ function FloorSelector({ currentTower, currentFloor }) {
                     }}
                   >
                     {selectedFloor !== currentFloor ||
-                    selectedTower !== currentTower
+                      selectedTower !== currentTower
                       ? "Explore"
                       : isOpen
-                      ? "Select-floor"
-                      : "Select floor"}
+                        ? "Select-floor"
+                        : "Select floor"}
                   </button>
                 </div>
               </div>

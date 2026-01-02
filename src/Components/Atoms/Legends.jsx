@@ -4,10 +4,10 @@ import styled from "styled-components";
 function Legends({ className }) {
   return (
     <Style className={className}>
-      <h2 class="title svelte-1igsnns">Legend</h2>{" "}
-      <div class="button-group body">
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+      <h2 className="title svelte-1igsnns">Legend</h2>{" "}
+      <div className="button-group body">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -27,10 +27,10 @@ function Legends({ className }) {
               ></path> */}
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">NH 08</div>
+          <div className="metro__item--text svelte-1igsnns">NH 08</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -44,10 +44,10 @@ function Legends({ className }) {
               ></path>
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">Golf Course Road</div>
+          <div className="metro__item--text svelte-1igsnns">Golf Course Road</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -61,10 +61,10 @@ function Legends({ className }) {
               ></path>
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">Sohna Road</div>
+          <div className="metro__item--text svelte-1igsnns">Sohna Road</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -78,10 +78,10 @@ function Legends({ className }) {
               ></path>
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">SPR Road</div>
+          <div className="metro__item--text svelte-1igsnns">SPR Road</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -101,10 +101,10 @@ function Legends({ className }) {
               ></path> */}
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">Dwarka Expressway</div>
+          <div className="metro__item--text svelte-1igsnns">Dwarka Expressway</div>
         </div>
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -124,7 +124,7 @@ function Legends({ className }) {
               ></path> */}
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">UE Road II</div>
+          <div className="metro__item--text svelte-1igsnns">UE Road II</div>
         </div>
       </div>
     </Style>

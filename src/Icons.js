@@ -80,7 +80,7 @@ export const FullScreenIcon = (
 );
 
 export const CloseFullScreenIcon = (
-  <svg width="000px" height="800px" viewBox="0 0 30 30" id="i-fullscreen-exit" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
-      <path d="M4 12 L12 12 12 4 M20 4 L20 12 28 12 M4 20 L12 20 12 28 M28 20 L20 20 20 28" />
+  <svg width="000px" height="800px" viewBox="0 0 30 30" id="i-fullscreen-exit" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+    <path d="M4 12 L12 12 12 4 M20 4 L20 12 28 12 M4 20 L12 20 12 28 M28 20 L20 20 20 28" />
   </svg>
-  );
+);

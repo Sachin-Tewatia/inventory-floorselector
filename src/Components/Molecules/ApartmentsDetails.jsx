@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {} from "../../Data/images/ApartmentsDetailsSvgs";
+import { } from "../../Data/images/ApartmentsDetailsSvgs";
 // import BookNow from "./BookNow";
 import BookNow from "../Moecules/BookNow";
 import { useInventories } from "../../Hooks";
@@ -15,13 +15,13 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
 
   return (
     <Style id="appartmnet-details-panel">
-      <div class="interface--col svelte-9mhvmf">
+      <div className="interface--col svelte-9mhvmf">
         <div
-          class="panel panel__unit-card svelte-1m6i2pp"
+          className="panel panel__unit-card svelte-1m6i2pp"
           style={{ maxHeight: "none" }}
         >
           <div
-            class="panel unitCard svelte-1e3fizx"
+            className="panel unitCard svelte-1e3fizx"
             style={{
               maxWidth: "240px",
               minWidth: "200px",
@@ -29,14 +29,14 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
               maxHeight: "none",
             }}
           >
-            <div class="body svelte-1e3fizx">
-              <div slot="body_not_hidden" class="svelte-1m6i2pp">
+            <div className="body svelte-1e3fizx">
+              <div slot="body_not_hidden" className="svelte-1m6i2pp">
                 <div
-                  class="unit-properties svelte-1m6i2pp"
+                  className="unit-properties svelte-1m6i2pp"
                   style={{ maxHeight: "172px" }}
                 >
-                  {/* <div class="unit-row svelte-1m6i2pp">
-                    <div class="type svelte-1m6i2pp ">Apartment Details</div>
+                  {/* <div className="unit-row svelte-1m6i2pp">
+                    <div className="type svelte-1m6i2pp ">Apartment Details</div>
                   </div> */}
                   <div className="features">
                     <div className="feature">
@@ -76,67 +76,67 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
                     </div> */}
                   </div>
                   {/* <div
-                    class="unit-row svelte-1m6i2pp"
+                    className="unit-row svelte-1m6i2pp"
                     style={{ marginTop: "0.5rem", marginBottom: "0" }}
                   >
-                    <div class="area svelte-1m6i2pp">Unit Status</div>
-                    <div class="area-count svelte-1m6i2pp">
+                    <div className="area svelte-1m6i2pp">Unit Status</div>
+                    <div className="area-count svelte-1m6i2pp">
                       <span
-                        class={`area svelte-wv78a7 unit-status ${unitDetails?.Status}`}
+                        className={`area svelte-wv78a7 unit-status ${unitDetails?.Status}`}
                       >
                         {unitDetails?.Status}
                       </span>
                     </div>
                   </div> */}
-                  {/* <div class="secondary-area svelte-1m6i2pp">
-                    <div class="unit-row svelte-1m6i2pp">
-                      <div class="area svelte-1m6i2pp">Suite Area</div>
-                      <div class="area-count svelte-1m6i2pp">
-                        <span class="area svelte-wv78a7">10,763.9</span>
-                        <span class="area-change svelte-wv78a7">Sq. Ft.</span>
+                  {/* <div className="secondary-area svelte-1m6i2pp">
+                    <div className="unit-row svelte-1m6i2pp">
+                      <div className="area svelte-1m6i2pp">Suite Area</div>
+                      <div className="area-count svelte-1m6i2pp">
+                        <span className="area svelte-wv78a7">10,763.9</span>
+                        <span className="area-change svelte-wv78a7">Sq. Ft.</span>
                       </div>
                     </div>{" "}
-                    <div class="unit-row svelte-1m6i2pp">
-                      <div class="area svelte-1m6i2pp">Balcony Area</div>
-                      <div class="area-count svelte-1m6i2pp">
-                        <span class="area svelte-wv78a7">11,840.29</span>
-                        <span class="area-change svelte-wv78a7">Sq. Ft.</span>
+                    <div className="unit-row svelte-1m6i2pp">
+                      <div className="area svelte-1m6i2pp">Balcony Area</div>
+                      <div className="area-count svelte-1m6i2pp">
+                        <span className="area svelte-wv78a7">11,840.29</span>
+                        <span className="area-change svelte-wv78a7">Sq. Ft.</span>
                       </div>
                     </div>
                   </div>{" "} */}
 
-                  {/* <div class="unit-row svelte-1m6i2pp">
-                    <div class="area svelte-1m6i2pp">
+                  {/* <div className="unit-row svelte-1m6i2pp">
+                    <div className="area svelte-1m6i2pp">
                       {" "}
                       Unit {unitDetails.FlatNumber}
                     </div>
-                    <div class="area-count svelte-1m6i2pp">
-                      <span class={`area svelte-wv78a7`}>
+                    <div className="area-count svelte-1m6i2pp">
+                      <span className={`area svelte-wv78a7`}>
                         {unitDetails?.UnitType}
                       </span>
                     </div>
                   </div>
-                  <div class="unit-row svelte-1m6i2pp">
-                    <div class="area svelte-1m6i2pp">Total Area</div>
-                    <div class="area-count svelte-1m6i2pp">
-                      <span class="area svelte-wv78a7">{unitDetails?.SBU}</span>
-                      <span class="area-change svelte-wv78a7"> Sq. Ft.</span>
+                  <div className="unit-row svelte-1m6i2pp">
+                    <div className="area svelte-1m6i2pp">Total Area</div>
+                    <div className="area-count svelte-1m6i2pp">
+                      <span className="area svelte-wv78a7">{unitDetails?.SBU}</span>
+                      <span className="area-change svelte-wv78a7"> Sq. Ft.</span>
                     </div>
                   </div>{" "}
-                  <div class="unit-row svelte-1m6i2pp">
-                    <div class="price svelte-1m6i2pp">Total Cost</div>
-                    <div class="price-count svelte-1m6i2pp">
+                  <div className="unit-row svelte-1m6i2pp">
+                    <div className="price svelte-1m6i2pp">Total Cost</div>
+                    <div className="price-count svelte-1m6i2pp">
                       <Price price={unitDetails?.TotalCost} />
                     </div>
                   </div>{" "} */}
-                  <div class="buttons svelte-1m6i2pp">
+                  <div className="buttons svelte-1m6i2pp">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         // opens the book now modal
                         setIsOpen(!isOpen);
                       }}
-                      class={
+                      className={
                         unitDetails?.status == UNIT_STATUS.AVAILABLE
                           ? "button green active svelte-ynf51n"
                           : "button green svelte-ynf51n"
@@ -149,7 +149,7 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
                     </button>
                     {/* {showVRBtn && (
                       <button
-                        class={
+                        className={
                           !getFlatVrTours(unitDetails?.unit_type)
                             ? "button green  svelte-ynf51n"
                             : "button green active svelte-ynf51n"
@@ -179,73 +179,73 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
               />
             )}
             {/* {!foldedCard && (
-              <div class="body svelte-1e3fizx">
-                <div slot="body" class="svelte-1m6i2pp">
+              <div className="body svelte-1e3fizx">
+                <div slot="body" className="svelte-1m6i2pp">
                   <div
-                    class="fake-margin svelte-1m6i2pp"
+                    className="fake-margin svelte-1m6i2pp"
                     style={{ maxHeight: "25px" }}
                   ></div>{" "}
-                  <div class="scrollable svelte-1m6i2pp">
-                    <div class="svelte-1m6i2pp" style={{ marginTop: "-25px" }}>
+                  <div className="scrollable svelte-1m6i2pp">
+                    <div className="svelte-1m6i2pp" style={{ marginTop: "-25px" }}>
                       <div
-                        class="rooms-properties svelte-1m6i2pp"
+                        className="rooms-properties svelte-1m6i2pp"
                         style={{ maxHeight: "391px" }}
                       >
-                        <div class="description svelte-1m6i2pp">
-                          <div class="description-title svelte-1m6i2pp">
+                        <div className="description svelte-1m6i2pp">
+                          <div className="description-title svelte-1m6i2pp">
                             Rooms and sizes
                           </div>{" "}
-                          <div class="description-subtitle svelte-1m6i2pp">
+                          <div className="description-subtitle svelte-1m6i2pp">
                             Click on the room name to go to VR
                           </div>
                         </div>{" "}
-                        <div class="vr-list svelte-1m6i2pp">
+                        <div className="vr-list svelte-1m6i2pp">
                           {roomDimensions.map((roomDimension, id) => {
                             return (
                               <>
                                 <div
                                   key={id}
-                                  class={`vr-list__item svelte-1m6i2pp `}
+                                  className={`vr-list__item svelte-1m6i2pp `}
                                 >
                                   <div
-                                    class={`info svelte-1m6i2pp ${
+                                    className={`info svelte-1m6i2pp ${
                                       roomDimension.type === "Balcony"
                                         ? ""
                                         : "clickable"
                                     }`}
                                   >
-                                    <span class="link svelte-1m6i2pp">
+                                    <span className="link svelte-1m6i2pp">
                                       {roomDimension.type}
                                     </span>{" "}
-                                    <span class="area svelte-1m6i2pp">
-                                      <span class="area svelte-wv78a7">
+                                    <span className="area svelte-1m6i2pp">
+                                      <span className="area svelte-wv78a7">
                                         {roomDimension.dimention.length}
                                       </span>{" "}
-                                      <span class="area-change svelte-wv78a7">
+                                      <span className="area-change svelte-wv78a7">
                                         {roomDimension.unit}
                                       </span>
                                       x
-                                      <span class="area svelte-wv78a7">
+                                      <span className="area svelte-wv78a7">
                                         {roomDimension.dimention.width}
                                       </span>{" "}
-                                      <span class="area-change svelte-wv78a7">
+                                      <span className="area-change svelte-wv78a7">
                                         {roomDimension.unit}
                                       </span>
                                     </span>{" "}
-                                    <div class="arrow svelte-1m6i2pp">
+                                    <div className="arrow svelte-1m6i2pp">
                                       <Arrow />
                                     </div>
                                   </div>
                                 </div>
-                                <div class="separator svelte-1m6i2pp"></div>
+                                <div className="separator svelte-1m6i2pp"></div>
                               </>
                             );
                           })}
-                          <div class="vr-list__item total-area svelte-1m6i2pp">
-                            <span class="title svelte-1m6i2pp">Total Area</span>{" "}
-                            <span class="area svelte-1m6i2pp">
-                              <span class="area svelte-wv78a7">12,916.68</span>{" "}
-                              <span class="area-change svelte-wv78a7">
+                          <div className="vr-list__item total-area svelte-1m6i2pp">
+                            <span className="title svelte-1m6i2pp">Total Area</span>{" "}
+                            <span className="area svelte-1m6i2pp">
+                              <span className="area svelte-wv78a7">12,916.68</span>{" "}
+                              <span className="area-change svelte-wv78a7">
                                 Sq. Ft.
                               </span>
                             </span>
@@ -261,10 +261,10 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
         </div>
         {/* <div
           onClick={() => setFoldedCard(!foldedCard)}
-          class={`hidden svelte-5ldss7 `}
+          className={`hidden svelte-5ldss7 `}
         >
           <button
-            class={`hidden__button svelte-5ldss7 ${
+            className={`hidden__button svelte-5ldss7 ${
               foldedCard ? "folded" : "unfolded"
             }  `}
           >

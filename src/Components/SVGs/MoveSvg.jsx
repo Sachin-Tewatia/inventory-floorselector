@@ -9,9 +9,9 @@ export const moveRotateSVG = (
     <path
       d="M56.5924 11.2919L61.2383 6.64594L56.5924 2.00002"
       stroke="white"
-      stroke-width="2.1979"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2.1979"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     ></path>
     <path
       d="M43.6758 5.54821C43.0688 5.54821 42.5768 6.04022 42.5768 6.64716C42.5768 7.25409 43.0688 7.74611 43.6758 7.74611L43.6758 5.54821ZM60.2671 5.54821L43.6758 5.54821L43.6758 7.74611L60.2671 7.74611L60.2671 5.54821Z"
@@ -20,9 +20,9 @@ export const moveRotateSVG = (
     <path
       d="M6.64593 11.2919L2 6.64594L6.64593 2.00002"
       stroke="white"
-      stroke-width="2.1979"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2.1979"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     ></path>
     <path
       d="M18.5 7.74611C19.1069 7.74611 19.599 7.25409 19.599 6.64716C19.599 6.04022 19.1069 5.54821 18.5 5.54821V7.74611ZM2.97069 7.74611H18.5V5.54821H2.97069V7.74611Z"

@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Loading(props) {
   return (
     <Style>
-      <span class="loader"></span>
+      <span className="loader"></span>
     </Style>
   );
 }

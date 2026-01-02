@@ -60,11 +60,11 @@ function MarkWithTippy({ children, bgColor = "#ffffffdd" }) {
       // Create the primary tippy tooltip with the main text.
       const instance = tippy(ele, {
         content: isHighway
-          ? `<div class="${className} tippy-mark">
+          ? `<div className="${className} tippy-mark">
           ${mainText}
          </div>`
           : `
-          <div class="${className} tippy-mark">
+          <div className="${className} tippy-mark">
             ${mainText}
             <div style="display: flex; align-items: center; gap: 4px;">
               <svg
@@ -97,7 +97,7 @@ function MarkWithTippy({ children, bgColor = "#ffffffdd" }) {
       // If distance and time exist, create a secondary tooltip on the main tooltip's popper.
       if (distance && time) {
         tippy(instance.popper, {
-          content: `<div class="tippy-distance-info">Distance: ${distance}, Time: ${time}</div>`,
+          content: `<div className="tippy-distance-info">Distance: ${distance}, Time: ${time}</div>`,
           animation: "shift-toward",
           placement: "bottom",
           allowHTML: true,

@@ -15,14 +15,14 @@ function CollapsiblePanel({ className, children, title, SecondaryBody }) {
 
   return (
     <Style className={className + " overlay-can-fade-out"}>
-      <div class="panel MapFilters">
-        <div class="title">
-          <h2 class="filter-title-mob" slot="title">
+      <div className="panel MapFilters">
+        <div className="title">
+          <h2 className="filter-title-mob" slot="title">
             {title}
           </h2>
         </div>
         <div
-          class={
+          className={
             isOpen
               ? "body body--margin collapsible"
               : "body body--margin hidden collapsible"
@@ -45,8 +45,8 @@ function CollapsiblePanel({ className, children, title, SecondaryBody }) {
 export default CollapsiblePanel;
 
 const CloseBtn = ({ onClick, isOpen }) => (
-  <div class="close-btn" onClick={onClick}>
-    <button class="hidden__button">
+  <div className="close-btn" onClick={onClick}>
+    <button className="hidden__button">
       <svg
         width="16"
         height="8"
@@ -58,8 +58,8 @@ const CloseBtn = ({ onClick, isOpen }) => (
         <path
           d="M15 7L8 1L0.999999 7"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></path>
       </svg>
     </button>

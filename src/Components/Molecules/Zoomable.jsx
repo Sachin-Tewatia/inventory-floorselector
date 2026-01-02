@@ -11,7 +11,7 @@ function Zoomable({ children }) {
   });
   const { roomId } = useRoomId();
   const mapValueRef = useRef(mapValue);
-  
+
   // Keep ref updated
   useEffect(() => {
     mapValueRef.current = mapValue;
@@ -60,14 +60,12 @@ function Zoomable({ children }) {
       maxScale={6}
       showControls
       value={mapValue}
-      controlsClass="zoom-control"
-      btnClass="zoom-btn"
-      plusBtnClass={`${
-        mapValue.scale !== 6 ? "plus-btn" : `plus-btn zoom-btn-disabled`
-      } `}
-      minusBtnClass={`${
-        mapValue.scale !== 1 ? "plus-btn" : `plus-btn zoom-btn-disabled`
-      } `}
+      controlsclassName="zoom-control"
+      btnclassName="zoom-btn"
+      plusBtnclassName={`${mapValue.scale !== 6 ? "plus-btn" : `plus-btn zoom-btn-disabled`
+        } `}
+      minusBtnclassName={`${mapValue.scale !== 1 ? "plus-btn" : `plus-btn zoom-btn-disabled`
+        } `}
       onChange={(value) => {
         // if (value.scale !== mapValue.scale) setScale(value.scale);
         let factor = value.scale - 1;
@@ -75,25 +73,25 @@ function Zoomable({ children }) {
           value.translation.x > 0
             ? 0
             : value.translation.x < -window.innerWidth * factor
-            ? -window.innerWidth * factor
-            : value.translation.x;
+              ? -window.innerWidth * factor
+              : value.translation.x;
         let y =
           value.translation.y > 0
             ? 0
             : value.translation.y < -window.innerHeight * factor
-            ? -window.innerHeight * factor
-            : value.translation.y;
-        
+              ? -window.innerHeight * factor
+              : value.translation.y;
+
         const newMapValue = {
-            ...value,
-            translation: {
-              x: x,
-              y: y,
-            },
+          ...value,
+          translation: {
+            x: x,
+            y: y,
+          },
         };
-        
+
         setMapValue(newMapValue);
-        
+
         // Sync zoom state if not receiving sync (debounced to avoid too many events)
         if (!getReceivingSync() && roomId) {
           emitSyncDebounced(SYNC_EVENTS.ZOOM, {

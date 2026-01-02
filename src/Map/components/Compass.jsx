@@ -7,18 +7,18 @@ function Compass({ angle = 0 }) {
       angle={angle}
       className="overlay-can-hide compasss"
     >
-      <div class="compass__wrapper svelte-aa5lhs">
+      <div className="compass__wrapper svelte-aa5lhs">
         <div
-          class="compass__circle svelte-aa5lhs"
+          className="compass__circle svelte-aa5lhs"
           style={{ transform: "rotate(0deg)" }}
         >
           <div
-            class="compass__north svelte-aa5lhs"
+            className="compass__north svelte-aa5lhs"
             style={{ transform: "rotate(0deg)" }}
           >
             N
           </div>
-          <div class="compass__arrow svelte-aa5lhs"></div>
+          <div className="compass__arrow svelte-aa5lhs"></div>
         </div>
       </div>
     </Style>

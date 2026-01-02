@@ -45,27 +45,27 @@ const MultiForm = ({
   const [submitting, setSubmitting] = useState(false);
   const { setInventories } = useContext(AppContext);
 
-const isFormValid = (values, currentStep) => {
-  
-  switch (currentStep) {
-    case 0:
-      return (
-        validateText(values?.firstName) &&
-        validateText(values?.lastName) &&
-        validateMobileNumber(values?.phone) &&
-        validateEmail(values?.email)
-      );
-    case 1:
-      return (
-        validateAadhaar(values?.kyc?.aadhar_number1) &&
-        validatePan(values?.kyc?.pan_number1)
-      );
-    case 2:
-      return validateCheque(values?.ref_or_cheque) && values?.cheque_amount?.length > 2;
-    default:
-      return false;
-  }
-};
+  const isFormValid = (values, currentStep) => {
+
+    switch (currentStep) {
+      case 0:
+        return (
+          validateText(values?.firstName) &&
+          validateText(values?.lastName) &&
+          validateMobileNumber(values?.phone) &&
+          validateEmail(values?.email)
+        );
+      case 1:
+        return (
+          validateAadhaar(values?.kyc?.aadhar_number1) &&
+          validatePan(values?.kyc?.pan_number1)
+        );
+      case 2:
+        return validateCheque(values?.ref_or_cheque) && values?.cheque_amount?.length > 2;
+      default:
+        return false;
+    }
+  };
 
   // const checkAadharPan = async (aadhar1, pan1) => {
   //   const res = await axios.get(
@@ -160,7 +160,7 @@ const isFormValid = (values, currentStep) => {
           index == currentStep ? (
             <Form values={values} setValues={setValues} />
           ) : (
-            <Form values={{}} setValues={() => {}} />
+            <Form values={{}} setValues={() => { }} />
           )
         )}
         {/* <RMForm values={values} setValues={setValues} /> */}
@@ -173,9 +173,9 @@ const isFormValid = (values, currentStep) => {
       </AntDCarousel>
       <div className="nav-btns flex gap-x-4 w-full justify-center m-2">
         {currentStep !== 0 && currentStep < 4 && (
-          <div class="submit-btn w-[100px]">
+          <div className="submit-btn w-[100px]">
             <button
-              class={`button submit`}
+              className={`button submit`}
               // disabled={!validatePhone(phoneNumber)}
               onClick={() => goToStep(currentStep - 1)}
             >
@@ -185,10 +185,10 @@ const isFormValid = (values, currentStep) => {
         )}
 
         {currentStep < steps.length - 1 ? (
-          <div class="submit-btn w-[100px]">
+          <div className="submit-btn w-[100px]">
             <button
-              class={`button submit`}
-              disabled={!isFormValid(values,currentStep)}
+              className={`button submit`}
+              disabled={!isFormValid(values, currentStep)}
               onClick={() => {
                 goToStep(currentStep + 1);
               }}
@@ -201,10 +201,10 @@ const isFormValid = (values, currentStep) => {
           // <>
           // {currentStep == 2 ? (
           // <>
-          // <div class="submit-btn w-[100px]">
+          // <div className="submit-btn w-[100px]">
           // {/* {values?.cheque_pic?.length > 0 ? ( */}
           // <button
-          // class={`button submit`}
+          // className={`button submit`}
           // disabled={!steps[currentStep].isCompleted}
           // onClick={() => goToStep(currentStep + 1)}
           // onClick={handleFormSubmit}
@@ -213,9 +213,9 @@ const isFormValid = (values, currentStep) => {
           // Pay Online
           // </button>
           // </div>
-          // <div class="submit-btn w-[100px]">
+          // <div className="submit-btn w-[100px]">
           // <button
-          // class={`button submit`}
+          // className={`button submit`}
           // disabled={!steps[currentStep].isCompleted}
           // onClick={() => goToStep(currentStep + 1)}
           // onClick={() => {
@@ -228,9 +228,9 @@ const isFormValid = (values, currentStep) => {
           // </div>
           // </>
           // )
-          <div class="submit-btn w-[100px]">
+          <div className="submit-btn w-[100px]">
             <button
-              class={`button submit`}
+              className={`button submit`}
               // disabled={!steps[currentStep].isCompleted}
               disabled={submitting}
               // onClick={() => goToStep(currentStep + 1)}

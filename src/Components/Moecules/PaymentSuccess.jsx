@@ -24,12 +24,12 @@ import Loading from "../Atoms/Loading";
 
 const Check = () => (
   <CheckStyle>
-    <div class="success-checkmark">
-      <div class="check-icon">
-        <span class="icon-line line-tip"></span>
-        <span class="icon-line line-long"></span>
-        <div class="icon-circle"></div>
-        <div class="icon-fix"></div>
+    <div className="success-checkmark">
+      <div className="check-icon">
+        <span className="icon-line line-tip"></span>
+        <span className="icon-line line-long"></span>
+        <div className="icon-circle"></div>
+        <div className="icon-fix"></div>
       </div>
     </div>
   </CheckStyle>

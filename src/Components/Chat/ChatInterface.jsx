@@ -115,6 +115,34 @@ const normalizeHistory = (history) => {
     });
 };
 
+const normalizeNavigationTarget = (target, projectId) => {
+    if (!target) return target;
+
+    let normalized = target;
+
+    // 1. Replace project ID with base path
+    if (normalized.startsWith(`/${projectId}`)) {
+        normalized = normalized.replace(`/${projectId}`, "/inspire");
+    }
+
+    // 2. Handle Floor Pattern: /floor/t11_3 -> /tower/cluster11/floor/3
+    const floorPatternMatch = normalized.match(/\/floor\/t(\d+)_(\d+)/i);
+    if (floorPatternMatch) {
+        normalized = `/inspire/tower/cluster${floorPatternMatch[1]}/floor/${floorPatternMatch[2]}`;
+        return normalized;
+    }
+
+    // 3. Handle Tower Patterns
+    // General tower cleanup
+    normalized = normalized.replace(/tower%20/gi, "cluster");
+    normalized = normalized.replace(/tower\s+/gi, "cluster");
+
+    // Specific match for /tower/10 or /tower/t11 -> /tower/cluster11
+    normalized = normalized.replace(/\/tower\/(?:cluster|t|)(\d+)/i, "/tower/cluster$1");
+
+    return normalized;
+};
+
 const ChatInterface = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -232,27 +260,33 @@ const ChatInterface = () => {
         }
     };
 
-    const playStreamAudio = (url) => {
-        stopAudio();
-        if (!url) return;
-
+    const setupEventSource = (url, audioCtx) => {
         try {
-            new URL(url, window.location.origin);
-        } catch (e) {
-            console.error("Invalid audio stream URL:", url, e);
-            setIsPlaying(false);
-            return;
-        }
-
-        setIsPlaying(true);
-
-        try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioCtx = new AudioContext();
-            audioContextRef.current = audioCtx;
-
             const eventSource = new EventSource(url);
             eventSourceRef.current = eventSource;
+            console.log("📡 EventSource created for:", url);
+            console.log("📡 EventSource initial readyState:", eventSource.readyState);
+
+            // Monitor readyState changes
+            const checkState = setInterval(() => {
+                if (eventSource.readyState !== EventSource.CONNECTING) {
+                    console.log("📡 EventSource readyState changed to:",
+                        eventSource.readyState === EventSource.OPEN ? "OPEN" :
+                            eventSource.readyState === EventSource.CLOSED ? "CLOSED" : "UNKNOWN");
+                    clearInterval(checkState);
+                }
+            }, 100);
+
+            // Timeout if connection takes too long
+            const connectionTimeout = setTimeout(() => {
+                if (eventSource.readyState === EventSource.CONNECTING) {
+                    console.error("❌ EventSource connection timeout - still CONNECTING after 10s");
+                    eventSource.close();
+                    stopAudio();
+                }
+            }, 10000);
+
+            let audioMetadata = null;
 
             const processQueue = () => {
                 if (isPlayingQueueRef.current || audioQueueRef.current.length === 0)
@@ -266,6 +300,7 @@ const ChatInterface = () => {
 
                 const buffer = audioQueueRef.current.shift();
                 isPlayingQueueRef.current = true;
+                console.log("▶️ Playing audio buffer, queue length:", audioQueueRef.current.length);
 
                 const source = audioContextRef.current.createBufferSource();
                 source.buffer = buffer;
@@ -273,47 +308,252 @@ const ChatInterface = () => {
 
                 source.onended = () => {
                     isPlayingQueueRef.current = false;
+                    console.log("✅ Audio buffer finished playing");
                     processQueue();
                 };
 
                 source.start(0);
             };
 
-            eventSource.onmessage = async (event) => {
+            // Convert PCM data to AudioBuffer
+            const convertPCMToAudioBuffer = async (arrayBuffer, sampleRate = 24000) => {
                 try {
-                    const data = JSON.parse(event.data);
+                    const int16Array = new Int16Array(arrayBuffer);
+                    const float32Array = new Float32Array(int16Array.length);
 
-                    if (data.type === "end" || data.status === "done") {
-                        eventSource.close();
-                        eventSourceRef.current = null;
-                        return;
+                    // Convert Int16 PCM to Float32 for Web Audio API
+                    for (let i = 0; i < int16Array.length; i++) {
+                        float32Array[i] = int16Array[i] / 32768.0;
                     }
 
-                    const audioContent = data.audio || data.audio_content;
-                    if (audioContent) {
-                        const binaryString = window.atob(audioContent);
-                        const len = binaryString.length;
-                        const bytes = new Uint8Array(len);
-                        for (let i = 0; i < len; i++) {
-                            bytes[i] = binaryString.charCodeAt(i);
-                        }
-
-                        const audioBuffer = await audioCtx.decodeAudioData(bytes.buffer);
-                        audioQueueRef.current.push(audioBuffer);
-                        processQueue();
-                    }
+                    const buffer = audioCtx.createBuffer(1, float32Array.length, sampleRate);
+                    buffer.getChannelData(0).set(float32Array);
+                    return buffer;
                 } catch (e) {
-                    console.error("Error processing stream chunk:", e);
+                    console.error("❌ Error in convertPCMToAudioBuffer:", e);
+                    throw e;
                 }
             };
 
+            eventSource.onopen = () => {
+                console.log("✅ EventSource connection opened successfully");
+                clearTimeout(connectionTimeout);
+            };
+
+            // Generic message handler to see if events are arriving without names
+            eventSource.onmessage = (event) => {
+                console.log("📨 Received unnamed message event:", event.data?.length, "bytes");
+            };
+
+            // Listen for metadata event
+            eventSource.addEventListener('metadata', (event) => {
+                console.log("📊 Received metadata event:", event.data);
+                try {
+                    audioMetadata = JSON.parse(event.data);
+                    console.log("📊 Audio metadata parsed:", audioMetadata);
+                } catch (e) {
+                    console.error("❌ Error parsing metadata:", e);
+                }
+            });
+
+            // Listen for audio_chunk events
+            eventSource.addEventListener('audio_chunk', async (event) => {
+                console.log("🎵 Received audio_chunk event, data length:", event.data?.length);
+                if (!event.data) {
+                    console.warn("⚠️ Received empty audio_chunk");
+                    return;
+                }
+
+                try {
+                    const base64Data = event.data?.trim();
+                    if (!base64Data) {
+                        console.warn("⚠️ Empty data in audio_chunk event");
+                        return;
+                    }
+                    // Decode base64 to ArrayBuffer
+                    const binaryString = window.atob(base64Data);
+                    const arrayBuffer = new ArrayBuffer(binaryString.length);
+                    const uint8Array = new Uint8Array(arrayBuffer);
+
+                    for (let i = 0; i < binaryString.length; i++) {
+                        uint8Array[i] = binaryString.charCodeAt(i);
+                    }
+
+                    // Convert PCM to AudioBuffer
+                    const sampleRate = audioMetadata?.sample_rate || 24000;
+                    console.log("🎵 Decoding chunk with sample rate:", sampleRate);
+                    const audioBuffer = await convertPCMToAudioBuffer(arrayBuffer, sampleRate);
+                    console.log("✅ Audio decoded, duration:", audioBuffer.duration.toFixed(3), "s");
+
+                    audioQueueRef.current.push(audioBuffer);
+                    processQueue();
+                } catch (e) {
+                    console.error("❌ Error processing audio_chunk:", e);
+                }
+            });
+
+            // Listen for complete event
+            eventSource.addEventListener('complete', (event) => {
+                console.log("🏁 Received complete event");
+                eventSource.close();
+                eventSourceRef.current = null;
+                clearTimeout(connectionTimeout);
+            });
+
+            // Listen for error event (named error event from server)
+            // Note: We listen for both 'error' and 'error_event' to be safe
+            const errorHandler = (event) => {
+                console.error("❌ Received error event:", event);
+                if (event.data) {
+                    try {
+                        const errorData = JSON.parse(event.data);
+                        console.error("❌ Backend error details:", errorData);
+
+                        if (errorData.type === 'model_error' || errorData.error?.includes('model')) {
+                            console.warn("⚠️ Audio generation permanently failed – stopping playback and closing connection");
+                            if (eventSourceRef.current) {
+                                eventSourceRef.current.close();
+                                eventSourceRef.current = null;
+                            }
+                            stopAudio();
+                            setIsPlaying(false);
+                            return;
+                        }
+                    } catch (e) {
+                        console.error("❌ Could not parse error data:", event.data);
+                    }
+                }
+            };
+
+            eventSource.addEventListener('error', errorHandler);
+            eventSource.addEventListener('error_event', errorHandler);
+
+            // Listen for highlighted units streamed during audio
+            eventSource.addEventListener('highlight_units', (event) => {
+                console.log("🔦 Received highlight_units event:", event.data);
+                try {
+                    const data = JSON.parse(event.data);
+                    const units = data.units || data;
+                    if (Array.isArray(units)) {
+                        handleHighlightUnits(units);
+                    }
+                } catch (e) {
+                    console.error("❌ Error parsing highlight_units:", e);
+                }
+            });
+
+            // Listen for highlighted locations streamed during audio
+            eventSource.addEventListener('highlight_locations', (event) => {
+                console.log("📍 Received highlight_locations event:", event.data);
+                try {
+                    const data = JSON.parse(event.data);
+                    const locations = data.locations || data;
+                    if (Array.isArray(locations)) {
+                        const locEvent = new CustomEvent("CHAT_HIGHLIGHT_LOCATION", {
+                            detail: { locations },
+                        });
+                        window.dispatchEvent(locEvent);
+                    }
+                } catch (e) {
+                    console.error("❌ Error parsing highlight_locations:", e);
+                }
+            });
+
+            // Listen for navigation targets streamed during audio
+            eventSource.addEventListener('navigation_target', (event) => {
+                console.log("🧭 Received navigation_target event:", event.data);
+                try {
+                    let target = event.data;
+                    if (target.startsWith("{")) {
+                        target = JSON.parse(target).target || target;
+                    }
+
+                    if (target) {
+                        const normalizedTarget = normalizeNavigationTarget(target, PROJECT_ID);
+                        console.log("🧭 Navigating to normalized target:", normalizedTarget);
+                        navigate(normalizedTarget);
+                    }
+                } catch (e) {
+                    console.error("❌ Error parsing navigation_target:", e);
+                }
+            });
+
             eventSource.onerror = (err) => {
+                console.error("❌ EventSource connection error notification:", err);
+                console.log("📡 EventSource readyState at error:", eventSource.readyState);
+
+                // For EventSource, readyState 2 (CLOSED) means it failed to connect or was closed by server
                 if (eventSource.readyState === EventSource.CLOSED) {
-                    stopAudio();
+                    console.log("🔌 EventSource connection closed");
+                    // Don't stopAudio immediately if we have chunks left in queue
+                    if (audioQueueRef.current.length === 0 && !isPlayingQueueRef.current) {
+                        setIsPlaying(false);
+                    }
+                    clearTimeout(connectionTimeout);
+                } else if (eventSource.readyState === EventSource.CONNECTING) {
+                    console.warn("📡 EventSource is disconnected and attempting to reconnect...");
                 }
             };
         } catch (e) {
-            console.error("Error setting up audio stream:", e);
+            console.error("❌ Error setting up event source:", e);
+            setIsPlaying(false);
+        }
+    };
+
+    const playStreamAudio = (url) => {
+        console.log("🔊 playStreamAudio called with URL:", url);
+        stopAudio();
+        if (!url) {
+            console.warn("⚠️ No audio stream URL provided");
+            return;
+        }
+
+        try {
+            new URL(url, window.location.origin);
+            console.log("✅ Audio stream URL is valid");
+        } catch (e) {
+            console.error("❌ Invalid audio stream URL:", url, e);
+            setIsPlaying(false);
+            return;
+        }
+
+        setIsPlaying(true);
+        console.log("🎵 Starting audio stream playback...");
+
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) {
+                console.error("❌ AudioContext not supported in this browser");
+                setIsPlaying(false);
+                return;
+            }
+
+            // Reuse or create AudioContext
+            let audioCtx = audioContextRef.current;
+            if (!audioCtx || audioCtx.state === "closed") {
+                audioCtx = new AudioContext();
+                audioContextRef.current = audioCtx;
+                console.log("🎧 New AudioContext created, state:", audioCtx.state);
+            } else {
+                console.log("🎧 Using existing AudioContext, state:", audioCtx.state);
+            }
+
+            // Resume if suspended
+            if (audioCtx.state === 'suspended') {
+                console.log("🎧 AudioContext is suspended, attempting to resume...");
+                audioCtx.resume().then(() => {
+                    console.log("🎧 AudioContext resumed successfully, state:", audioCtx.state);
+                    setupEventSource(url, audioCtx);
+                }).catch(err => {
+                    console.error("❌ Error resuming AudioContext:", err);
+                    // Fallback: try to setup anyway, but it might be silent
+                    setupEventSource(url, audioCtx);
+                });
+            } else {
+                setupEventSource(url, audioCtx);
+            }
+        } catch (e) {
+            console.error("❌ Error in playStreamAudio:", e);
             setIsPlaying(false);
         }
     };
@@ -327,6 +567,30 @@ const ChatInterface = () => {
     const handleSendMessage = async (textOverride = null) => {
         const text = textOverride || inputValue.trim();
         if (!text || isLoading) return;
+
+        // CRITICAL: Resume AudioContext on direct user action (click/enter)
+        // This satisfies the browser's autoplay policy gesture requirement.
+        let audioCtx = audioContextRef.current;
+        if (audioCtx && audioCtx.state === "suspended") {
+            try {
+                await audioCtx.resume();
+                console.log("✅ AudioContext resumed on user gesture, current state:", audioCtx.state);
+            } catch (e) {
+                console.warn("⚠️ Failed to resume AudioContext on gesture:", e);
+            }
+        } else if (!audioCtx) {
+            // Pre-emptively create it on the first gesture if it doesn't exist
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                    audioContextRef.current = audioCtx;
+                    console.log("🎧 AudioContext pre-emptively created on gesture, state:", audioCtx.state);
+                }
+            } catch (e) {
+                console.warn("⚠️ Failed to create AudioContext on gesture:", e);
+            }
+        }
 
         stopAudio();
 
@@ -350,6 +614,10 @@ const ChatInterface = () => {
                     localStorage.getItem("chat_session_id") || `session_${Date.now()}`,
             });
 
+            console.log("🤖 Chat API Response:", response);
+            console.log("📊 Response Status:", response.status);
+            console.log("📦 Response Data:", response.data);
+
             if (response.status !== 200) {
                 // axios throws on 4xx/5xx usually, but if we handle it:
                 const errorData = response.data || {};
@@ -366,6 +634,14 @@ const ChatInterface = () => {
             }
 
             const data = response.data;
+            console.log("✅ Parsed Data:", {
+                response: data.response,
+                navigation_target: data.navigation_target,
+                external_url: data.external_url,
+                highlighted_units: data.highlighted_units,
+                audio_content: data.audio_content ? "present" : "none",
+                audio_stream_url: data.audio_stream_url || "none"
+            });
 
             const assistantMsg = {
                 role: "assistant",
@@ -380,16 +656,9 @@ const ChatInterface = () => {
             }
 
             if (data.navigation_target) {
-                let target = data.navigation_target;
-                if (target.startsWith(`/${PROJECT_ID}`)) {
-                    target = target.replace(`/${PROJECT_ID}`, "/inspire");
-                }
-                // Fix for bot returning "tower%2011" instead of "cluster11"
-                target = target.replace(/tower%20/gi, "cluster");
-                target = target.replace(/tower\s+/gi, "cluster");
-                // Fix for bot returning "tower/10" instead of "tower/cluster10"
-                target = target.replace(/\/tower\/(\d+)/i, "/tower/cluster$1");
-                navigate(target);
+                const normalizedTarget = normalizeNavigationTarget(data.navigation_target, PROJECT_ID);
+                console.log("🧭 Navigating to normalized target:", normalizedTarget);
+                navigate(normalizedTarget);
             }
 
             if (data.external_url) {
@@ -439,7 +708,28 @@ const ChatInterface = () => {
         window.dispatchEvent(unitEvent);
     };
 
-    const startVoiceInput = () => {
+    const startVoiceInput = async () => {
+        // CRITICAL: Resume AudioContext on direct user action (click)
+        let audioCtx = audioContextRef.current;
+        if (audioCtx && audioCtx.state === "suspended") {
+            try {
+                await audioCtx.resume();
+                console.log("✅ AudioContext resumed on voice gesture, state:", audioCtx.state);
+            } catch (e) {
+                console.warn("⚠️ Failed to resume AudioContext on voice gesture:", e);
+            }
+        } else if (!audioCtx) {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                    audioContextRef.current = audioCtx;
+                }
+            } catch (e) {
+                console.warn("⚠️ Failed to create AudioContext on voice gesture:", e);
+            }
+        }
+
         if (
             typeof window !== "undefined" &&
             ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
@@ -504,8 +794,30 @@ const ChatInterface = () => {
                     ))}
                 </select>
                 <button
+                    onClick={async () => {
+                        try {
+                            const AudioContext = window.AudioContext || window.webkitAudioContext;
+                            const ctx = new AudioContext();
+                            await ctx.resume();
+                            const oscillator = ctx.createOscillator();
+                            oscillator.type = 'sine';
+                            oscillator.frequency.setValueAtTime(440, ctx.currentTime);
+                            oscillator.connect(ctx.destination);
+                            oscillator.start();
+                            oscillator.stop(ctx.currentTime + 0.2);
+                            console.log("🔊 Test beep successful");
+                        } catch (e) {
+                            console.error("❌ Test beep failed:", e);
+                        }
+                    }}
+                    className="ml-2 text-white/60 hover:text-white"
+                    title="Test Audio"
+                >
+                    <Send size={14} style={{ transform: 'rotate(-45deg)' }} />
+                </button>
+                <button
                     onClick={clearChatHistory}
-                    className="ml-auto text-white/80 hover:text-white"
+                    className="ml-2 text-white/80 hover:text-white"
                     title="Clear chat history"
                 >
                     <Trash2 size={14} />
