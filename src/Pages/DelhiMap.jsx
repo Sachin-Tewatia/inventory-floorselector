@@ -52,9 +52,9 @@ function DelhiMap(props) {
       <CollapsiblePanel
         title="Map Filters"
         SecondaryBody={null}
-        // SecondaryBody={
-        //   activeMapFilterIds.includes("map-filter-highways") ? Legends : null
-        // }
+      // SecondaryBody={
+      //   activeMapFilterIds.includes("map-filter-highways") ? Legends : null
+      // }
       >
         <Screen1PageMapFilter />
       </CollapsiblePanel>
@@ -99,7 +99,7 @@ function DelhiMap(props) {
         height="100%"
         viewBox="0 0 1920 1080"
         fill="none"
-        // style={{ background: "red" }}
+      // style={{ background: "red" }}
       >
         <image
           height="100%"
@@ -123,7 +123,7 @@ function DelhiMap(props) {
           alt=""
           width={"100%"}
           height={"100%"}
-          // onLoad={() => setLoading(false)}
+        // onLoad={() => setLoading(false)}
         />
         {showRadius && (
           <SVG renderer={<g className="overlay-can-hide">{mark_radius}</g>} />

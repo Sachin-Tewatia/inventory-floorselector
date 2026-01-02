@@ -10,7 +10,7 @@ const Disclaimer = () => {
   const [isMobile, setIsMobile] = useState(false);
   const { roomId } = useRoomId();
   const isModalOpenRef = useRef(isModalOpen);
-  
+
   // Keep ref updated
   useEffect(() => {
     isModalOpenRef.current = isModalOpen;
@@ -27,7 +27,7 @@ const Disclaimer = () => {
 
   const showModal = () => {
     setIsModalOpen(true);
-    
+
     // Sync modal open state if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSync(SYNC_EVENTS.DISCLAIMER_MODAL, {
@@ -35,10 +35,10 @@ const Disclaimer = () => {
       }, roomId);
     }
   };
-  
+
   const handleOk = () => {
     setIsModalOpen(false);
-    
+
     // Sync modal close state if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSync(SYNC_EVENTS.DISCLAIMER_MODAL, {
@@ -46,10 +46,10 @@ const Disclaimer = () => {
       }, roomId);
     }
   };
-  
+
   const handleCancel = () => {
     setIsModalOpen(false);
-    
+
     // Sync modal close state if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSync(SYNC_EVENTS.DISCLAIMER_MODAL, {
@@ -61,7 +61,7 @@ const Disclaimer = () => {
   // Listen for disclaimer modal sync events via SyncContext (sockets as single source of truth)
   useDisclaimerModalSync((isOpen) => {
     const currentIsOpen = isModalOpenRef.current;
-    
+
     if (isOpen !== undefined && isOpen !== currentIsOpen) {
       console.log('📋 [Disclaimer] Syncing modal state:', {
         from: currentIsOpen,
@@ -89,37 +89,37 @@ const Disclaimer = () => {
 
     content: isMobile
       ? {
-          left: "50%",
-          top: "50%",
-          right: "auto",
-          bottom: "auto",
-          transform: "translate(-50%, -50%)",
-          zIndex: 101,
-          position: "absolute",
-          background: "var(--background_panel)",
-          color: "rgba(255,255,255,0.9)",
-          width: "90%",
-          maxWidth: "400px",
-          height: "fit-content",
-          maxHeight: "85vh",
-          overflow: "auto",
-          border: "1px solid #ffffff71",
-          borderRadius: "8px",
-          padding: "1rem",
-        }
+        left: "50%",
+        top: "50%",
+        right: "auto",
+        bottom: "auto",
+        transform: "translate(-50%, -50%)",
+        zIndex: 101,
+        position: "absolute",
+        background: "var(--background_panel)",
+        color: "rgba(255,255,255,0.9)",
+        width: "90%",
+        maxWidth: "400px",
+        height: "fit-content",
+        maxHeight: "85vh",
+        overflow: "auto",
+        border: "1px solid #ffffff71",
+        borderRadius: "8px",
+        padding: "1rem",
+      }
       : {
-      left: "50%",
-      right: "0",
-      bottom: "0",
-      top: "50%",
-      zIndex: 101,
-      position: "absolute",
-      background: "var(--background_panel)",
-      color: "rgba(255,255,255,0.9)",
-      height: "fit-content",
-      border: "1px solid #ffffff71",
-      borderRadius: "10px",
-    },
+        left: "50%",
+        right: "0",
+        bottom: "0",
+        top: "50%",
+        zIndex: 101,
+        position: "absolute",
+        background: "var(--background_panel)",
+        color: "rgba(255,255,255,0.9)",
+        height: "fit-content",
+        border: "1px solid #ffffff71",
+        borderRadius: "10px",
+      },
   };
 
   return (
@@ -176,8 +176,8 @@ const Style = styled.div`
   font-family: Roboto, sans-serif;
   .icon {
     position: absolute;
-    right: 1rem;
-    bottom: 1rem;
+    right: 2rem;
+    bottom: 4.5rem;
     color: white;
     font-size: 1.4rem;
     box-shadow: 0 0 1px #e4e4e453;
