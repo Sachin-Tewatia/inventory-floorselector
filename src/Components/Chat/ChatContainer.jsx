@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import ChatButton from './ChatButton';
-import ChatInterface, { getChatOpenState, setChatOpenState } from './ChatInterface';
+import ChatInterface from './ChatInterface';
+import { getChatOpenState, setChatOpenState } from './Utils/chat';
 import './ChatInterface.css';
 
 const ChatContainer = () => {

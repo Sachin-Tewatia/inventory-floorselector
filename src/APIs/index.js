@@ -506,15 +506,26 @@ export const getOtpStatus = async (phone, otp) => {
     });
 };
 
-export const sendChatMessage = async (payload) => {
+export const sendChatMessage = async (payload, options = {}) => {
   try {
-    const res = await axios.post(`${chatURL}/chat`, payload, {
+    const config = {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+      ...options
+    };
+
+    const res = await axios.post(`${chatURL}/chat`, payload, config);
     return res;
   } catch (error) {
+    // Enhanced error handling
+    if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+      error.code = 'NETWORK_ERROR';
+      error.message = 'Request timed out. Please check your connection.';
+    } else if (!navigator.onLine) {
+      error.code = 'OFFLINE_ERROR';
+      error.message = 'You appear to be offline. Please check your connection.';
+    }
     throw error;
   }
 };

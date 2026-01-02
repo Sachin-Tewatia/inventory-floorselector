@@ -60,12 +60,12 @@ export const getFormalNameFromNumber = (num) => {
   if (num === -1) return "Upper basement";
   if (num === "G") return "Ground";
   if (num === "g") return "Ground";
-  if (num === "1" || num == 1) return "1st";
-  if (num === "2" || num == 2) return "2nd";
-  if (num === "3" || num == 3) return "3rd";
-  if (num === "22" || num == 22) return "22nd";
-  if (num === "21" || num == 21) return "21st";
-  if (num === "31" || num == 31) return "31st";
+  if (num === "1" || num === 1) return "1st";
+  if (num === "2" || num === 2) return "2nd";
+  if (num === "3" || num === 3) return "3rd";
+  if (num === "22" || num === 22) return "22nd";
+  if (num === "21" || num === 21) return "21st";
+  if (num === "31" || num === 31) return "31st";
   else return `${num}th`;
 };
 
