@@ -6,7 +6,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { Mic, Trash2, Send } from "lucide-react";
 import "./ChatInterface.css";
-import { sendChatMessage, PROJECT_ID, baseURL } from "../../APIs";
+import { sendChatMessage, PROJECT_ID, baseURL, chatURL } from "../../APIs";
 import { useChatNavigation } from "./Hooks/useChatNavigation";
 import { useChatAudio } from "./Hooks/useChatAudio";
 import { useChatData } from "./Hooks/useChatData";
@@ -99,7 +99,7 @@ const ChatInterface = () => {
 
       console.log("=== CHAT API REQUEST ===");
       console.log("Payload:", requestPayload);
-      console.log("API URL:", `${baseURL}/chat` || "API_URL_NOT_SET");
+      console.log("API URL:", `${chatURL}/chat` || "API_URL_NOT_SET");
       console.log("========================");
 
       try {
@@ -298,9 +298,6 @@ const ChatInterface = () => {
         )}
         <div ref={messagesEndRef} />
       </div>
-
-      {error && <div className="chat-error-toast">{error}</div>}
-
       <div className="chat-input-area">
         <input
           type="text"

@@ -171,12 +171,32 @@ export const useInventories = () => {
 
   const getMinMaxSBUInCombinedTowers = (combinedTower) => {
     const units = [];
-    const towers = COMBINED_TOWERS_MAP[combinedTower];
+    // Normalize tower name to lowercase to match COMBINED_TOWERS_MAP keys
+    const normalizedTower = combinedTower?.toLowerCase();
+    const towers = COMBINED_TOWERS_MAP[normalizedTower];
+    
+    // Safety check: if combinedTower doesn't exist in map, return default values
+    if (!towers || !Array.isArray(towers) || towers.length === 0) {
+      console.warn(`getMinMaxSBUInCombinedTowers: Invalid combinedTower "${combinedTower}" (normalized: "${normalizedTower}"). Available keys:`, Object.keys(COMBINED_TOWERS_MAP));
+      return [0, 1000]; // Return default range
+    }
+    
     towers.forEach((tower) => {
       units.push(...getAllUnitsInTower(tower));
     });
 
-    const sbus = units.map((unit) => unit["area"]);
+    // Safety check: if no units found, return default values
+    if (units.length === 0) {
+      console.warn(`getMinMaxSBUInCombinedTowers: No units found for "${combinedTower}"`);
+      return [0, 1000]; // Return default range
+    }
+
+    const sbus = units.map((unit) => unit["area"]).filter(area => area != null && !isNaN(area));
+    
+    if (sbus.length === 0) {
+      return [0, 1000]; // Return default range if no valid areas
+    }
+    
     const minSBU = Math.min(...sbus);
     const maxSBU = Math.max(...sbus);
     return [minSBU - 10, maxSBU + 10];
@@ -206,7 +226,14 @@ export const useInventories = () => {
 
   const getAllAvailableUnitsInCombinedTowers = (combinedTower) => {
     const units = [];
-    const towers = COMBINED_TOWERS_MAP[combinedTower];
+    const normalizedTower = combinedTower?.toLowerCase();
+    const towers = COMBINED_TOWERS_MAP[normalizedTower];
+    
+    if (!towers || !Array.isArray(towers)) {
+      console.warn(`getAllAvailableUnitsInCombinedTowers: Invalid combinedTower "${combinedTower}" (normalized: "${normalizedTower}")`);
+      return [];
+    }
+    
     towers.forEach((tower) =>
       units.push(...getAllAvailableUnitsInTower(tower))
     );
@@ -220,7 +247,14 @@ export const useInventories = () => {
 
   const getAllBookedUnitsInCombinedTowers = (combinedTower) => {
     const units = [];
-    const towers = COMBINED_TOWERS_MAP[combinedTower];
+    const normalizedTower = combinedTower?.toLowerCase();
+    const towers = COMBINED_TOWERS_MAP[normalizedTower];
+    
+    if (!towers || !Array.isArray(towers)) {
+      console.warn(`getAllBookedUnitsInCombinedTowers: Invalid combinedTower "${combinedTower}" (normalized: "${normalizedTower}")`);
+      return [];
+    }
+    
     towers.forEach((tower) => units.push(...getAllBookedUnitsInTower(tower)));
     return units;
   };
@@ -231,7 +265,14 @@ export const useInventories = () => {
 
   const getAllUnitsInCombinedTowers = (combinedTower) => {
     const units = [];
-    const towers = COMBINED_TOWERS_MAP[combinedTower];
+    const normalizedTower = combinedTower?.toLowerCase();
+    const towers = COMBINED_TOWERS_MAP[normalizedTower];
+    
+    if (!towers || !Array.isArray(towers)) {
+      console.warn(`getAllUnitsInCombinedTowers: Invalid combinedTower "${combinedTower}" (normalized: "${normalizedTower}")`);
+      return [];
+    }
+    
     towers.forEach((tower) => units.push(...getAllUnitsInTower(tower)));
     return units;
   };
@@ -263,7 +304,14 @@ export const useInventories = () => {
   };
   const getAllUnitTypesInCombinedTowers = (combinedTower) => {
     const units = [];
-    const towers = COMBINED_TOWERS_MAP[combinedTower];
+    const normalizedTower = combinedTower?.toLowerCase();
+    const towers = COMBINED_TOWERS_MAP[normalizedTower];
+    
+    if (!towers || !Array.isArray(towers)) {
+      console.warn(`getAllUnitTypesInCombinedTowers: Invalid combinedTower "${combinedTower}" (normalized: "${normalizedTower}")`);
+      return [];
+    }
+    
     towers.forEach((tower) => units.push(...getAllUnitTypesInTower(tower)));
     const uniqueUnitTypes = [...new Set(units)];
     return sortUnitTypes(uniqueUnitTypes);
