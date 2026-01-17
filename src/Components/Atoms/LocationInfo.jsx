@@ -9,16 +9,16 @@ function LocationInfo({ className, landmarks_with_routes }) {
     landmarks_with_routes?.[selectedLandmarkId]?.routeDetails || {};
   return selectedLandmarkId ? (
     <Style className={className + " overlay-can-hide"}>
-      <div class="image svelte-1v2lona">
+      <div className="image svelte-1v2lona">
         <img
           src={`${process.env.PUBLIC_URL}/landmarks/${selectedLandmarkId}.jpg`}
           alt="Burj Khalifa"
-          class="svelte-1v2lona"
+          className="svelte-1v2lona"
         />{" "}
       </div>{" "}
-      <div class="content svelte-1v2lona">
-        <div class="title svelte-1v2lona">{landmark_name}</div>{" "}
-        <div class="description">{details}</div>
+      <div className="content svelte-1v2lona">
+        <div className="title svelte-1v2lona">{landmark_name}</div>{" "}
+        <div className="description">{details}</div>
       </div>
     </Style>
   ) : (

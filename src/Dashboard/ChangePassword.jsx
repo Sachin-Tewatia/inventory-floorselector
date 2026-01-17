@@ -26,15 +26,15 @@ function Price({ price }) {
 
 const RadioInput = ({ label, value, checked, setter }) => {
   return (
-    <div class="input-group">
-      <label class="fake-radio-label">
+    <div className="input-group">
+      <label className="fake-radio-label">
         <input
-          class="input-radio"
+          className="input-radio"
           type="radio"
           checked={checked == value}
           onChange={() => setter(value)}
         />{" "}
-        <div class="fake-radio"></div>
+        <div className="fake-radio"></div>
         <span>{label}</span>
       </label>
     </div>
@@ -107,22 +107,22 @@ function ChangePassword({
   if (!isOpen) return null;
   return (
     <Style onClick={(e) => setIsOpen(false)}>
-      <div class={`${"form-wrapper svelte-tipeeb"}`} ref={ref}>
-        <div class="background svelte-tipeeb"></div>{" "}
-        <div class="content svelte-tipeeb" dir="">
+      <div className={`${"form-wrapper svelte-tipeeb"}`} ref={ref}>
+        <div className="background svelte-tipeeb"></div>{" "}
+        <div className="content svelte-tipeeb" dir="">
           <div
-            class="enquiry-form  svelte-tipeeb"
+            className="enquiry-form  svelte-tipeeb"
             onClick={(e) => e.stopPropagation()}
           >
             {" "}
-            <h2 class="form-title svelte-tipeeb">Change Password</h2>{" "}
+            <h2 className="form-title svelte-tipeeb">Change Password</h2>{" "}
             <div
               onClick={(e) => {
                 // e.preventDefault();
                 // e.stopPropagation();
                 setIsOpen(!isOpen);
               }}
-              class="close-popup svelte-tipeeb"
+              className="close-popup svelte-tipeeb"
             >
               <CloseButton />
             </div>{" "}
@@ -136,46 +136,46 @@ function ChangePassword({
                 });
               }}
             >
-              <div class="description svelte-tipeeb">
-                {/* <div class="description-main svelte-tipeeb">
-                  <span class="svelte-tipeeb">ONE DXP</span>{" "}
-                  <span class="svelte-tipeeb">Apartments</span>{" "}
-                  <span class="svelte-tipeeb">{unitDetails?.UnitType}</span>
+              <div className="description svelte-tipeeb">
+                {/* <div className="description-main svelte-tipeeb">
+                  <span className="svelte-tipeeb">ONE DXP</span>{" "}
+                  <span className="svelte-tipeeb">Apartments</span>{" "}
+                  <span className="svelte-tipeeb">{unitDetails?.UnitType}</span>
                 </div>{" "} */}
                 <div
-                  class="description-secondary-wrapper"
-                  // style={{
-                  //   display: "grid",
-                  //   gridTemplateColumns: "1fr 1fr",
-                  //   margin: "auto",
-                  // }}
+                  className="description-secondary-wrapper"
+                // style={{
+                //   display: "grid",
+                //   gridTemplateColumns: "1fr 1fr",
+                //   margin: "auto",
+                // }}
                 >
-                  {/* <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Unit Number:</span>{" "}
+                  {/* <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Unit Number:</span>{" "}
                     <span className="desc-value">
                       {unitDetails?.unit_number}
                     </span>
                   </span>{" "}
-                  <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Unit Type:</span>{" "}
+                  <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Unit Type:</span>{" "}
                     <span className="desc-value">{unitDetails?.unit_type}</span>
                   </span>{" "}
-                  <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Total Area:</span>{" "}
-                    <span class="area svelte-wv78a7">
+                  <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Total Area:</span>{" "}
+                    <span className="area svelte-wv78a7">
                       <span className="desc-value">{unitDetails?.area}</span>
                     </span>{" "}
-                    <span class="area-change svelte-wv78a7">Sq. Mt.</span>
+                    <span className="area-change svelte-wv78a7">Sq. Mt.</span>
                   </span>{" "} */}
-                  {/* <span class="svelte-tipeeb">
-                    <span class="title svelte-tipeeb">Total Cost:</span>{" "}
+                  {/* <span className="svelte-tipeeb">
+                    <span className="title svelte-tipeeb">Total Cost:</span>{" "}
                     <span className="desc-value">
                       <Price price={(unitDetails?.total_cost).toFixed(2)} />
                     </span>
                   </span> */}
                 </div>
               </div>{" "}
-              <div class="gender-group svelte-tipeeb">
+              <div className="gender-group svelte-tipeeb">
                 {/* <RadioInput
                   label="Mr."
                   value="Mr."
@@ -189,9 +189,9 @@ function ChangePassword({
                   setter={setGender}
                 /> */}
               </div>{" "}
-              <div class="form-row">
-                <div class="input-group">
-                  <label class="input-group-label">
+              <div className="form-row">
+                <div className="input-group">
+                  <label className="input-group-label">
                     <span className="title-form">Old Password*</span>{" "}
                     <input
                       type="password"
@@ -204,9 +204,9 @@ function ChangePassword({
                   </label>
                 </div>{" "}
               </div>
-              <div class="form-row">
-                <div class="input-group">
-                  <label class="input-group-label">
+              <div className="form-row">
+                <div className="input-group">
+                  <label className="input-group-label">
                     <span className="title-form">New Password*</span>{" "}
                     <input
                       type="password"
@@ -225,9 +225,9 @@ function ChangePassword({
                   )}
                 </div>
               </div>{" "}
-              <div class="form-row">
-                <div class="input-group">
-                  <label class="input-group-label">
+              <div className="form-row">
+                <div className="input-group">
+                  <label className="input-group-label">
                     <span className="title-form">Confirm Password*</span>{" "}
                     <input
                       type="password"
@@ -246,21 +246,20 @@ function ChangePassword({
                     )}
                 </div>
               </div>
-              {/* <div class="form-row">
-                <div class="input-group payment-info">
+              {/* <div className="form-row">
+                <div className="input-group payment-info">
                   Please pay the Blocking amount to Block your Unit. Please note
                   that the Unit will be blocked for 48 hours. To confirm your
                   booking, please contact our Sales Team now - 9599867299.
                 </div>
               </div>{" "} */}
-              <div class="submit-btn svelte-tipeeb">
+              <div className="submit-btn svelte-tipeeb">
                 <button
-                  class={`button submit svelte-ynf51n enable ${
-                    newPassword == confirmPassword &&
-                    validatePassowrd(newPassword)
+                  className={`button submit svelte-ynf51n enable ${newPassword == confirmPassword &&
+                      validatePassowrd(newPassword)
                       ? ""
                       : "disabled"
-                  }`}
+                    }`}
                   value=""
                   style={{ paddings: "5px 8px" }}
                 >

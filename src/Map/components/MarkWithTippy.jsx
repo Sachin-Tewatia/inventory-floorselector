@@ -24,9 +24,9 @@ const getDataForMapElement = async (mapElementId) => {
   // If already fetching, wait for the existing promise
   if (dataCachePromise) {
     await dataCachePromise;
-    return { 
-      title: titlesCache[mapElementId] || mapElementId, 
-      distance: distancesCache[mapElementId] || null 
+    return {
+      title: titlesCache[mapElementId] || mapElementId,
+      distance: distancesCache[mapElementId] || null
     };
   }
 
@@ -37,11 +37,11 @@ const getDataForMapElement = async (mapElementId) => {
         mapDataManager.getTitles(),
         mapDataManager.getDistances()
       ]);
-      
+
       if (titlesResult.success && titlesResult.data) {
         titlesCache = { ...titlesCache, ...titlesResult.data };
       }
-      
+
       if (distancesResult.success && distancesResult.data) {
         distancesCache = { ...distancesCache, ...distancesResult.data };
       }
@@ -53,13 +53,13 @@ const getDataForMapElement = async (mapElementId) => {
   })();
 
   await dataCachePromise;
-  return { 
-    title: titlesCache[mapElementId] || mapElementId, 
-    distance: distancesCache[mapElementId] || null 
+  return {
+    title: titlesCache[mapElementId] || mapElementId,
+    distance: distancesCache[mapElementId] || null
   };
 };
 
-function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffdd" }) {
+function MarkWithTippy({ children, isTenKm, isTenkmSatellite, bgColor = "#ffffffdd" }) {
   const ref = useRef(null);
   const { blackout } = useBlackout();
 
@@ -75,7 +75,7 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
 
     for (let i = 0; i < ref.current.children.length; i++) {
       const ele = ref.current.children[i];
-      if(!ele) return;
+      if (!ele) return;
       ele.style.zIndex = "999999";
       ele.style.cursor = "pointer";
       ele.addEventListener("click", () => {
@@ -85,10 +85,10 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
           ref.current.children[j].style.transformOrigin = "";
         }
 
-     
+
       });
       let className = ele.id.substring(2, ele.id.indexOf(" ")).trim();
-      
+
       // Extract map_element_id from the SVG element id
       let mapElementId =
         ele.id
@@ -103,10 +103,10 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
           .replace("__highway ", "")
           .replace("__school ", "")
           .replace("__restaurant ", "")
-          .replace("__office ", "") 
-          .replace("__flyover ", "") 
-          .replace("__sports ", "") ||null;
-          
+          .replace("__office ", "")
+          .replace("__flyover ", "")
+          .replace("__sports ", "") || null;
+
       // Use map_element_id directly (no more splitting by underscore)
       let tippyText = mapElementId;
       let tippywithlowercase = mapElementId.toLowerCase();
@@ -115,7 +115,7 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
       // Get distance from the static distance data
       let distance = distaces[tippywithlowercase]?.distance;
       let time = distaces[tippywithlowercase]?.time;
-      
+
       // Get specific landmark class and color styling
       const getLandmarkSpecificClass = (mapId) => {
         const id = mapId?.toLowerCase() || '';
@@ -127,7 +127,7 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
         if (id.includes('estate')) return 'landmark-estate';
         return 'landmark-default';
       };
-      
+
       const getLandmarkColor = (mapId) => {
         const id = mapId?.toLowerCase() || '';
         if (id.includes('airport')) return '#1F8BED'; // Blue (matches icon fill)
@@ -138,21 +138,21 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
         if (id.includes('estate')) return '#A45D04'; // Brown (matches icon fill)
         return '#FF5454'; // Red default
       };
-      
+
       const specificLandmarkClass = className === 'landmark' ? getLandmarkSpecificClass(mapElementId) : '';
       const landmarkColor = className === 'landmark' ? getLandmarkColor(mapElementId) : '';
-      
+
       if (tippyText) {
         // Create tooltip with loading content first
-        const styleAttr = landmarkColor 
-          ? `style="background-color: ${landmarkColor} !important; backdrop-filter: blur(2px) !important;"` 
+        const styleAttr = landmarkColor
+          ? `style="background-color: ${landmarkColor} !important; backdrop-filter: blur(2px) !important;"`
           : '';
-        
+
         const instance = tippy(ele, {
           content: `
-           <div class="${className} ${specificLandmarkClass} tippy-mark m-0 capitalize overlay-can-hide flex flex-col gap-1 justify-start" ${styleAttr} id="${ele.id}">
-            <p class="w-full text-center">Loading...</p>
-            <p class="w-full text-center">${distance} KM</p>
+           <div className="${className} ${specificLandmarkClass} tippy-mark m-0 capitalize overlay-can-hide flex flex-col gap-1 justify-start" ${styleAttr} id="${ele.id}">
+            <p className="w-full text-center">Loading...</p>
+            <p className="w-full text-center">${distance} KM</p>
            </div>
           `,
           animation: "shift-toward",
@@ -166,11 +166,11 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
           sticky: true,
           plugins: [sticky],
           zIndex: 5,
-          showOnCreate: false, 
+          showOnCreate: false,
           hideOnClick: false,
           appendTo: document.getElementById("app"),
         });
-        
+
         instances.push(instance); // Add instance to array for cleanup
 
         // Update content with actual title and distance once loaded
@@ -179,9 +179,9 @@ function MarkWithTippy({ children, isTenKm,isTenkmSatellite, bgColor = "#ffffffd
             // Use API distance if available, otherwise fallback to static distance
             const finalDistance = apiDistance || distance;
             instance.setContent(`
-              <div class="${className} ${specificLandmarkClass} tippy-mark m-0 capitalize overlay-can-hide flex flex-col gap-1 justify-start" ${styleAttr} id="${ele.id}">
-                <p class="w-full text-center">${displayTitle}</p>
-                <p class="w-full text-center">${finalDistance} KM</p>
+              <div className="${className} ${specificLandmarkClass} tippy-mark m-0 capitalize overlay-can-hide flex flex-col gap-1 justify-start" ${styleAttr} id="${ele.id}">
+                <p className="w-full text-center">${displayTitle}</p>
+                <p className="w-full text-center">${finalDistance} KM</p>
                </div>
             `);
           }

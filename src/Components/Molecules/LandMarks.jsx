@@ -30,31 +30,31 @@ function LandMarks({ landmarks = [] }) {
         width="1920"
         height="1080"
         fill="#282626"
-        fill-opacity={selectedLandmarkId ? "0.59" : "0"}
+        fillOpacity={selectedLandmarkId ? "0.59" : "0"}
       />
       {selectedLandmarkId && (
         <>
           {/* blackout */}
           {landmarks?.find((landMark) => landMark.id === selectedLandmarkId)
             ?.route && (
-            <>
-              <DrawLine
-                path={
-                  landmarks?.find(
-                    (landMark) => landMark.id === selectedLandmarkId
-                  )?.route
-                }
-                duration={1200}
-              />
-              <SVG
-                renderer={
-                  landmarks?.find(
-                    (landMark) => landMark.id === selectedLandmarkId
-                  )?.routeDetails.icon
-                }
-              />
-            </>
-          )}
+              <>
+                <DrawLine
+                  path={
+                    landmarks?.find(
+                      (landMark) => landMark.id === selectedLandmarkId
+                    )?.route
+                  }
+                  duration={1200}
+                />
+                <SVG
+                  renderer={
+                    landmarks?.find(
+                      (landMark) => landMark.id === selectedLandmarkId
+                    )?.routeDetails.icon
+                  }
+                />
+              </>
+            )}
         </>
       )}
       {landmarks?.map((landMark) => (

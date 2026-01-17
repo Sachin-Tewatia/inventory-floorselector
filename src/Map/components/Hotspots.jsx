@@ -28,7 +28,7 @@ export default function Hotspots({ children }) {
       if (isLandmark(element)) {
         const landmarkId = getLandmarkId(element.id);
         setSelectedLandmarkId(landmarkId);
-        if(isMobile)setLabel(null); // Set label to null when a landmark is selected
+        if (isMobile) setLabel(null); // Set label to null when a landmark is selected
         return;
       }
       element = element.parentElement;
@@ -123,16 +123,16 @@ export default function Hotspots({ children }) {
       if (element) {
         // Create tippy instance with loading content first
         tippyInstance = tippy(element, {
-          content: `<div class="overlay-can-hide route-details flex flex-col gap-2 bg-[rgba(0,0,0,0.0)] text-slate-200 rounded-md px-3 py-2">
-            <div class="flex gap-2 font-light">
-            <div class="distance flex flex-col items-center justify-center ">
-            <div class="time font-medium" style="color:white">Loading...</div>
+          content: `<div className="overlay-can-hide route-details flex flex-col gap-2 bg-[rgba(0,0,0,0.0)] text-slate-200 rounded-md px-3 py-2">
+            <div className="flex gap-2 font-light">
+            <div className="distance flex flex-col items-center justify-center ">
+            <div className="time font-medium" style="color:white">Loading...</div>
             </div>
           </div>`,
           animation: "shift-toward",
           placement:
             selectedLandmarkId == "SilverOak Estate" ||
-            selectedLandmarkId == "NSCB International Airport"
+              selectedLandmarkId == "NSCB International Airport"
               ? "left"
               : "bottom",
           allowHTML: true,

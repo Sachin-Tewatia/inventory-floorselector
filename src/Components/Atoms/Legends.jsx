@@ -4,10 +4,10 @@ import styled from "styled-components";
 function Legends({ className }) {
   return (
     <Style className={className}>
-      <h2 class="title svelte-1igsnns">Legend</h2>{" "}
-      <div class="button-group body">
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+      <h2 className="title svelte-1igsnns">Legend</h2>{" "}
+      <div className="button-group body">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -20,17 +20,17 @@ function Legends({ className }) {
                 fill="#FF5454"
               ></path>
               {/* <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 clip-rule="evenodd"
                 d="M12.2044 11.337C12.2044 11.5249 12.0166 11.8122 11.9613 11.8895C11.5967 12.1878 11.1768 12.3646 10.8785 12.3646H10.4033L11.5635 14H10.768L10.0166 12.8508H7.05525L6.27072 14H5.49724L6.63536 12.3646H6.21547C5.79558 12.3646 5.43094 12.0663 5.24309 11.8122L5 11.3923C5.05525 9.39227 5.12155 7.14917 5.36464 4.85083C5.36464 4.72928 5.78453 4.37569 6.14917 4.29834C7 4.1105 7.90608 4 8.81216 4L10.9227 4.29834C11.221 4.35359 11.7072 4.59669 11.7735 4.85083C12.2186 7.02707 12.2121 8.90222 12.2059 10.7062C12.2051 10.9173 12.2044 11.1275 12.2044 11.337ZM6.41065 6.18635C6.40525 6.06773 6.39977 5.94716 6.39221 5.82329H10.8784C10.8199 6.10554 10.785 6.3642 10.7502 6.62132C10.6735 7.1896 10.5978 7.75033 10.2707 8.54152H6.99995C6.4753 7.6067 6.44475 6.93537 6.41065 6.18635ZM7.82131 11.9069C7.82809 11.7634 7.83414 11.6353 7.90618 11.6353H9.23215C9.3578 11.724 9.37468 11.8869 9.38862 12.0214C9.39552 12.088 9.4017 12.1476 9.41999 12.1878H7.78463C7.81164 12.1113 7.81664 12.0054 7.82131 11.9069ZM6.6354 9.82334C6.33706 9.82334 6.16026 10.0664 6.16026 10.2985C6.21551 10.5416 6.40336 10.7736 6.6354 10.7736C6.86744 10.7736 7.05529 10.5858 7.11054 10.2985C7.12159 10.0001 6.87849 9.82334 6.6354 9.82334ZM10.0937 10.2985C10.0937 10.0664 10.2705 9.82334 10.5689 9.82334C10.823 9.82334 11.0551 10.0554 11.044 10.2985C11.044 10.5858 10.8672 10.7736 10.5689 10.7736C10.3368 10.7736 10.0937 10.5305 10.0937 10.2985Z"
                 fill="white"
               ></path> */}
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">NH 08</div>
+          <div className="metro__item--text svelte-1igsnns">NH 08</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -44,10 +44,10 @@ function Legends({ className }) {
               ></path>
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">Golf Course Road</div>
+          <div className="metro__item--text svelte-1igsnns">Golf Course Road</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -61,10 +61,10 @@ function Legends({ className }) {
               ></path>
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">Sohna Road</div>
+          <div className="metro__item--text svelte-1igsnns">Sohna Road</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -78,10 +78,10 @@ function Legends({ className }) {
               ></path>
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">SPR Road</div>
+          <div className="metro__item--text svelte-1igsnns">SPR Road</div>
         </div>{" "}
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -94,17 +94,17 @@ function Legends({ className }) {
                 fill="#9C6BF5"
               ></path>
               {/* <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 clip-rule="evenodd"
                 d="M12.2044 11.337C12.2044 11.5249 12.0166 11.8122 11.9613 11.8895C11.5967 12.1878 11.1768 12.3646 10.8785 12.3646H10.4033L11.5635 14H10.768L10.0166 12.8508H7.05525L6.27072 14H5.49724L6.63536 12.3646H6.21547C5.79558 12.3646 5.43094 12.0663 5.24309 11.8122L5 11.3923C5.05525 9.39227 5.12155 7.14917 5.36464 4.85083C5.36464 4.72928 5.78453 4.37569 6.14917 4.29834C7 4.1105 7.90608 4 8.81216 4L10.9227 4.29834C11.221 4.35359 11.7072 4.59669 11.7735 4.85083C12.2186 7.02707 12.2121 8.90222 12.2059 10.7062C12.2051 10.9173 12.2044 11.1275 12.2044 11.337ZM6.41065 6.18635C6.40525 6.06773 6.39977 5.94716 6.39221 5.82329H10.8784C10.8199 6.10554 10.785 6.3642 10.7502 6.62132C10.6735 7.1896 10.5978 7.75033 10.2707 8.54152H6.99995C6.4753 7.6067 6.44475 6.93537 6.41065 6.18635ZM7.82131 11.9069C7.82809 11.7634 7.83414 11.6353 7.90618 11.6353H9.23215C9.3578 11.724 9.37468 11.8869 9.38862 12.0214C9.39552 12.088 9.4017 12.1476 9.41999 12.1878H7.78463C7.81164 12.1113 7.81664 12.0054 7.82131 11.9069ZM6.6354 9.82334C6.33706 9.82334 6.16026 10.0664 6.16026 10.2985C6.21551 10.5416 6.40336 10.7736 6.6354 10.7736C6.86744 10.7736 7.05529 10.5858 7.11054 10.2985C7.12159 10.0001 6.87849 9.82334 6.6354 9.82334ZM10.0937 10.2985C10.0937 10.0664 10.2705 9.82334 10.5689 9.82334C10.823 9.82334 11.0551 10.0554 11.044 10.2985C11.044 10.5858 10.8672 10.7736 10.5689 10.7736C10.3368 10.7736 10.0937 10.5305 10.0937 10.2985Z"
                 fill="white"
               ></path> */}
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">Dwarka Expressway</div>
+          <div className="metro__item--text svelte-1igsnns">Dwarka Expressway</div>
         </div>
-        <div class="metro__item svelte-1igsnns">
-          <div class="metro__item--icon svelte-1igsnns">
+        <div className="metro__item svelte-1igsnns">
+          <div className="metro__item--icon svelte-1igsnns">
             <svg
               width="17"
               height="17"
@@ -117,14 +117,14 @@ function Legends({ className }) {
                 fill="#a77bfa"
               ></path>
               {/* <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 clip-rule="evenodd"
                 d="M12.2044 11.337C12.2044 11.5249 12.0166 11.8122 11.9613 11.8895C11.5967 12.1878 11.1768 12.3646 10.8785 12.3646H10.4033L11.5635 14H10.768L10.0166 12.8508H7.05525L6.27072 14H5.49724L6.63536 12.3646H6.21547C5.79558 12.3646 5.43094 12.0663 5.24309 11.8122L5 11.3923C5.05525 9.39227 5.12155 7.14917 5.36464 4.85083C5.36464 4.72928 5.78453 4.37569 6.14917 4.29834C7 4.1105 7.90608 4 8.81216 4L10.9227 4.29834C11.221 4.35359 11.7072 4.59669 11.7735 4.85083C12.2186 7.02707 12.2121 8.90222 12.2059 10.7062C12.2051 10.9173 12.2044 11.1275 12.2044 11.337ZM6.41065 6.18635C6.40525 6.06773 6.39977 5.94716 6.39221 5.82329H10.8784C10.8199 6.10554 10.785 6.3642 10.7502 6.62132C10.6735 7.1896 10.5978 7.75033 10.2707 8.54152H6.99995C6.4753 7.6067 6.44475 6.93537 6.41065 6.18635ZM7.82131 11.9069C7.82809 11.7634 7.83414 11.6353 7.90618 11.6353H9.23215C9.3578 11.724 9.37468 11.8869 9.38862 12.0214C9.39552 12.088 9.4017 12.1476 9.41999 12.1878H7.78463C7.81164 12.1113 7.81664 12.0054 7.82131 11.9069ZM6.6354 9.82334C6.33706 9.82334 6.16026 10.0664 6.16026 10.2985C6.21551 10.5416 6.40336 10.7736 6.6354 10.7736C6.86744 10.7736 7.05529 10.5858 7.11054 10.2985C7.12159 10.0001 6.87849 9.82334 6.6354 9.82334ZM10.0937 10.2985C10.0937 10.0664 10.2705 9.82334 10.5689 9.82334C10.823 9.82334 11.0551 10.0554 11.044 10.2985C11.044 10.5858 10.8672 10.7736 10.5689 10.7736C10.3368 10.7736 10.0937 10.5305 10.0937 10.2985Z"
                 fill="white"
               ></path> */}
             </svg>
           </div>{" "}
-          <div class="metro__item--text svelte-1igsnns">UE Road II</div>
+          <div className="metro__item--text svelte-1igsnns">UE Road II</div>
         </div>
       </div>
     </Style>

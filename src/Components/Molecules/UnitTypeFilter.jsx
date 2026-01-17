@@ -13,7 +13,7 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters =
   const { flatFilterSizeValues, setFlatFilterSizeValues } =
     useContext(AppContext);
   const { roomId } = useRoomId();
-
+console.log("minMaxArea", minMaxArea);
   const { activeMapFilterIds, isFilterActive, setActiveMapFilterIds } =
     useMapFilter();
 
@@ -29,7 +29,7 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters =
       newFilters = [...unitTypeFilters.map((filter) => filter.id)];
       setActiveMapFilterIds(newFilters);
     }
-    
+
     // Sync filter changes if not receiving sync
     if (!getReceivingSync() && roomId) {
       emitSyncDebounced(SYNC_EVENTS.FILTERS, {
@@ -74,7 +74,7 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters =
   //size handler
   const handleSizeOnSliderChange = (value) => {
     setFlatFilterSizeValues(value);
-    
+
     // Sync size filter changes with debouncing (since slider changes rapidly)
     if (!getReceivingSync() && roomId) {
       emitSyncDebounced(SYNC_EVENTS.FILTERS, {

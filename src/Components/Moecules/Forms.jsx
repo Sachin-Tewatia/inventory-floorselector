@@ -83,9 +83,9 @@ export const CustomerForm = ({ values, setValues }) => {
   ];
   return (
     <form>
-      <div class="form-row">
-        <div class="input-group">
-          <label class="input-group-label">
+      <div className="form-row">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">First Name*</span>{" "}
             <input
               className={`${validateText(values?.firstName) ? "valid" : ""}`}
@@ -101,8 +101,8 @@ export const CustomerForm = ({ values, setValues }) => {
             />
           </label>
         </div>{" "}
-        <div class="input-group">
-          <label class="input-group-label">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">Last Name*</span>{" "}
             <input
               className={`${values.lastName && validateText(values?.lastName) ? "valid" : ""}`}
@@ -120,10 +120,10 @@ export const CustomerForm = ({ values, setValues }) => {
         </div>
       </div>{" "}
       <div className="form-row">
-        <div class="input-group">
-          <label class="combo-input">
+        <div className="input-group">
+          <label className="combo-input">
             <span className="title">Email*</span>
-            <div class="row">
+            <div className="row">
               <input
                 className={`${validateEmail(values.email) ? "valid" : ""}`}
                 type="text"
@@ -140,17 +140,16 @@ export const CustomerForm = ({ values, setValues }) => {
           </label>
         </div>
 
-        <div class="input-group">
-          <label class="combo-input">
+        <div className="input-group">
+          <label className="combo-input">
             <span className="title">Phone Number*</span>
-            <div class="row phone-input">
-              <div class="code-input" style={{ marginRight: "5px" }}>
+            <div className="row phone-input">
+              <div className="code-input" style={{ marginRight: "5px" }}>
                 <select
                   name="phone_code"
                   id="booking_form_phone_code"
-                  className={`${
-                    validateMobileNumber(values.phone) ? "valid" : ""
-                  }`}
+                  className={`${validateMobileNumber(values.phone) ? "valid" : ""
+                    }`}
                 >
                   <option value="+91">+91</option>
                   <option value="+971">+971</option>
@@ -159,9 +158,8 @@ export const CustomerForm = ({ values, setValues }) => {
                 </select>
               </div>{" "}
               <input
-                className={`${
-                  validateMobileNumber(values.phone) ? "valid" : ""
-                }`}
+                className={`${validateMobileNumber(values.phone) ? "valid" : ""
+                  }`}
                 type="text"
                 name="phone_number"
                 placeholder=""
@@ -180,8 +178,8 @@ export const CustomerForm = ({ values, setValues }) => {
         </div>
       </div>
       {/* <div className="form-row "> */}
-      {/* <div class="input-group"> */}
-      {/* <label class="input-group-label"></label> */}
+      {/* <div className="input-group"> */}
+      {/* <label className="input-group-label"></label> */}
       {/* <span className="title">OTP*</span>{" "} */}
       {/* <input
             type="number"
@@ -195,8 +193,8 @@ export const CustomerForm = ({ values, setValues }) => {
             disabled={!disableSendButton}
           />
         </div> */}
-      {/* <div class="input-group"> */}
-      {/* <label class="input-group-label">
+      {/* <div className="input-group"> */}
+      {/* <label className="input-group-label">
                     <span className="title">Cheque or Ref No.*</span>{" "}
                     <input
                       type="text"
@@ -216,7 +214,7 @@ export const CustomerForm = ({ values, setValues }) => {
       {/* {disableSendButton ? "OTP Sent" : "Send OTP"}
           </button>
         </div>
-        <div class="input-group">
+        <div className="input-group">
           <button
             className="otp-buttons"
             onClick={(e) => {
@@ -228,7 +226,7 @@ export const CustomerForm = ({ values, setValues }) => {
             Verify OTP
           </button>
         </div>{" "} */}
-      {/* <div class="input-group">
+      {/* <div className="input-group">
         {disableSendButton && (
           <button
             onClick={handleResendOTP}
@@ -243,9 +241,9 @@ export const CustomerForm = ({ values, setValues }) => {
       {/* </div> */}
       {/* </div> */}
       {/* <div className="form-row"> */}
-      <div class="form-row">
-        <div class="input-group">
-          <label class="input-group-label">
+      <div className="form-row">
+        <div className="input-group">
+          <label className="input-group-label">
             <Radio.Group
               className="w-[300px]"
               buttonStyle="solid"
@@ -265,12 +263,12 @@ export const CustomerForm = ({ values, setValues }) => {
           </label>
         </div>{" "}
       </div>{" "}
-      {/* <div class="description ">
+      {/* <div className="description ">
       You Will Be Charged ₹ {`5 Lakh`} For This Booking
     </div> */}
-      <div class="form-row">
-        <div class="input-group">
-          <label class="input-group-label">
+      <div className="form-row">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">Channel Partner*</span>{" "}
             <input
               type="text"
@@ -299,8 +297,8 @@ export const CustomerForm = ({ values, setValues }) => {
             /> */}
           </label>
         </div>{" "}
-        <div class="input-group">
-          <label class="input-group-label">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">RM (Saleperson)*</span>{" "}
             <input
               type="text"
@@ -312,7 +310,7 @@ export const CustomerForm = ({ values, setValues }) => {
               }
               value={values.rm_name}
               required={true}
-              // disabled={true}
+            // disabled={true}
             />
           </label>
         </div>
@@ -328,9 +326,9 @@ export const RMForm = ({ values, setValues, onValid }) => {
 
   return (
     <form>
-      {/* <div class="form-row">
-      <div class="input-group">
-        <label class="input-group-label">
+      {/* <div className="form-row">
+      <div className="input-group">
+        <label className="input-group-label">
           <span className="title">Channel Partner*</span>{" "}
           <input
             type="text"
@@ -343,8 +341,8 @@ export const RMForm = ({ values, setValues, onValid }) => {
           />
         </label>
       </div>{" "}
-      <div class="input-group">
-        <label class="input-group-label">
+      <div className="input-group">
+        <label className="input-group-label">
           <span className="title">RM (Saleperson)*</span>{" "}
           <input
             type="text"
@@ -361,8 +359,8 @@ export const RMForm = ({ values, setValues, onValid }) => {
     </div>{" "} */}
       <div className="form-row">
         {/* {additionalDetails?.check && ( */}
-        <div class="input-group">
-          <label class="input-group-label">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">Cheque or Ref No.</span> <br />
             <input
               type="text"
@@ -380,8 +378,8 @@ export const RMForm = ({ values, setValues, onValid }) => {
             />
           </label>
         </div>
-        <div class="input-group">
-          <label class="input-group-label">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">Cheque Amount*</span> <br />
             <input
               type="number"
@@ -442,9 +440,9 @@ export const AddOnForm = ({ values, setValues, onValid }) => {
 
   return (
     <form>
-      {/* <div class="form-row">
-      <div class="input-group">
-        <label class="input-group-label">
+      {/* <div className="form-row">
+      <div className="input-group">
+        <label className="input-group-label">
           <span className="title">Channel Partner*</span>{" "}
           <input
             type="text"
@@ -457,8 +455,8 @@ export const AddOnForm = ({ values, setValues, onValid }) => {
           />
         </label>
       </div>{" "}
-      <div class="input-group">
-        <label class="input-group-label">
+      <div className="input-group">
+        <label className="input-group-label">
           <span className="title">RM (Saleperson)*</span>{" "}
           <input
             type="text"
@@ -475,8 +473,8 @@ export const AddOnForm = ({ values, setValues, onValid }) => {
     </div>{" "} */}
       <div className="form-row">
         {/* {additionalDetails?.check && ( */}
-        <div class="input-group">
-          <label class="input-group-label">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">No of Parkings</span> <br />
             <input
               type="text"
@@ -539,9 +537,9 @@ export const KYCForm = ({ values, setValues, onValid }) => {
       {isDoubleOwner && (
         <div className="title text-white mb-3">Documents of owner 1</div>
       )}
-      <div class="form-row">
-        <div class="input-group">
-          <label class="input-group-label">
+      <div className="form-row">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">Aadhar Number</span>{" "}
             <input
               type="number"
@@ -557,7 +555,7 @@ export const KYCForm = ({ values, setValues, onValid }) => {
                 }))
               }
               value={values.kyc?.aadhar_number1}
-              // required={true}
+            // required={true}
             />
           </label>
         </div>
@@ -568,9 +566,9 @@ export const KYCForm = ({ values, setValues, onValid }) => {
           setValues((prev) => ({ ...prev, kyc: { ...prev.kyc, adhaar1: e } }))
         }
       />
-      <div class="form-row">
-        <div class="input-group">
-          <label class="input-group-label">
+      <div className="form-row">
+        <div className="input-group">
+          <label className="input-group-label">
             <span className="title">Pan Number</span>{" "}
             <input
               type="text"
@@ -598,9 +596,9 @@ export const KYCForm = ({ values, setValues, onValid }) => {
       {isDoubleOwner && (
         <>
           <div className="title text-white my-2 mt-4">Documents of owner 2</div>
-          <div class="form-row">
-            <div class="input-group">
-              <label class="input-group-label">
+          <div className="form-row">
+            <div className="input-group">
+              <label className="input-group-label">
                 <span className="title">Aadhar Number</span>{" "}
                 <input
                   type="number"
@@ -628,9 +626,9 @@ export const KYCForm = ({ values, setValues, onValid }) => {
               }))
             }
           />
-          <div class="form-row">
-            <div class="input-group">
-              <label class="input-group-label">
+          <div className="form-row">
+            <div className="input-group">
+              <label className="input-group-label">
                 <span className="title">Pan Number</span>{" "}
                 <input
                   type="text"

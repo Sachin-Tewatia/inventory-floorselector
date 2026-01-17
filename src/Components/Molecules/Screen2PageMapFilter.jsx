@@ -42,27 +42,25 @@ function Screen2PageMapFilter(props) {
     <>
       <div>
         <button
-          class={`button button-show_all ${
-            isAllFiltersActive() ? "active" : ""
-          }`}
+          className={`button button-show_all ${isAllFiltersActive() ? "active" : ""
+            }`}
           value=""
           style={{ padding: "5px 8px" }}
           onClick={onShowAllClicked}
         >
           Show All
         </button>
-        <div class="button-group">
+        <div className="button-group">
           {screen2PageMapFilters.map((filter) => (
             <button
-              class={`button ${
-                isFilterActive(filter.id) ? "active" : ""
-              } button-icon ${filter.className}`}
+              className={`button ${isFilterActive(filter.id) ? "active" : ""
+                } button-icon ${filter.className}`}
               value=""
               style={{ padding: "5px 8px" }}
               onClick={() => handleFilterClick(filter.id)}
             >
               {filter.title}
-              <div class="icon">{filter.icon}</div>
+              <div className="icon">{filter.icon}</div>
             </button>
           ))}
         </div>

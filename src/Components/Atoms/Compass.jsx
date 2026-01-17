@@ -35,7 +35,7 @@ const Style = styled.div`
   justify-content: center;
 
   position: absolute;
-  bottom: 10vh;
+  bottom: 14vh;
   right: 2vh;
   transition: all linear 200ms;
   transform-origin: center;

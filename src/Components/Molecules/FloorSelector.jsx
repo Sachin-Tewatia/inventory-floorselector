@@ -98,7 +98,7 @@ function FloorSelector({ currentTower, currentFloor,towerName }) {
                             selectedTower !== currentTower
                               ? "input-floor floor-selected"
                               : "input-floor"
-                          }`}
+                            }`}
                           onChange={(e) => {
                             if (e.key !== "Enter")
                               setSelectedFloor(e.target.value);
@@ -202,7 +202,7 @@ function FloorSelector({ currentTower, currentFloor,towerName }) {
                     }}
                   >
                     {selectedFloor !== currentFloor ||
-                    selectedTower !== currentTower
+                      selectedTower !== currentTower
                       ? "Explore"
                       : "Select Floor"}
                   </button>

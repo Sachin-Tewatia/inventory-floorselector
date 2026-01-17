@@ -20,7 +20,7 @@ const Title = ({ title }) => (
 export const Explore = ({ active, onClick, unitDetails }) => {
   return (
     <ExploreStyle active={active}>
-      <div class="unit__info info">
+      <div className="unit__info info">
         <div className="row-line">
           <Title title={`${unitDetails.unit_number}`} />
           {/* <Title title={`${unitDetails.tower} ${unitDetails.floor} ${unitDetails.unit_number}`} /> */}
@@ -52,7 +52,7 @@ export const Explore = ({ active, onClick, unitDetails }) => {
           </div>
         )} */}
         {/* <div
-          class="unit__button unit__button--plan wide"
+          className="unit__button unit__button--plan wide"
           onClick={(e) => {
             e.stopPropagation();
             onClick();
@@ -277,9 +277,9 @@ function UnitMark({
         inset: `${top} auto auto ${left}`,
       }}
       className="unit-explore-panel"
-      /* onMouseEnter={(e) => alert("mouse entered")} */
+    /* onMouseEnter={(e) => alert("mouse entered")} */
     >
-      {/* <div class={`unit__number ${isSelected ? "active" : ""} `}>{unit.unit_number}</div> */}
+      {/* <div className={`unit__number ${isSelected ? "active" : ""} `}>{unit.unit_number}</div> */}
       {isSelected && (
         <Explore
           active={isSelected}

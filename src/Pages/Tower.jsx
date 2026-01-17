@@ -110,7 +110,7 @@ function Tower(props) {
         filter
       />
       {/* <UnitStatusLegend /> */}
-      <div className="left-panels">
+      {/* <div className="left-panels">
         <CollapsiblePanel className="filters" title={"Filters"}>
           <UnitTypeFilter
             minMaxArea={minMaxArea}
@@ -118,7 +118,7 @@ function Tower(props) {
             totalUnits={getAllUnitsInCombinedTowers(tower).length}
           />
         </CollapsiblePanel>
-      </div>
+      </div> */}
       <ExploreTowers currentTower={tower} />
       {/* <FloorSelector /> */}
       <div className="right-btn-group absolute flex gap-2  z-10 right-0 top-0">

@@ -224,6 +224,8 @@ export const testMapAPIConnectivity = async () => {
 };
 
 export const baseURL = "https://api.floorselector.convrse.ai/api";
+export const chatURL = "https://api.agent.convrsespaces.com";
+// export const chatURL = "http://localhost:8001";
 // export const baseURL = "http://localhost:8000/api";
 
 export const fetchUserFromToken = async () => {
@@ -502,4 +504,28 @@ export const getOtpStatus = async (phone, otp) => {
     .catch(function (error) {
       console.error(error);
     });
+};
+
+export const sendChatMessage = async (payload, options = {}) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      ...options
+    };
+
+    const res = await axios.post(`${chatURL}/chat`, payload, config);
+    return res;
+  } catch (error) {
+    // Enhanced error handling
+    if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+      error.code = 'NETWORK_ERROR';
+      error.message = 'Request timed out. Please check your connection.';
+    } else if (!navigator.onLine) {
+      error.code = 'OFFLINE_ERROR';
+      error.message = 'You appear to be offline. Please check your connection.';
+    }
+    throw error;
+  }
 };

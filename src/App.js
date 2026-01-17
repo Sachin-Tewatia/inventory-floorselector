@@ -16,6 +16,7 @@ import HoverInfo from "./Components/Molecules/HoverInfo";
 import FullScreenModeAlert from "./Components/Atoms/FullScreenModeAlert";
 import dataToUpdate from "./newData.json";
 import { getDatabase, ref, child, get, set } from "firebase/database";
+import ChatContainer from "./Components/Chat/ChatContainer";
 
 function App() {
   // do not call this function

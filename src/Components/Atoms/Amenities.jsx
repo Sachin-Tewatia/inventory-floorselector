@@ -22,33 +22,32 @@ function Amenities() {
   ];
   return (
     <Style>
-      <div class="col flex j-end svelte-9mhvmf">
-        <div class="amenities">
+      <div className="col flex j-end svelte-9mhvmf">
+        <div className="amenities">
           <div
-            class={`amenities__button ${amenitiesPopupOpen ? "active" : ""}`}
+            className={`amenities__button ${amenitiesPopupOpen ? "active" : ""}`}
             onClick={() => setAmenitiesPopupOpen((old) => !old)}
           >
             {arrowUp}
-            <span class="amenities__button--text">Amenities</span>
+            <span className="amenities__button--text">Amenities</span>
           </div>
           {
             <div
-              class={`amenities__popup slide-up ${
-                amenitiesPopupOpen ? " active" : ""
-              }`}
+              className={`amenities__popup slide-up ${amenitiesPopupOpen ? " active" : ""
+                }`}
             >
               {places.map((place, id) => {
                 return (
                   <a href={place.link}>
-                    <div key={id} class="amenities__popup--item">
-                      <div class="amenities__popup--item-image">
+                    <div key={id} className="amenities__popup--item">
+                      <div className="amenities__popup--item-image">
                         <img src={place.image} alt="" />
                       </div>{" "}
-                      <span class="item--name">{place.name}</span>{" "}
-                      <div class="item--shadow"></div>{" "}
-                      <div class="item--smoothBorder"></div>{" "}
-                      <div class="item--floor">VR Tour</div>{" "}
-                      <div class="item--helper">{view_360}</div>{" "}
+                      <span className="item--name">{place.name}</span>{" "}
+                      <div className="item--shadow"></div>{" "}
+                      <div className="item--smoothBorder"></div>{" "}
+                      <div className="item--floor">VR Tour</div>{" "}
+                      <div className="item--helper">{view_360}</div>{" "}
                     </div>
                   </a>
                 );
