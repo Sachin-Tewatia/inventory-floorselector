@@ -141,7 +141,9 @@ export const getTowerFromCombinedTowersAndIndex = (combinedTower, index) => {
 export const getCombinedTowerFromTower = (tower) => {
   for (const combinedTower in COMBINED_TOWERS_MAP) {
     const towers = COMBINED_TOWERS_MAP[combinedTower];
+    console.log("tower", towers);
     if (towers.includes(tower)) {
+      console.log("combinedTower", combinedTower);
       return combinedTower;
     }
   }

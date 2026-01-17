@@ -1,4 +1,3 @@
-import { useState } from 'react';
 let inventories = [];
 let onInventoriesChangeCallback = null;
 
@@ -13,11 +12,7 @@ export const getInventories = () => inventories;
 // Function to set inventories and notify React components
 export const setInventories = (_inventories) => {
   inventories = [..._inventories];
-  console.log("📊 inventories.js: Inventories updated:", inventories.length, "items");
-  
-  // Notify React components if callback is set
   if (onInventoriesChangeCallback) {
-    console.log("🔄 inventories.js: Notifying React components of inventory change");
     onInventoriesChangeCallback(inventories);
   }
 };

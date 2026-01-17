@@ -3,10 +3,11 @@
   --animate-duration: 500ms;
   --blue-theme: #4391a5;
   --green-theme: #77a641;
-    --background_panel: rgba(35, 35, 35, 0.85);
     --header_up_icon_color: rgb(255, 255, 255);
     --color_text: rgba(200, 200, 200, 1);
-    --background_panel: rgba(35, 35, 35, 0.85);
+    /* --background_panel: rgba(35, 35, 35, 0.85); */
+    --background_panel: rgba(28, 28, 28, 0.75);
+    --background_panel_blur: blur(4px);
     --transition: 0.3s;
     --radius: 8px;
     --logo_width: 105px;

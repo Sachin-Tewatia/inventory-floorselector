@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import ReactDOMServer from "react-dom/server";
 import styled from "styled-components";
 import tippy, { createSingleton } from "tippy.js";
@@ -13,6 +13,7 @@ import { emitSync, SYNC_EVENTS, getReceivingSync } from "../../services/socketSy
 import { useTippyShowSync } from "../../Hooks/useTippyShowSync";
 import { useTippyHideSync } from "../../Hooks/useTippyHideSync";
 import { useSvgHoverSync } from "../../Hooks/useSvgHoverSync";
+import { AppContext } from "../../Contexts/AppContext";
 
 let singleton = false;
 const tippyInstanceMap = new Map();
@@ -25,6 +26,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
   const location = useLocation();
   const clickTimers = useRef({});
   const { getUnitById } = useInventories();
+  const { inventoryRefreshTrigger } = useContext(AppContext);
   const { roomId } = useRoomId();
   const roomIdRef = useRef(roomId);
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || 
@@ -77,13 +79,18 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
       for (const floor of floors) {
         if (!floor) continue;
 
-        floor.classList.remove("available", "sold", "hold", "mixed");
+        floor.classList.remove("available", "sold", "hold", "mixed", "blocked");
         floor.classList.add("active");
         floor.style.setProperty('pointer-events', 'all', 'important');
         if (floor._tippy) floor._tippy.destroy();
 
         const unitID = `${towerCode}_${floor.id}`;
         const flatDetails = getUnitById(unitID);
+        if (flatDetails === null || flatDetails === undefined) {
+          floor.style.display = 'none';
+          continue;
+        }
+        floor.style.display = '';
         const floorNo = flatDetails?.floor;
         if (flatDetails?.status) floor.classList.add(flatDetails.status);
         
@@ -226,7 +233,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
       });
       clickTimers.current = {};
     };
-  }, [floorsData, tower, rotation, location.pathname, onFloorClick, isTouchDevice]);
+  }, [floorsData, tower, rotation, location.pathname, onFloorClick, isTouchDevice, inventoryRefreshTrigger]);
 
   const retryUntilReady = (fn, maxAttempts = 20) => {
     const attempt = (count = 0) => {
@@ -276,7 +283,18 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
     page: 'tower',
     tower: tower,
     onSync: ({ elementId }) => {
-      if (!elementId) return;
+      console.log('💬 [FloorWithTippy] TIPPY_HIDE sync received:', { elementId });
+      // If elementId is null, hide all tippy instances (used when video starts)
+      if (elementId === null || elementId === undefined) {
+        console.log('💬 [FloorWithTippy] Hiding all tippy instances (elementId is null)');
+        hideAllFloorsTippy();
+        // Also try to hide again after a short delay to ensure it's hidden
+        setTimeout(() => {
+          hideAllFloorsTippy();
+        }, 50);
+        return;
+      }
+      
       retryUntilReady(() => {
           if (singleton) {
           ref.current.querySelectorAll('.tippy-showing').forEach(floor => floor.classList.remove('tippy-showing'));
@@ -310,6 +328,100 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
 
   return <Style ref={ref}>{children}</Style>;
 }
+
+// Export function to hide all tippy instances (used by TowerSvg when video starts)
+export const hideAllFloorsTippy = () => {
+  try {
+    console.log('🔇 Hiding all floors tippy instances');
+    
+    // Hide singleton instance first (most important)
+    if (singleton) {
+      try {
+        singleton.hide();
+        console.log('✅ Singleton hidden');
+      } catch (e) {
+        console.warn('⚠️ Error hiding singleton:', e);
+      }
+    }
+    
+    // Hide all individual instances
+    tippyInstanceMap.forEach((instance, elementId) => {
+      try {
+        if (instance && typeof instance.hide === 'function') {
+          instance.hide();
+        }
+      } catch (e) {
+        console.warn(`⚠️ Error hiding instance for ${elementId}:`, e);
+      }
+    });
+    
+    // Remove tippy-showing class from all floors (in ref and document)
+    if (typeof document !== 'undefined') {
+      // Remove from any ref elements
+      const allTippyShowing = document.querySelectorAll('.tippy-showing');
+      allTippyShowing.forEach(floor => {
+        floor.classList.remove('tippy-showing');
+      });
+    }
+    
+    // Hide all tippy boxes in DOM (multiple methods for reliability)
+    if (typeof document !== 'undefined') {
+      // Method 1: Hide tippy boxes directly
+      const tippyBoxes = document.querySelectorAll('.tippy-box');
+      tippyBoxes.forEach(box => {
+        try {
+          if (box.style) {
+            box.style.display = 'none';
+            box.style.visibility = 'hidden';
+            box.style.opacity = '0';
+          }
+          // Try to hide via tippy instance
+          if (box._tippy && typeof box._tippy.hide === 'function') {
+            box._tippy.hide();
+          }
+        } catch (e) {
+          // Ignore individual errors
+        }
+      });
+      
+      // Method 2: Hide tippy root containers
+      const tippyRoots = document.querySelectorAll('[data-tippy-root]');
+      tippyRoots.forEach(root => {
+        try {
+          if (root.style) {
+            root.style.display = 'none';
+            root.style.visibility = 'hidden';
+            root.style.opacity = '0';
+          }
+          if (root._tippy && typeof root._tippy.hide === 'function') {
+            root._tippy.hide();
+          }
+        } catch (e) {
+          // Ignore individual errors
+        }
+      });
+      
+      // Method 3: Find all elements with tippy instances
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
+        try {
+          if (el._tippy && typeof el._tippy.hide === 'function') {
+            el._tippy.hide();
+          }
+        } catch (e) {
+          // Ignore individual errors
+        }
+      });
+    }
+    
+    // Reset current showing element
+    currentShowingElementId = null;
+    
+    console.log('✅ All floors tippy instances hidden');
+  } catch (error) {
+    console.error('❌ Error hiding floors tippy instances:', error);
+  }
+};
 
 export default FloorsWithTippy;
 

@@ -5,7 +5,7 @@ import { useRoomId } from "../../Hooks/useRoomId";
 import { emitSync, SYNC_EVENTS, getReceivingSync } from "../../services/socketSync";
 import { useTippyShowSync } from "../../Hooks/useTippyShowSync";
 import { useSvgHoverSync } from "../../Hooks/useSvgHoverSync";
-import { ALL_TOWERS_SVGS, CLUB_SVGS } from "../../Data";
+import { ALL_TOWERS_SVGS } from "../../Data";
 import SVG from "./SVG";
 import ReactDOMServer from "react-dom/server";
 import { useInventories } from "../../Hooks";
@@ -76,11 +76,6 @@ function TowersSvg({ imageNumber, onTowerClick }) {
         if (element) elements.push({ ref: element, tower });
     });
 
-    if (CLUB_SVGS?.[imageNumber]) {
-        const clubhouseElement = document.getElementById(`clubhouse-svg`);
-        if (clubhouseElement) elements.push({ ref: clubhouseElement, club: true });
-    }
-
       if (elements.length === 0) {
         setTimeout(setupTippyAndEvents, 100);
         return;
@@ -105,13 +100,13 @@ function TowersSvg({ imageNumber, onTowerClick }) {
       elements.forEach((ele) => {
         if (!ele.ref) return;
 
-        const elementId = ele.club ? 'clubhouse-svg' : `${ele.tower}-tower-svg`;
+        const elementId = `${ele.tower}-tower-svg`;
         const instance = tippy(ele.ref, {
           content: ReactDOMServer.renderToStaticMarkup(
             <HoverInfo
               className="towers-hover-info"
-              title={ele.club ? 'Club Inspire' : ele.tower}
-              features={ele.club ? [] : [
+              title={ele.tower}
+              features={[
                 `${getAllFloorsInTower(ele.tower).length} Floors | ${getAllUnitsInTower(ele.tower).length} Apartments`,
                 `${getAllUnitTypesInTower(ele.tower).join("\n | ")}`
               ]}
@@ -124,9 +119,6 @@ function TowersSvg({ imageNumber, onTowerClick }) {
         TippyInstances.push(instance);
         if (ele.ref.id) tippyInstanceMap.set(ele.ref.id, instance);
 
-        if (ele.club) {
-          createHoverHandlers(ele.ref, elementId);
-        } else {
           const towerPath = `tower/${getCombinedTowerFromTower(ele.tower)}`;
           
           if (isTouchDevice) {
@@ -162,7 +154,6 @@ function TowersSvg({ imageNumber, onTowerClick }) {
             };
           }
           createHoverHandlers(ele.ref, elementId);
-        }
       });
 
     singleton = createSingleton(TippyInstances, {
@@ -171,7 +162,7 @@ function TowersSvg({ imageNumber, onTowerClick }) {
       moveTransition: "transform 0.2s ease-out",
       allowHTML: true,
       appendTo: document.getElementById("m3m-crown-page"),
-      placement: "right",
+      placement: "left",
     });
     };
 
@@ -268,19 +259,6 @@ function TowersSvg({ imageNumber, onTowerClick }) {
           />
         </TowerStyle>
       ))}
-
-      {/* Clubhouse overlay (rendered last to be on top) */}
-      {CLUB_SVGS?.[imageNumber] && (
-        <TowerStyle>
-          <SVG
-            renderer={
-              <g id={`clubhouse-svg`} className="overlay-can-hide">
-                <path d={CLUB_SVGS[imageNumber]} className="Available" />
-              </g>
-            }
-          />
-        </TowerStyle>
-      )}
     </>
   );
 }

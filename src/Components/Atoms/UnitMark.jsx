@@ -4,13 +4,14 @@ import styled, { css } from "styled-components";
 import { useInventories } from "../../Hooks";
 import { useMapFilter } from "../../Hooks";
 import { unitTypeFilters } from "../../Data";
-import { LocationIcon } from "../../Data/icons";
+import { LocationIcon, TowerIcon } from "../../Data/icons";
 import Price from "./Price";
 
 const Title = ({ title }) => (
   <div className="title">
     <div className="icon">
-      <LocationIcon />
+      {/* <LocationIcon /> */}
+      <TowerIcon/>
     </div>
     <div className="text">{title}</div>
   </div>
@@ -146,6 +147,8 @@ const ExploreStyle = styled.div`
     display: flex;
     align-items: center;
     color: white;
+    border-bottom: 1px solid #ffffff2d;
+    padding-bottom: 7px;
 
     svg {
       transform: translateY(2px);

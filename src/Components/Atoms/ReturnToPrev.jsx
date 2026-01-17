@@ -32,6 +32,7 @@ const Style = styled.div`
   top: 95%;
   /* background-color: rgba(76, 106, 148, 0.829); */
   background-color: var(--background_panel);
+  backdrop-filter: var(--background_panel_blur);
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
   color: #f2eeee;

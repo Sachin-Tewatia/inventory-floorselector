@@ -133,8 +133,10 @@ export const useInventories = () => {
   };
 
   useEffect(() => {
-    if (inventories && inventories.length > 0) setInventoriesList(inventories);
-  }, [inventories]);
+    if (inventories !== null && inventories !== undefined) {
+      setInventoriesList(Array.isArray(inventories) ? [...inventories] : []);
+    }
+  }, [inventories, setInventoriesList]);
 
   const getAllUnitsInFloor = (towerName, floor) => {
     if (!inventories) {
@@ -280,7 +282,10 @@ export const useInventories = () => {
       .sort((a, b) => a["unit_number"] - b["unit_number"]);
 
   const getUnitById = (id) => {
-    return inventoriesList.find((unit) => unit.id === id);
+    // Always use the latest inventoriesList from context
+    // If inventoriesList is empty but inventories has data, use inventories as fallback
+    const source = inventoriesList && inventoriesList.length > 0 ? inventoriesList : (inventories || []);
+    return source.find((unit) => unit.id === id);
   };
 
   return {

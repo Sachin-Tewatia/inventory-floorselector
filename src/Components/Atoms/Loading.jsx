@@ -27,19 +27,19 @@ const Style = styled.main`
     display: inline-block;
     position: relative;
   }
-  .loader::after,
-  .loader::before {
-    content: "";
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
-    animation: animloader 2s linear infinite;
-  }
+  // .loader::after,
+  // .loader::before {
+  //   content: "";
+  //   box-sizing: border-box;
+  //   width: 48px;
+  //   height: 48px;
+  //   border-radius: 50%;
+  //   border: 2px solid #fff;
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   animation: animloader 2s linear infinite;
+  // }
   .loader::after {
     animation-delay: 1s;
   }

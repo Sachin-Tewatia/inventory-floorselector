@@ -131,6 +131,10 @@ export const useSocketSync = () => {
           handleSvgHoverSync(socketEvent);
           break;
         
+        case SYNC_EVENTS.PANEL_VISIBILITY:
+          handlePanelVisibilitySync(socketEvent);
+          break;
+        
         default:
           console.log('Unknown sync event type:', socketEvent.event);
       }
@@ -190,6 +194,9 @@ export const useSocketSync = () => {
       }
       if (data.flatFilterSizeValues !== undefined) {
         context.setFlatFilterSizeValues(data.flatFilterSizeValues);
+      }
+      if (data.flatFilterViewValues !== undefined) {
+        context.setFlatFilterViewValues(data.flatFilterViewValues);
       }
       if (data.flatFilterPriceValues !== undefined) {
         context.setFlatFilterPriceValues(data.flatFilterPriceValues);
@@ -380,6 +387,22 @@ export const useSocketSync = () => {
       
       // Use SyncContext to trigger handlers (sockets as single source of truth)
       triggerHandlers(SYNC_EVENTS.SVG_HOVER, data);
+    };
+
+    // Panel visibility sync handler
+    const handlePanelVisibilitySync = (socketEvent) => {
+      const { data } = socketEvent;
+      
+      // Validate event data
+      if (!data || typeof data !== 'object') {
+        console.warn('🔍 Invalid panel visibility sync event data:', data);
+        return;
+      }
+      
+      console.log('🔍 Syncing panel visibility:', data);
+      
+      // Use SyncContext to trigger handlers (sockets as single source of truth)
+      triggerHandlers(SYNC_EVENTS.PANEL_VISIBILITY, data);
     };
 
     // Navigator state sync handler

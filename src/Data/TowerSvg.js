@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { UNIT_STATUS } from ".";
-import FloorsWithTippy from "../Components/Atoms/FloorWithTippy";
+import FloorsWithTippy, { hideAllFloorsTippy } from "../Components/Atoms/FloorWithTippy";
 import { AppContext } from "../Contexts/AppContext";
 import { useInventories, useMapFilter } from "../Hooks";
 import RotateTower from "../Pages/RotateTower";
@@ -33,6 +33,8 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     getUnitTypeBYId,
     getUnitById,
   } = useInventories();
+  
+  const { inventoryRefreshTrigger } = useContext(AppContext);
   const [rotation, setRotation] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
@@ -124,6 +126,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     tower,
     rotation,
     location.pathname,
+    inventoryRefreshTrigger, // React to inventory updates
   ]);
   
   const handlePrevImage = () => {
@@ -171,51 +174,8 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
 
   // Function to hide all visible tippy instances
   const hideAllTippyInstances = () => {
-    try {
-      // Method 1: Hide all tippy boxes directly
-      const tippyBoxes = document.querySelectorAll('.tippy-box');
-      tippyBoxes.forEach(box => {
-        if (box.style) {
-          box.style.display = 'none';
-        }
-        const tippyInstance = box._tippy;
-        if (tippyInstance && typeof tippyInstance.hide === 'function') {
-          tippyInstance.hide();
-        }
-      });
-      
-      // Method 2: Find all elements with tippy instances and hide them
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        if (el._tippy && typeof el._tippy.hide === 'function') {
-          el._tippy.hide();
-        }
-      });
-      
-      // Method 3: Hide tippy root containers
-      const tippyRoots = document.querySelectorAll('[data-tippy-root]');
-      tippyRoots.forEach(root => {
-        if (root.style) {
-          root.style.display = 'none';
-        }
-        const tippyInstance = root._tippy;
-        if (tippyInstance && typeof tippyInstance.hide === 'function') {
-          tippyInstance.hide();
-        }
-      });
-      
-      // Method 4: Remove tippy elements from DOM after a short delay
-      setTimeout(() => {
-        const remainingTippyBoxes = document.querySelectorAll('.tippy-box');
-        remainingTippyBoxes.forEach(box => {
-          if (box.style && box.style.display !== 'none') {
-            box.style.display = 'none';
-          }
-        });
-      }, 100);
-    } catch (error) {
-      console.error('Error hiding tippy instances:', error);
-    }
+    // Use the exported function from FloorWithTippy to properly hide singleton
+    hideAllFloorsTippy();
   };
 
   const handleVideoComplete = useCallback((navPath) => {
@@ -232,13 +192,22 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
   }, []);
 
   // Play video helper function
-  const playVideo = useCallback((navPath) => {
+  const playVideo = useCallback((navPath, skipTippyHideSync = false) => {
     setPendingNavigation(navPath);
     setHideSvg(true); // Hide SVG elements when video starts
     setHideImage(true); // Start fade-out animation for image
     
     // Hide all tippy instances immediately
     hideAllTippyInstances();
+    
+    // Emit sync event to hide tippy on secondary screen (skip if called from sync)
+    if (!skipTippyHideSync && !getReceivingSync() && roomId) {
+      emitSync(SYNC_EVENTS.TIPPY_HIDE, {
+        page: 'tower',
+        tower: tower,
+        elementId: null, // null means hide all
+      }, roomId);
+    }
     
     // Wait for fade animation to complete (0.5s) before showing video
     setTimeout(() => {
@@ -261,7 +230,7 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
         }
       }, 50);
     }, 500); // Wait for fade animation duration
-  }, [handleVideoComplete]);
+  }, [handleVideoComplete, roomId, tower]);
 
   // Handle floor click to play video and navigate
   const handleFloorClick = useCallback((navPath) => {
@@ -283,11 +252,20 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     const { navPath } = data;
     if (navPath) {
       console.log('🎬 [TowerSvg] Syncing video playback:', navPath);
-      // Hide tippy instances before playing video
+      // Hide tippy instances immediately and multiple times to ensure it's hidden
       hideAllTippyInstances();
+      
+      // Hide again after a short delay to catch any that might reappear
+      setTimeout(() => {
+        hideAllTippyInstances();
+      }, 10);
+      
       // Small delay to ensure tippy is hidden before video starts
       setTimeout(() => {
-      playVideo(navPath);
+        // Hide one more time before playing video
+        hideAllTippyInstances();
+        // Skip tippy hide sync since we're already receiving sync and hiding locally
+        playVideo(navPath, true);
       }, 50);
     }
   }, [playVideo]);
@@ -332,27 +310,27 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
       {loading && <Loading />}
       <ArrowButtonsWrapper className="overlay-can-fade-out">
         <button
-          className={`absolute top-[55%] right-[30%] rounded-2xl cursor-pointer z-30 bg-[#363636] px-2 py-3  ${
+          className={`absolute top-[50%] right-[30%] rounded-[50%] cursor-pointer z-30 bg-[#363636] px-3 py-4  ${
             "imageNumber" > 2 && "opacity-50"
           }`}
           onClick={handleNextImage}
         >
           {" "}
           <img
-            className="hover:scale-110 rotate-90"
+            className="hover:scale-110 -rotate-180"
             alt="next-arrow"
             src={`/up_arrow.svg`}
           />
         </button>
         <button
-          className={`absolute top-[55%] left-[30%] rounded-2xl cursor-pointer z-30  bg-[#363636] px-2 py-3  ${
+          className={`absolute top-[50%] left-[30%] rounded-[50%] cursor-pointer z-30  bg-[#363636] px-3 py-4  ${
             "imageNumber" < 2 && "opacity-50"
           }`}
           onClick={handlePrevImage}
         >
           {" "}
           <img
-            className="hover:scale-110 -rotate-90"
+            className="hover:scale-110 "
             alt="next-arrow"
             src={`/up_arrow.svg`}
           />
@@ -554,6 +532,11 @@ const Style = styled.svg`
     .active.mixed {
       fill: var(--clr-mixed-faded);
       stroke: var(--clr-mixed);
+    }
+
+    .active.blocked {
+      fill: var(--clr-blocked-faded);
+      stroke: var(--clr-blocked);
     }
   }
 `;

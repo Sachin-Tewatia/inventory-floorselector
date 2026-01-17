@@ -15,6 +15,75 @@ export const LocationIcon = () => (
   </svg>
 );
 
+export const TowerIcon = ()=>(
+  <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.72559 22.9942H22.8684" stroke="#8DBD3E" stroke-width="2.12697" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.7414 22.994V16.613V8.10515C20.7414 6.09981 20.7414 5.09715 20.1184 4.47418C19.4954 3.8512 18.4927 3.8512 16.4874 3.8512H13.297H10.1065C8.10116 3.8512 7.09849 3.8512 6.47552 4.47418C5.85254 5.09715 5.85254 6.09981 5.85254 8.10515V16.613V22.994" stroke="#8DBD3E" stroke-width="1.24428" stroke-linejoin="round"/>
+<path d="M10.1064 9.1684H11.1699" stroke="#8DBD3E" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.1064 13.422H11.1699" stroke="#8DBD3E" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.1064 17.6763H11.1699" stroke="#8DBD3E" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.4238 9.1684H16.4873" stroke="#8DBD3E" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.4238 13.422H16.4873" stroke="#8DBD3E" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.4238 17.6763H16.4873" stroke="#8DBD3E" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+);
+export const TowerIconwhite = ()=>(
+  <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.72559 22.9942H22.8684" stroke="white" stroke-width="2.12697" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.7414 22.994V16.613V8.10515C20.7414 6.09981 20.7414 5.09715 20.1184 4.47418C19.4954 3.8512 18.4927 3.8512 16.4874 3.8512H13.297H10.1065C8.10116 3.8512 7.09849 3.8512 6.47552 4.47418C5.85254 5.09715 5.85254 6.09981 5.85254 8.10515V16.613V22.994" stroke="white" stroke-width="1.24428" stroke-linejoin="round"/>
+<path d="M10.1064 9.1684H11.1699" stroke="white" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.1064 13.422H11.1699" stroke="white" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.1064 17.6763H11.1699" stroke="white" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.4238 9.1684H16.4873" stroke="white" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.4238 13.422H16.4873" stroke="white" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.4238 17.6763H16.4873" stroke="white" stroke-width="1.24428" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+);
+
+export const ArrowIcon = ()=>(
+  <svg style={{marginRight:"20px"}} width="16" height="17" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path strokeWidth="1" d="M15.6431 1.26919C15.6269 0.766007 15.2058 0.371258 14.7026 0.387489L6.50283 0.651998C5.99965 0.66823 5.6049 1.08929 5.62114 1.59247C5.63737 2.09565 6.05843 2.4904 6.56161 2.47417L13.8503 2.23905L14.0854 9.52775C14.1017 10.0309 14.5227 10.4257 15.0259 10.4094C15.5291 10.3932 15.9238 9.97215 15.9076 9.46897L15.6431 1.26919ZM1.05859 15.8835L1.72361 16.507L15.397 1.92203L14.732 1.29858L14.067 0.675122L0.393576 15.2601L1.05859 15.8835Z" fill="#8DBD3E"/>
+  </svg>
+);
+
+export const zoomPlusBtn = (
+  <>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 27 27"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10.9938 19.9701C5.85628 19.9701 1.69073 15.8781 1.69073 10.8223C1.69073 5.76644 5.85628 1.66626 10.9938 1.66626C16.1313 1.66626 20.2969 5.76644 20.2969 10.8223C20.2969 15.8781 16.1313 19.9701 10.9938 19.9701ZM25.882 24.7075L19.1362 18.0671C20.9029 16.1477 21.9876 13.6157 21.9876 10.8223C21.9876 4.84348 17.0657 0 10.9938 0C4.92189 0 0 4.84348 0 10.8223C0 16.7929 4.92189 21.6364 10.9938 21.6364C13.6173 21.6364 16.0235 20.7298 17.9135 19.2188L24.6871 25.8836C25.017 26.2103 25.552 26.2103 25.882 25.8836C26.2128 25.565 26.2128 25.0342 25.882 24.7075ZM15.1259 10.1362H11.8612V6.86912C11.8612 6.41172 11.4961 6.05234 11.0453 6.05234C10.5952 6.05234 10.2293 6.41172 10.2293 6.86912V10.1362H6.96628C6.51623 10.1362 6.15032 10.2832 6.15032 10.7325C6.15032 11.1898 6.51623 11.7698 6.96628 11.7698H10.2293V15.0369C10.2293 15.4943 10.5952 15.8537 11.0453 15.8537C11.4961 15.8537 11.8612 15.4943 11.8612 15.0369V11.7698H15.1259C15.5759 11.7698 15.9418 11.4022 15.9418 10.953C15.9418 10.5038 15.5759 10.1362 15.1259 10.1362Z"
+        fill="#fff"
+      />
+    </svg>
+  </>
+);
+export const zoomOutBtn = (
+  <>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 27 27"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M11.0996 20.1624C5.91266 20.1624 1.70784 16.031 1.70784 10.9265C1.70784 5.82196 5.91266 1.6823 11.0996 1.6823C16.2866 1.6823 20.4923 5.82196 20.4923 10.9265C20.4923 16.031 16.2866 20.1624 11.0996 20.1624ZM26.1312 24.9454L19.3205 18.241C21.1042 16.3031 22.1993 13.7468 22.1993 10.9265C22.1993 4.89012 17.23 0 11.0996 0C4.96927 0 0 4.89012 0 10.9265C0 16.9546 4.96927 21.8447 11.0996 21.8447C13.7484 21.8447 16.1778 20.9294 18.086 19.4038L24.9248 26.1328C25.2579 26.4627 25.798 26.4627 26.1312 26.1328C26.4652 25.8112 26.4652 25.2752 26.1312 24.9454ZM15.4117 10.2338H7.12737C6.68124 10.2338 6.31921 10.5884 6.31921 11.0254C6.31921 11.4625 6.68124 11.8171 7.12737 11.8171H15.4117C15.8578 11.8171 16.2199 11.4625 16.2199 11.0254C16.2199 10.5884 15.8578 10.2338 15.4117 10.2338Z"
+        fill="#fff"
+      />
+    </svg>
+  </>
+);
+
+
 export const malls_icon = (
   <svg
     width="32"

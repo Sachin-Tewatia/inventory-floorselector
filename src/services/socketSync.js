@@ -22,6 +22,7 @@ export const SYNC_EVENTS = {
   TIPPY_HIDE: 'tippyHide',
   UNIT_FRAME: 'unitFrame',
   SVG_HOVER: 'svgHover',
+  PANEL_VISIBILITY: 'panelVisibility',
 };
 
 /**

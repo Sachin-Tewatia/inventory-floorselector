@@ -3,6 +3,7 @@ import { MapInteractionCSS } from "react-map-interaction";
 import { useRoomId } from "../../Hooks/useRoomId";
 import { emitSync, SYNC_EVENTS, getReceivingSync, emitSyncDebounced, setReceivingSync } from "../../services/socketSync";
 import { useZoomSync } from "../../Hooks/useZoomSync";
+import { zoomOutBtn, zoomPlusBtn } from "../../Data/icons";
 
 function Zoomable({ children }) {
   const [mapValue, setMapValue] = useState({
@@ -60,6 +61,8 @@ function Zoomable({ children }) {
       maxScale={6}
       showControls
       value={mapValue}
+      plusBtnContents={zoomPlusBtn}
+      minusBtnContents={zoomOutBtn}
       controlsClass="zoom-control"
       btnClass="zoom-btn"
       plusBtnClass={`${

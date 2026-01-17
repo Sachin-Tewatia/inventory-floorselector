@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { LocationIcon } from "../../Data/icons";
+import { LocationIcon, TowerIcon } from "../../Data/icons";
 import {
   getFormalCurrencyFromNum,
   getFormalNameFromNumber,
@@ -86,7 +86,8 @@ export const FloorInfo = ({ exploreTop, floorData, tower }) => (
     <div className="explore-panel" style={{ top: exploreTop }}>
       <div className="title">
         {" "}
-        <LocationIcon />
+        {/* <LocationIcon /> */}
+        <TowerIcon/>
         <div className="title-block">
           <div>{`${tower.toUpperCase()}`}</div>
           <div className="floor-num">
@@ -183,7 +184,7 @@ const Style = styled.div`
     min-width: 230px;
     top: 0;
     /* left: -170px; */
-    .title {
+     .title {
       display: flex;
       align-items: center;
       /* justify-content: center; */
@@ -193,16 +194,17 @@ const Style = styled.div`
       font-size: 1rem;
       border-radius: 3px;
       color: var(--blue-theme);
-      opacity: 0.8;
+      opacity: 1;
       padding-left: 0.3rem;
+      border-bottom: 1px solid grey;
       svg {
         margin-right: 0.5rem;
         width: 18px;
         height: 18x;
 
         path {
-          fill: white;
-          stroke: #cae9f3;
+          // fill: white;
+          stroke: var(--blue-theme);
         }
       }
 

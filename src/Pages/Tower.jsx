@@ -109,8 +109,8 @@ function Tower(props) {
         totalUnits={getAllUnitsInCombinedTowers(tower).length}
         filter
       />
-      <UnitStatusLegend />
-      {/* <div className="left-panels">
+      {/* <UnitStatusLegend /> */}
+      <div className="left-panels">
         <CollapsiblePanel className="filters" title={"Filters"}>
           <UnitTypeFilter
             minMaxArea={minMaxArea}
@@ -118,7 +118,7 @@ function Tower(props) {
             totalUnits={getAllUnitsInCombinedTowers(tower).length}
           />
         </CollapsiblePanel>
-      </div> */}
+      </div>
       <ExploreTowers currentTower={tower} />
       {/* <FloorSelector /> */}
       <div className="right-btn-group absolute flex gap-2  z-10 right-0 top-0">
@@ -225,8 +225,8 @@ const Style = styled.div`
 
   .left-panels {
     position: absolute;
-    top: 1vh;
-    left: 2rem;
+    top: 25%;
+    left: 1rem;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -234,10 +234,11 @@ const Style = styled.div`
     height: 75vh;
     gap: 2rem;
 
-    .filters {
-      position: relative !important;
-      left: 0;
-      top: 0;
+    @media screen and (max-width: 860px) {
+      left: 0.5rem;
+    }
+    @media screen and (min-width: 861px) and (max-width: 1080px) {
+      left: 0.5rem;
     }
   }
 

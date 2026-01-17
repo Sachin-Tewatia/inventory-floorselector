@@ -43,7 +43,8 @@ function ExploreTowers({ currentTower }) {
 
 const Style = styled.div`
   color: var(--color_text);
-  background: var(--panel_background);
+  background: var(--background_panel);
+  backdrop-filter: var(--background_panel_blur);
   position: absolute;
   right: 1rem;
   top: 35vh;

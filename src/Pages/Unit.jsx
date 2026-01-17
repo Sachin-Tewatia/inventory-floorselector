@@ -291,23 +291,6 @@ const CarouselPageStyle = styled.section`
   display: flex;
   flex-direction: row;
 
-  .left-panels {
-    position: absolute;
-    top: 1vh;
-    left: 2rem;
-    display: flex;
-    flex-direction: column;
-    z-index: 90;
-    justify-content: space-between;
-    height: 75vh;
-    gap: 2rem;
-
-    .filters {
-      position: relative !important;
-      left: 0;
-      top: 0;
-    }
-
     /* Mobile responsive styles */
     @media screen and (max-width: 860px) {
       top: 0.5vh;
@@ -408,6 +391,11 @@ const CarouselPageStyle = styled.section`
     color: #a09c9c;
     transition: var(--transition);
 
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
     :hover {
       background: var(--button_background_zoom_hover);
     }
@@ -417,8 +405,13 @@ const CarouselPageStyle = styled.section`
       width: 28px;
       height: 28px;
       font-size: 18px;
-      border-radius: 6px;
+      border-radius: 5px;
       line-height: 15px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
     }
 
     /* Medium screen responsive styles (860px - 1080px) */
@@ -426,8 +419,13 @@ const CarouselPageStyle = styled.section`
       width: 32px;
       height: 32px;
       font-size: 20px;
-      border-radius: 7px;
+      border-radius: 8px;
       line-height: 17px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 

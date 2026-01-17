@@ -55,7 +55,9 @@ const Style = styled.div`
     width: var(--button_panel_width);
     height: var(--button_panel_height);
     border-radius: var(--radius);
-    background: var(--button_panel_background);
+    // background: var(--button_panel_background);
+    background: var(--background_panel);
+    backdrop-filter: var(--background_panel_blur);
     box-shadow: var(--button_panel_shadow);
     pointer-events: all;
     transition: var(--transition);

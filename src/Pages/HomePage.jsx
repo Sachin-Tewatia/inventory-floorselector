@@ -222,25 +222,25 @@ function HomePage(props) {
       </div>
       <div className="overlay-can-fade-out">
         <button
-          className={`absolute top-[50%] right-[10%]  px-8 py-1  rounded-xl cursor-pointer z-30 arrow-left `}
+          className={`absolute top-[50%] right-[10%]  px-5 py-5  rounded-[50%] cursor-pointer z-30 arrow-left `}
           style={{ backgroundColor: 'var(--background_panel)' }}
           onClick={handleNextImage}
         >
           {" "}
           <img
-            className="hover:scale-110 rotate-90 arrow-animate   "
+            className="hover:scale-110 arrow-animate-rotated"
             alt="next-arrow"
             src={`/up_arrow.svg`}
           />
         </button>
         <button
-          className={`absolute top-[50%] left-[10%] px-8 py-1 rounded-xl cursor-pointer z-30 arrow-right`}
+          className={`absolute top-[50%] left-[10%] px-5 py-5 rounded-[50%] cursor-pointer z-30 arrow-right`}
           style={{ backgroundColor: 'var(--background_panel)' }}
           onClick={handlePrevImage}
         >
           {" "}
           <img
-            className="hover:scale-110 -rotate-90 arrow-animate "
+            className="hover:scale-110 arrow-animate-rotated "
             alt="next-arrow"
             src={`/up_arrow.svg`}
           />
@@ -350,6 +350,20 @@ const Style = styled.main`
       }
       100% {
         transform: scale(1.2);
+      }
+    }
+  }
+
+  .arrow-animate-rotated {
+    animation: arrowRotated 0.9s 0.3s infinite alternate ease-in-out;
+    transform: rotate(90deg);
+
+    @keyframes arrowRotated {
+      0% {
+        transform: rotate(90deg) scale(1);
+      }
+      100% {
+        transform: rotate(90deg) scale(1.2);
       }
     }
   }

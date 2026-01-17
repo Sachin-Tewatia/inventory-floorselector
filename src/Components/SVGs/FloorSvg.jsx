@@ -50,6 +50,7 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
 
       let flatIndex = FLAT_SVG_NO_MAP[flatSvgNo];
       const unit = units[flatIndex - 1];
+      // const unit = units.find(( {unit_number} ) => unit_number.slice(-1) == flatSvgNo);
 
       if (isActive(unit)) flatSvg.classList.add("active");
       else flatSvg.classList.remove("active");
@@ -94,10 +95,12 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
       flatSvg.classList.remove("hold");
       flatSvg.classList.remove("sold");
       flatSvg.classList.remove("available");
+      flatSvg.classList.remove("blocked");
       const flatSvgNo = (flatSvg.id.split("_")[0]);
 
       let flatIndex = FLAT_SVG_NO_MAP[flatSvgNo];
       const currentUnit = units[flatIndex - 1];
+      // const currentUnit = units.find(( {unit_number} ) => unit_number.slice(-1) == flatSvgNo);
       if (!currentUnit) continue;
 
       const { status, id } = currentUnit;
@@ -493,6 +496,10 @@ const Style = styled.svg`
   path.sold {
     fill: var(--clr-booked-faded);
     stroke: var(--clr-booked-faded);
+  }
+  path.blocked {
+    fill: var(--clr-blocked-faded);
+    stroke: var(--clr-blocked-faded);
   }
 `;
 

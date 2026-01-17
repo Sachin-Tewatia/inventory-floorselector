@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
 import { screen1PageMapFilters, PAGES } from "../Data";
 import { fetchAndGetInventories, fetchUserFromToken } from "../APIs";
 import { setInventoriesChangeCallback } from "../Data/inventories";
@@ -63,35 +63,23 @@ export const AppContextProvider = ({ children }) => {
 
   const INVENTORY_UPDATE_INTERVAL = 1 * 60 * 1000; // 1 minute
 
- useEffect(() => {
-   
-    setInventoriesChangeCallback((newInventories) => {
+  // Create stable callback function for inventory updates
+  const handleInventoryUpdate = useCallback((newInventories) => {
+    const now = Date.now();
+    if (now - lastUpdateRef.current < 200) return; // Debounce rapid updates
     
-      const now = Date.now();
-      const timeSinceLastUpdate = now - lastUpdateRef.current;
-      
-      // Debounce rapid updates (less than 200ms apart for slow internet)
-      if (timeSinceLastUpdate < 200) {
-        console.log("🔄 AppContext: Skipping rapid inventory update");
-        return;
-      }
-      
-      lastUpdateRef.current = now;
-      
-      console.log("🔄 AppContext: Received inventory update from inventories.js");
-      console.log("📊 AppContext: New inventories count:", newInventories.length);
-      
-      // Update inventories state
-      setInventories([...newInventories]); // Create new array reference
-      
-      // Update trigger with timestamp for unique value
-      setInventoryRefreshTrigger(now);
-      
-      console.log("✅ AppContext: React state updated with timestamp trigger");
-     
-    });
-    console.log("✅ AppContext: Inventory change callback registered");
+    lastUpdateRef.current = now;
+    const newArray = Array.isArray(newInventories) ? [...newInventories] : [];
+    
+    setInventories(newArray);
+    setInventoriesList(newArray);
+    setInventoryRefreshTrigger(now);
   }, []);
+
+  useEffect(() => {
+    setInventoriesChangeCallback(handleInventoryUpdate);
+    return () => setInventoriesChangeCallback(null);
+  }, [handleInventoryUpdate]);
   
   // Function to refresh inventory data and update state
   const refreshInventories = async () => {

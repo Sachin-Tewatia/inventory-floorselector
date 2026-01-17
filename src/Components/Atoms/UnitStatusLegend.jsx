@@ -41,34 +41,34 @@ function UnitStatusLegend(props) {
 
 const Style = styled.div`
   color: var(--color_text);
-  background: var(--panel_background);
-  position: absolute;
-  padding: 0.5rem 0.8rem;
+  // background: var(--panel_background);
+  // position: absolute;
+  padding: 0.2rem 0.5rem;
   padding-bottom: 1rem;
-  border-radius: 8px;
-  top: 6rem;
-  right: 1rem;
-  z-index: 90;
+  // border-radius: 8px;
+  // top: 6rem;
+  // right: 2rem;
+  // z-index: 90;
   .title {
     color: var(--color_text);
     font-size: 11px;
     font-weight: 500;
     text-align: center;
-    padding: 10px 0;
+    padding: 7px 0;
     opacity: 0.9;
   }
-  .body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 0.5rem;
-    gap: 0.3rem;
-    width: fit-container;
-  }
+.body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+  gap: 0.5rem; /* space between items */
+  margin-top: 0.2rem;
+  width: 100%; /* makes it responsive */
+}
   .row {
     display: flex;
     align-items: center;
     color: var(--color_text);
+     margin-right: 0.5rem;
     .mark {
       width: 10px;
       height: 10px;
@@ -82,62 +82,58 @@ const Style = styled.div`
     }
   }
 
-  /* Mobile responsive styles */
-  @media screen and (max-width: 860px) {
-    padding: 0.2rem 0.4rem;
-    padding-bottom: 0.5rem;
-    border-radius: 3px;
-    top: 3.2rem;
-    right: 0.5rem;
+  /* Tablet styles (861px - 1080px) */
+  @media screen and (min-width: 861px) and (max-width: 1080px) {
+    padding: 0.15rem 0.4rem;
+    padding-bottom: 0.7rem;
 
     .title {
-      font-size: 6px;
-      padding: 4px 0;
+      font-size: 9px;
+      padding: 5px 0;
     }
 
     .body {
-      margin-top: 0.2rem;
-      gap: 0.2rem;
+      gap: 0.35rem;
+      margin-top: 0.15rem;
     }
 
     .row {
+      margin-right: 0.35rem;
       .mark {
-        width: 5px;
-        height: 5px;
+        width: 7px;
+        height: 7px;
       }
       .text {
-        margin-left: 0.2rem;
-        font-size: 0.4rem;
+        margin-left: 0.35rem;
+        font-size: 0.65rem;
       }
     }
   }
 
-  /* Medium screen responsive styles (860px - 1080px) */
-  @media screen and (min-width: 861px) and (max-width: 1080px) {
-    padding: 0.5rem 0.7rem;
-    padding-bottom: 0.8rem;
-    border-radius: 6px;
-    top: 3.5rem;
-    right: 1rem;
+  /* Mobile styles (max-width: 860px) */
+  @media screen and (max-width: 860px) {
+    padding: 0.1rem 0.3rem;
+    padding-bottom: 0.5rem;
 
     .title {
-      font-size: 9px;
-      padding: 7px 0;
+      font-size: 6px;
+      padding: 3px 0;
     }
 
     .body {
-      margin-top: 0.4rem;
-      gap: 0.3rem;
+      gap: 0.2rem;
+      margin-top: 0.1rem;
     }
 
     .row {
+      margin-right: 0.2rem;
       .mark {
-        width: 8px;
-        height: 8px;
+        width: 4px;
+        height: 4px;
       }
       .text {
-        margin-left: 0.5rem;
-        font-size: 0.7rem;
+        margin-left: 0.2rem;
+        font-size: 5px;
       }
     }
   }

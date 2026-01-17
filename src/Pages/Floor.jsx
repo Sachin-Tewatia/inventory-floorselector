@@ -52,16 +52,6 @@ import { emitSync, SYNC_EVENTS, getReceivingSync } from "../services/socketSync"
 import { useOverlayVisibilitySync } from "../Hooks/useOverlayVisibilitySync";
 
 function Floor() {
-  const towers = {
-    a: "A",
-    b: "B",
-    c: "C",
-    d: "D",
-    e: "E",
-    f: "F",
-    g: "G",
-    h: "H",
-  };
 
   const { activeMapFilterIds, isFilterActive, setActiveMapFilterIds } =
     useMapFilter();
@@ -135,7 +125,7 @@ function Floor() {
     }, 800); // Animation duration
   }, [navigate]);
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), [2000]);
+    const timeout = setTimeout(() => setLoading(false), [200]);
     return () => clearTimeout(timeout);
   }, [loading]);
 
@@ -257,15 +247,6 @@ function Floor() {
             setSelectedTower={setSelectedTower}
           />
         </div> */}
-        <div className="unit-type-filter overlay-can-fade-out">
-          <CollapsiblePanel title={"Filters"}>
-            <UnitTypeFilter
-              unitTypeFilters={unitTypeFilters}
-              minMaxArea={minMaxArea}
-              totalUnits={getAllFlatsInFloor(combinedTower, floor).length}
-            />
-          </CollapsiblePanel>
-        </div>
       </>
        <div className="col flex j-end">
           <Compass angle={COMPASS_ANGLES.TOWERS[tower]} />
@@ -310,7 +291,7 @@ function Floor() {
           />
         </div>
       </div>
-      <UnitStatusLegend />
+      {/* <UnitStatusLegend /> */}
 
       {/* <div className="compass-fullscreen-wrapper absolute bottom right flex row overlay-can-fade-out">
         <div className="col w-space flex j-end">
@@ -355,7 +336,16 @@ function Floor() {
           )}
         </div>
       </Zoomable>
-      <ReraNumber />
+      <div className="unit-type-filter overlay-can-fade-out">
+          <CollapsiblePanel title={"Filters"}>
+            <UnitTypeFilter
+              unitTypeFilters={unitTypeFilters}
+              minMaxArea={minMaxArea}
+              totalUnits={getAllFlatsInFloor(combinedTower, floor).length}
+            />
+          </CollapsiblePanel>
+        </div>
+      {/* <ReraNumber /> */}
     </Style>
   );
 }
@@ -371,19 +361,19 @@ const Style = styled.main`
 
   .unit-type-filter {
     position: absolute;
-    top: 0;
-    left: 0rem;
+    top: 25%;
+    left: 1rem;
 
     /* Mobile responsive styles */
     @media screen and (max-width: 860px) {
       left: 0.5rem;
-      top: 0;
+      top: 25%;
     }
 
     /* Medium screen responsive styles (860px - 1080px) */
     @media screen and (min-width: 861px) and (max-width: 1080px) {
       left: 1rem;
-      top: 0.5rem;
+      top: 25%;
     }
   }
 
@@ -412,8 +402,8 @@ const Style = styled.main`
 
   @keyframes zoomFadeInOut {
     0% {
-      opacity: 0;
-      transform: scale(1.1);
+      opacity: 0.4;
+      transform: scale(2);
     }
     30% {
       opacity: 1;
@@ -440,6 +430,7 @@ const Style = styled.main`
       rgba(121, 109, 90, 1) 45%,
       rgba(92, 86, 74, 1) 100%
     );
+    // background: linear-gradient(to bottom,rgba(87, 176, 211, 0.9),rgba(5, 62, 85, 0.9));
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   }
 
@@ -459,7 +450,7 @@ const Style = styled.main`
 
   .img-wrapper.zoom-fade-animation,
   .svg-wrapper.zoom-fade-animation {
-    animation: zoomFadeInOut 1.5s ease-in-out;
+    animation: zoomFadeInOut 2s ease-in-out;
   }
 
   .img-wrapper.zoom-out-fade-animation,
@@ -508,7 +499,9 @@ const Style = styled.main`
   .zoom-btn {
     width: 36px;
     height: 36px;
-    background: var(--button_background_zoom);
+    // background: var(--button_background_zoom);
+    background: var(--background_panel);
+    backdrop-filter: var(--background_panel_blur);
     border-radius: 8px;
     display: inline-block;
     border: none;
@@ -524,6 +517,11 @@ const Style = styled.main`
     color: #a09c9c;
     transition: var(--transition);
 
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
     :hover {
       background: var(--button_background_zoom_hover);
     }
@@ -533,8 +531,13 @@ const Style = styled.main`
       width: 22px;
       height: 22px;
       font-size: 13px;
-      border-radius: 3px;
+      border-radius: 5px;
       line-height: 10px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
     }
 
     /* Medium screen responsive styles (860px - 1080px) */
@@ -544,6 +547,11 @@ const Style = styled.main`
       font-size: 20px;
       border-radius: 7px;
       line-height: 17px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 
@@ -564,11 +572,20 @@ const Style = styled.main`
   }
 
   .right-btn-group {
-    margin:  0.5rem;
+    margin:  1rem;
     z-index: 2;
     .icon-btn {
       margin: 1rem;
     }
+
+    /* Mobile responsive styles */
+    @media screen and (max-width: 860px) {
+      margin: 0.5rem;
+    }
+
+    /* Medium screen responsive styles (860px - 1080px) */
+    @media screen and (min-width: 861px) and (max-width: 1080px) {
+      margin: 0.5rem;
   }
 
   .compass-fullscreen-wrapper {

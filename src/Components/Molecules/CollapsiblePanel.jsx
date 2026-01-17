@@ -1,43 +1,520 @@
-import React, { useRef } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+// import React, { useRef } from "react";
+// import { useEffect } from "react";
+// import { useState } from "react";
+// import styled from "styled-components";
+
+// function CollapsiblePanel({ className, children, title, SecondaryBody }) {
+//   const [isOpen, setIsOpen] = useState(true);
+//   const bodyRef = useRef();
+
+//   useEffect(() => {
+//     var body = bodyRef.current;
+//     body.style.height = body.scrollHeight + "px";
+//     // setIsOpen(false);
+//   }, []);
+
+//   return (
+//     <Style className={className + " overlay-can-fade-out"}>
+//       <div class="panel MapFilters">
+//         <div class="title">
+//           <h2 class="filter-title-mob" slot="title">
+//             {title}
+//           </h2>
+//         </div>
+//         <div
+//           class={
+//             isOpen
+//               ? "body body--margin collapsible"
+//               : "body body--margin hidden collapsible"
+//           }
+//           ref={bodyRef}
+//         >
+//           {children}
+//         </div>
+//       </div>
+
+//       {SecondaryBody && <SecondaryBody className={isOpen ? "" : "hidden"} />}
+//       <CloseBtn
+//         isOpen={isOpen}
+//         onClick={() => setIsOpen((isOpen) => !isOpen)}
+//       />
+//     </Style>
+//   );
+// }
+
+// export default CollapsiblePanel;
+
+// const CloseBtn = ({ onClick, isOpen }) => (
+//   <div class="close-btn" onClick={onClick}>
+//     <button class="hidden__button">
+//       <svg
+//         width="16"
+//         height="8"
+//         viewBox="0 0 16 8"
+//         fill="none"
+//         xmlns="http://www.w3.org/2000/svg"
+//         className={isOpen ? "" : "rotated"}
+//       >
+//         <path
+//           d="M15 7L8 1L0.999999 7"
+//           stroke="#fff"
+//           stroke-linecap="round"
+//           stroke-linejoin="round"
+//         ></path>
+//       </svg>
+//     </button>
+//   </div>
+// );
+
+// const Style = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 1rem;
+//   margin-top: 8rem;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: flex-start;
+//   width: fit-content;
+//   transition: all 800ms linear;
+//   .body {
+//     overflow: hidden;
+//     transition: height 200ms linear;
+//   }
+//   .panel {
+//     display: flex;
+//     flex-direction: column;
+//     background: var(--panel_background);
+//     border-radius: var(--radius);
+//     padding: var(--panel_paddings);
+//     width: 100%;
+//     max-width: var(--panel_max_width);
+//     min-width: var(--panel_min_width);
+//     transition: opacity var(--transition);
+//     pointer-events: all;
+//     z-index: 13;
+//     position: relative;
+//   }
+//   .panel + .close-btn {
+//     margin-top: 10px;
+//   }
+//   .hidden-btn {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     z-index: 1;
+//   }
+//   .panel .title {
+//     font-size: 9px;
+//     text-transform: uppercase;
+//     text-align: center;
+//     color: var(--panel_title_color);
+//   }
+//   .panel .title .filter-title-mob {
+//     color: var(--panel_title_color);
+//   }
+//   .panel .body--margin {
+//     padding-top: 10px;
+//   }
+//   .panel .body {
+//     flex-shrink: 0;
+//   }
+//   element.style {
+//     --paddings: 5px 8px;
+//   }
+//   .button.button-show_all {
+//     margin: 0;
+//   }
+//   .button-group {
+//     margin-top: 18px;
+//     button {
+//       border-radius: 0;
+//       margin: 1px;
+//     }
+//   }
+//   .button-group {
+//     button {
+//       :first-child {
+//         border-top-left-radius: var(--radius) !important;
+//         border-top-right-radius: var(--radius) !important;
+//       }
+//       :last-child {
+//         border-bottom-left-radius: var(--radius) !important;
+//         border-bottom-right-radius: var(--radius) !important;
+//       }
+//     }
+//   }
+//   .button.button-icon .icon {
+//     width: 18px;
+//     height: 20px;
+//   }
+//   .button.button-icon.landmarks.active .icon {
+//     :before {
+//       content: " ";
+//       position: absolute;
+//       margin: 2px;
+//       z-index: -1;
+//       background-color: white;
+//       border-radius: 50%;
+//       width: 15px;
+//       height: 15px;
+//     }
+//   }
+//   .button.active {
+//     background: var(--button_background_active);
+//     box-shadow: var(--button_shadow_active);
+//     color: var(--button_color_active);
+//     font-weight: 500;
+//   }
+//   /* style for each icon */
+//   .button.button-icon.highway.active svg {
+//     path {
+//       fill: #ffffff;
+//       &:nth-child(1) {
+//         &:nth-child(1) {
+//           fill: #ce457e !important;
+//         }
+//       }
+//     }
+//   }
+//   .button.button-icon.retail.active svg {
+//     path {
+//       fill: #4dbce0;
+//       &:nth-child(2) {
+//         fill: white !important;
+//       }
+//     }
+//   }
+//   .button.button-icon.retail.active svg circle {
+//     fill: #ffffff;
+//   }
+
+//   .button.button-icon.education.active svg circle {
+//     fill: #ffffff;
+//   }
+
+//   .button.button-icon.education.active svg {
+//     path {
+//       fill: #95c040;
+//       &:nth-child(2) {
+//         fill: white !important;
+//       }
+//     }
+//   }
+
+//   .button.button-icon.hotels.active svg circle {
+//     fill: #ffffff;
+//   }
+
+//   .button.button-icon.hotels.active svg {
+//     path {
+//       fill: #fcb270;
+//       &:nth-child(2) {
+//         fill: white !important;
+//       }
+//       &:nth-child(3) {
+//         fill: white !important;
+//       }
+//     }
+//   }
+
+//   .button.button-icon.cinema.active svg circle {
+//     fill: #916edc;
+//   }
+//   .button.button-icon.cinema.active svg path {
+//     fill: #fff;
+//   }
+//   .button.button-icon.metro.active svg path {
+//     fill: #636363;
+//   }
+//   .button.button-icon.metro.active svg circle {
+//     fill: #ffffff;
+//   }
+//   .button.button-icon.mosque.active svg path {
+//     fill: #b777a6;
+//   }
+//   .button.button-icon.mosque.active svg circle {
+//     fill: #ffffff;
+//   }
+//   .button.button-icon.garden.active svg circle {
+//     fill: #ffffff;
+//   }
+//   .button.button-icon.garden.active svg path {
+//     fill: rgba(81, 173, 107, 0.9528);
+//   }
+//   .button.button-icon {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     position: relative;
+//     overflow: hidden;
+//     padding: 4px 9px 4px 9px;
+//   }
+//   .button-group {
+//     border-radius: 0;
+//     margin-bottom: 1px;
+//   }
+//   .button.button-icon.landmarks {
+//     z-index: 1;
+//   }
+//   .close-btn {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     z-index: 1;
+//     .rotated {
+//       transform: rotate(180deg);
+//     }
+//   }
+//   .hidden__button {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     max-width: 60px;
+//     padding: 8px 22px;
+//     margin: 0;
+//     border: 0;
+//     border-radius: var(--radius);
+//     background: var(--hidden_background);
+//     transition: var(--transition);
+//     pointer-events: all;
+//     cursor: pointer;
+//     overflow: hidden;
+//   }
+//   .hidden__button svg {
+//     width: 16px;
+//     height: 8px;
+//     transition: var(--transition);
+//   }
+//   .hidden {
+//     height: 0px !important;
+//   }
+
+//   /* Mobile responsive styles */
+//   @media screen and (max-width: 860px) {
+//     left: 0.2rem;
+//     margin-top: 4.5rem;
+
+//     .panel {
+//       padding: 0.5rem 0.7rem !important;
+//       border-radius: 6px;
+//       max-width: 120px !important;
+//       min-width: 110px !important;
+//     }
+
+//     .panel .title {
+//       font-size: 6px !important;
+//       padding: 4px 0 !important;
+//     }
+
+//     .panel .title .filter-title-mob {
+//       font-size: 7px !important;
+//       margin: 0 !important;
+//       padding: 0 !important;
+//     }
+
+//     .panel .title h2 {
+//       font-size: 7px !important;
+//       margin: 0 !important;
+//       padding: 0 !important;
+//     }
+
+//     .panel .body--margin {
+//       padding-top: 4px !important;
+//       height: 160px !important;
+//     }
+
+//     .panel .body {
+//       font-size: 0.7rem;
+//     }
+
+//     .button-group {
+//       margin-top: 10px !important;
+//       button {
+//         padding:2px 5px !important;
+//         font-size: 8px !important;
+//         margin: 0.5px !important;
+//       }
+//     }
+
+//     .button.button-icon {
+//       padding: 2px 5px 2px 5px !important;
+//       font-size: 8px !important;
+//     }
+
+//     .button.button-icon .icon {
+//       width: 12px !important;
+//       height: 14px !important;
+//     }
+
+//     .close-btn {
+//       .hidden__button {
+//         max-width: 40px !important;
+//         padding: 4px 14px !important;
+//       }
+
+//       .hidden__button svg {
+//         width: 10px !important;
+//         height: 5px !important;
+//       }
+//     }
+
+//     .panel + .close-btn {
+//       margin-top: 7px !important;
+//     }
+//   }
+
+//   /* Medium screen responsive styles (860px - 1080px) */
+//   @media screen and (min-width: 861px) and (max-width: 1080px) {
+//     left: 0.5rem;
+//     margin-top: 6rem;
+
+//     .panel {
+//       padding: 0.7rem 0.9rem !important;
+//       border-radius: 7px;
+//       max-width: 160px !important;
+//       min-width: 140px !important;
+//     }
+
+//     .panel .title {
+//       font-size: 8px !important;
+//       padding: 5px 0 !important;
+//     }
+
+//     .panel .title .filter-title-mob,
+//     .panel .title h2 {
+//       font-size: 9px !important;
+//       margin: 0 !important;
+//       padding: 0 !important;
+//     }
+
+//     .panel .body--margin {
+//       padding-top: 6px !important;
+//       height: 220px !important;
+//     }
+
+//     .panel .body {
+//       font-size: 0.8rem;
+//     }
+
+//     .button-group {
+//       margin-top: 12px !important;
+//       button {
+//         padding: 3px 7px !important;
+//         font-size: 9px !important;
+//         margin: 0.5px !important;
+//       }
+//     }
+
+//     .button.button-icon {
+//       padding: 3px 7px 3px 7px !important;
+//       font-size: 9px !important;
+//     }
+
+//     .button.button-icon .icon {
+//       width: 14px !important;
+//       height: 16px !important;
+//     }
+
+//     .close-btn {
+//       .hidden__button {
+//         max-width: 45px !important;
+//         padding: 5px 16px !important;
+//       }
+
+//       .hidden__button svg {
+//         width: 11px !important;
+//         height: 6px !important;
+//       }
+//     }
+
+//     .panel + .close-btn {
+//       margin-top: 9px !important;
+//     }
+//   }
+// `;
+
+
+
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
+import { useRoomId } from "../../Hooks/useRoomId";
+import { emitSync, SYNC_EVENTS, getReceivingSync } from "../../services/socketSync";
+import { useSyncContext } from "../../Contexts/SyncContext";
 
 function CollapsiblePanel({ className, children, title, SecondaryBody }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const bodyRef = useRef();
+  const { roomId } = useRoomId();
+  const { registerHandler } = useSyncContext();
+  const isOpenRef = useRef(isOpen);
+
+  // Keep ref updated
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
 
   useEffect(() => {
-    var body = bodyRef.current;
-    body.style.height = body.scrollHeight + "px";
-    // setIsOpen(false);
+    if (bodyRef.current) {
+      bodyRef.current.style.height = "auto";
+    }
   }, []);
 
-  return (
-    <Style className={className + " overlay-can-fade-out"}>
-      <div class="panel MapFilters">
-        <div class="title">
-          <h2 class="filter-title-mob" slot="title">
-            {title}
-          </h2>
-        </div>
-        <div
-          class={
-            isOpen
-              ? "body body--margin collapsible"
-              : "body body--margin hidden collapsible"
-          }
-          ref={bodyRef}
-        >
-          {children}
-        </div>
-      </div>
+  // Listen for panel visibility sync events
+  useEffect(() => {
+    const unsubscribe = registerHandler(SYNC_EVENTS.PANEL_VISIBILITY, (data) => {
+      if (!data || typeof data !== 'object') {
+        return;
+      }
 
+      // Check if this event is for the filter panel (CollapsiblePanel)
+      if (data.panelType === 'filterPanel' && data.isOpen !== undefined) {
+        if (data.isOpen !== isOpenRef.current) {
+          console.log('🔍 [CollapsiblePanel] Syncing panel visibility:', data.isOpen);
+          setIsOpen(data.isOpen);
+        }
+      }
+    });
+
+    return unsubscribe;
+  }, [registerHandler]);
+
+  return (
+    <Style className={`${className}`} isOpen={isOpen}>
+      <div className="panel-wrapper">
+        <div className="panel MapFilters overlay-can-fade-out">
+          {/* <div className="title">
+            <h2 className="filter-title-mob" slot="title">
+              {title}
+            </h2>
+            
+          </div> */}
+          <div className="body body--margin collapsible" ref={bodyRef}>
+            {children}
+          </div>
+        </div>
+        <CloseBtn
+          isOpen={isOpen}
+          onClick={() => {
+            const newIsOpen = !isOpen;
+            setIsOpen(newIsOpen);
+            
+            // Sync panel visibility if not receiving sync
+            if (!getReceivingSync() && roomId) {
+              emitSync(SYNC_EVENTS.PANEL_VISIBILITY, {
+                panelType: 'filterPanel',
+                isOpen: newIsOpen,
+              }, roomId);
+            }
+          }}
+        />
+      </div>
       {SecondaryBody && <SecondaryBody className={isOpen ? "" : "hidden"} />}
-      <CloseBtn
-        isOpen={isOpen}
-        onClick={() => setIsOpen((isOpen) => !isOpen)}
-      />
     </Style>
   );
 }
@@ -45,396 +522,132 @@ function CollapsiblePanel({ className, children, title, SecondaryBody }) {
 export default CollapsiblePanel;
 
 const CloseBtn = ({ onClick, isOpen }) => (
-  <div class="close-btn" onClick={onClick}>
-    <button class="hidden__button">
+  <div className="close-button overlay-can-fade-out" onClick={onClick}>
+    <button className="hidden__button">
       <svg
-        width="16"
-        height="8"
-        viewBox="0 0 16 8"
+        width="26"   // ⬆ bigger size
+        height="26"
+        viewBox="0 0 24 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={isOpen ? "" : "rotated"}
       >
         <path
-          d="M15 7L8 1L0.999999 7"
+          d="M9 18L15 12L9 6"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     </button>
   </div>
 );
 
 const Style = styled.div`
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  margin-top: 8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: fit-content;
-  transition: all 800ms linear;
+  transition: transform 0.4s ease;
+  transform: ${(props) => (props.isOpen ? "translateX(-250px)" : "translateX(0px)")};
+  z-index: 13;
+  padding-right: ${(props) => (props.isOpen ? "0" : "10px")};
+
+  .panel-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .panel {
+
+    border-radius: var(--radius);
+    width: 220px;
+    transition: opacity var(--transition);
+    pointer-events: all;
+    position: relative;
+    z-index: 10;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Push title left & close btn right */
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--panel_title_color);
+  }
+
+  .close-button {
+    position: absolute;
+    top: 60%;           /* vertically center relative to panel height */
+    right: -45px;       /* push outside to the right side */
+    transform: translateY(-50%);
+    z-index: 20;
+  }
+
+  .hidden__button {
+    width: 25px;     /* ⬆ button size */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: var(--background_panel);
+    backdrop-filter: var(--background_panel_blur);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
   .body {
     overflow: hidden;
     transition: height 200ms linear;
   }
-  .panel {
-    display: flex;
-    flex-direction: column;
-    background: var(--panel_background);
-    border-radius: var(--radius);
-    padding: var(--panel_paddings);
-    width: 100%;
-    max-width: var(--panel_max_width);
-    min-width: var(--panel_min_width);
-    transition: opacity var(--transition);
-    pointer-events: all;
-    z-index: 13;
-    position: relative;
-  }
-  .panel + .close-btn {
-    margin-top: 10px;
-  }
-  .hidden-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    z-index: 1;
-  }
-  .panel .title {
-    font-size: 9px;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--panel_title_color);
-  }
-  .panel .title .filter-title-mob {
-    color: var(--panel_title_color);
-  }
-  .panel .body--margin {
-    padding-top: 10px;
-  }
-  .panel .body {
-    flex-shrink: 0;
-  }
-  element.style {
-    --paddings: 5px 8px;
-  }
-  .button.button-show_all {
-    margin: 0;
-  }
-  .button-group {
-    margin-top: 18px;
-    button {
-      border-radius: 0;
-      margin: 1px;
-    }
-  }
-  .button-group {
-    button {
-      :first-child {
-        border-top-left-radius: var(--radius) !important;
-        border-top-right-radius: var(--radius) !important;
-      }
-      :last-child {
-        border-bottom-left-radius: var(--radius) !important;
-        border-bottom-right-radius: var(--radius) !important;
-      }
-    }
-  }
-  .button.button-icon .icon {
-    width: 18px;
-    height: 20px;
-  }
-  .button.button-icon.landmarks.active .icon {
-    :before {
-      content: " ";
-      position: absolute;
-      margin: 2px;
-      z-index: -1;
-      background-color: white;
-      border-radius: 50%;
-      width: 15px;
-      height: 15px;
-    }
-  }
-  .button.active {
-    background: var(--button_background_active);
-    box-shadow: var(--button_shadow_active);
-    color: var(--button_color_active);
-    font-weight: 500;
-  }
-  /* style for each icon */
-  .button.button-icon.highway.active svg {
-    path {
-      fill: #ffffff;
-      &:nth-child(1) {
-        &:nth-child(1) {
-          fill: #ce457e !important;
-        }
-      }
-    }
-  }
-  .button.button-icon.retail.active svg {
-    path {
-      fill: #4dbce0;
-      &:nth-child(2) {
-        fill: white !important;
-      }
-    }
-  }
-  .button.button-icon.retail.active svg circle {
-    fill: #ffffff;
-  }
 
-  .button.button-icon.education.active svg circle {
-    fill: #ffffff;
-  }
-
-  .button.button-icon.education.active svg {
-    path {
-      fill: #95c040;
-      &:nth-child(2) {
-        fill: white !important;
-      }
-    }
-  }
-
-  .button.button-icon.hotels.active svg circle {
-    fill: #ffffff;
-  }
-
-  .button.button-icon.hotels.active svg {
-    path {
-      fill: #fcb270;
-      &:nth-child(2) {
-        fill: white !important;
-      }
-      &:nth-child(3) {
-        fill: white !important;
-      }
-    }
-  }
-
-  .button.button-icon.cinema.active svg circle {
-    fill: #916edc;
-  }
-  .button.button-icon.cinema.active svg path {
-    fill: #fff;
-  }
-  .button.button-icon.metro.active svg path {
-    fill: #636363;
-  }
-  .button.button-icon.metro.active svg circle {
-    fill: #ffffff;
-  }
-  .button.button-icon.mosque.active svg path {
-    fill: #b777a6;
-  }
-  .button.button-icon.mosque.active svg circle {
-    fill: #ffffff;
-  }
-  .button.button-icon.garden.active svg circle {
-    fill: #ffffff;
-  }
-  .button.button-icon.garden.active svg path {
-    fill: rgba(81, 173, 107, 0.9528);
-  }
-  .button.button-icon {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 4px 9px 4px 9px;
-  }
-  .button-group {
-    border-radius: 0;
-    margin-bottom: 1px;
-  }
-  .button.button-icon.landmarks {
-    z-index: 1;
-  }
-  .close-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    z-index: 1;
-    .rotated {
-      transform: rotate(180deg);
-    }
-  }
-  .hidden__button {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 60px;
-    padding: 8px 22px;
-    margin: 0;
-    border: 0;
-    border-radius: var(--radius);
-    background: var(--hidden_background);
-    transition: var(--transition);
-    pointer-events: all;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .hidden__button svg {
-    width: 16px;
-    height: 8px;
-    transition: var(--transition);
-  }
   .hidden {
-    height: 0px !important;
+    height: 0 !important;
   }
 
-  /* Mobile responsive styles */
-  @media screen and (max-width: 860px) {
-    left: 0.2rem;
-    margin-top: 4.5rem;
-
-    .panel {
-      padding: 0.5rem 0.7rem !important;
-      border-radius: 6px;
-      max-width: 120px !important;
-      min-width: 110px !important;
-    }
-
-    .panel .title {
-      font-size: 6px !important;
-      padding: 4px 0 !important;
-    }
-
-    .panel .title .filter-title-mob {
-      font-size: 7px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    .panel .title h2 {
-      font-size: 7px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    .panel .body--margin {
-      padding-top: 4px !important;
-      height: 160px !important;
-    }
-
-    .panel .body {
-      font-size: 0.7rem;
-    }
-
-    .button-group {
-      margin-top: 10px !important;
-      button {
-        padding:2px 5px !important;
-        font-size: 8px !important;
-        margin: 0.5px !important;
-      }
-    }
-
-    .button.button-icon {
-      padding: 2px 5px 2px 5px !important;
-      font-size: 8px !important;
-    }
-
-    .button.button-icon .icon {
-      width: 12px !important;
-      height: 14px !important;
-    }
-
-    .close-btn {
-      .hidden__button {
-        max-width: 40px !important;
-        padding: 4px 14px !important;
-      }
-
-      .hidden__button svg {
-        width: 10px !important;
-        height: 5px !important;
-      }
-    }
-
-    .panel + .close-btn {
-      margin-top: 7px !important;
-    }
-  }
-
-  /* Medium screen responsive styles (860px - 1080px) */
+  /* Tablet styles (861px - 1080px) */
   @media screen and (min-width: 861px) and (max-width: 1080px) {
-    left: 0.5rem;
-    margin-top: 6rem;
+    transform: ${(props) => (props.isOpen ? "translateX(-220px)" : "translateX(0px)")};
+    padding-right: ${(props) => (props.isOpen ? "0" : "8px")};
 
-    .panel {
-      padding: 0.7rem 0.9rem !important;
-      border-radius: 7px;
-      max-width: 160px !important;
-      min-width: 140px !important;
+    .close-button {
+      right: -15px;   /* adjust horizontal offset only */
     }
 
-    .panel .title {
-      font-size: 8px !important;
-      padding: 5px 0 !important;
+    .hidden__button {
+      width: 20px;
+      height: 50px;
     }
 
-    .panel .title .filter-title-mob,
-    .panel .title h2 {
-      font-size: 9px !important;
-      margin: 0 !important;
-      padding: 0 !important;
+    .hidden__button svg {
+      width: 22px;
+      height: 26px;
+    }
+  }
+
+  /* Mobile styles (max-width: 860px) */
+  @media screen and (max-width: 860px) {
+    transform: ${(props) => (props.isOpen ? "translateX(-120px)" : "translateX(0px)")};
+    padding-right: ${(props) => (props.isOpen ? "0" : "6px")};
+
+    .close-button {
+      right: 85px;   /* adjust horizontal offset only */
     }
 
-    .panel .body--margin {
-      padding-top: 6px !important;
-      height: 220px !important;
+    .hidden__button {
+      width: 16px;
+      height: 40px;
+      border-radius: 3px;
     }
 
-    .panel .body {
-      font-size: 0.8rem;
-    }
-
-    .button-group {
-      margin-top: 12px !important;
-      button {
-        padding: 3px 7px !important;
-        font-size: 9px !important;
-        margin: 0.5px !important;
-      }
-    }
-
-    .button.button-icon {
-      padding: 3px 7px 3px 7px !important;
-      font-size: 9px !important;
-    }
-
-    .button.button-icon .icon {
-      width: 14px !important;
-      height: 16px !important;
-    }
-
-    .close-btn {
-      .hidden__button {
-        max-width: 45px !important;
-        padding: 5px 16px !important;
-      }
-
-      .hidden__button svg {
-        width: 11px !important;
-        height: 6px !important;
-      }
-    }
-
-    .panel + .close-btn {
-      margin-top: 9px !important;
+    .hidden__button svg {
+      width: 18px;
+      height: 20px;
     }
   }
 `;

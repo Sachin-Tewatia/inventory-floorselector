@@ -3,7 +3,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useLandmark } from "../../Hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { useRoomId } from "../../Hooks/useRoomId";
 
 function Navigator({
   className,
@@ -14,34 +13,24 @@ function Navigator({
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { selectedLandmarkId } = useLandmark();
-  const { roomId } = useRoomId();
 
   const navigate = useNavigate();
-  
-  // Helper function to navigate while preserving roomId
-  const navigateWithRoomId = (path) => {
-    if (roomId) {
-      // Check if path already has query parameters
-      const hasQuery = path.includes('?');
-      const separator = hasQuery ? '&' : '?';
-      navigate(`${path}${separator}roomId=${roomId}`);
-    } else {
-      navigate(path);
-    }
-  };
 
   return (
     <Style className={className}>
       <Logo />
-      <BackButton
+      {/* {
+        prevPages.length>0&&
+        <BackButton
         onClick={(e) => {
           if (prevPages.length > 0) {
             e.stopPropagation();
-            navigateWithRoomId(prevPages[prevPages.length - 1].path);
+            navigate(prevPages[prevPages.length - 1].path);
           }
         }}
-      />
-      <div class="path">
+        />
+      } */}
+      <div class="">
         <div class="path__scroll">
           {/* prev pages */}
           {prevPages.map((page, index) => (
@@ -50,7 +39,7 @@ function Navigator({
               isActive={false}
               title={page.title}
               isFirst={index == 0}
-              onClick={(e) => navigateWithRoomId(page.path)}
+              onClick={(e) => navigate(page.path)}
             />
           ))}
 
@@ -70,7 +59,7 @@ function Navigator({
               isActive={false}
               title={page.title}
               isFirst={false}
-              onClick={() => navigateWithRoomId(page.path)}
+              onClick={() => navigate(page.path)}
             />
           ))}
 
@@ -84,11 +73,13 @@ function Navigator({
             )}
         </div>
       </div>
-      {}
-      <CollapseButton
+      {/* {
+        prevPages.length>0 &&
+        <CollapseButton
         isCollapsed={isCollapsed}
         onClick={() => setIsCollapsed((collapsed) => !collapsed)}
-      />
+        />
+      } */}
     </Style>
   );
 }
@@ -97,17 +88,16 @@ export default Navigator;
 
 const Style = styled.header`
   position: absolute;
-  top: 0rem;
-  left: 0rem;
-  background-color: var(--background_panel);
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(35, 35, 35, 0.4);
+  backdrop-filter: blur(2px);
   display: flex;
-  height: 60px;
+  height: auto;
   max-width: 100%;
-  margin: 1rem;
   width: fit-content;
-  background-color: var(--background_panel);
   border-radius: var(--radius);
-  z-index: 11;
+  z-index: 13;
   pointer-events: all;
   align-items: center;
   overflow: hidden;
@@ -219,17 +209,19 @@ const Style = styled.header`
       flex-shrink: 0;
       background: var(--header_path_background);
       box-shadow: var(--header_path_shadow);
-      padding: 4px 16px;
-      border-radius: var(--radius);
+      padding: 4px 30px;
+      border-radius: 18px;
       font-size: 15px;
       line-height: 1.2;
       text-align: center;
       white-space: nowrap;
       color: var(--header_path_color);
       width: fit-content;
+      height: 32px;
       transform-orgin: left;
       /* transition: var(--transition); */
       cursor: pointer;
+
       :hover {
         opacity: 0.9 !important;
       }
@@ -313,104 +305,134 @@ const Style = styled.header`
     }
   }
 
-  /* Mobile responsive styles */
-  @media screen and (max-width: 860px) {
-    height: 36px;
-    margin: 0.4rem;
-    border-radius: 7px;
-    
+  /* Tablet styles (861px - 1080px) */
+  @media screen and (min-width: 861px) and (max-width: 1080px) {
+    top: 0.6rem;
+    left: 0.6rem;
+    border-radius: 6px;
+
+    button {
+      padding: 3px 7px;
+      font-size: 11px;
+    }
+
     .logo {
-      margin-left: 10px;
-      margin-right: 0.6rem;
+      margin-left: 12px;
+      margin-right: 0.8rem;
       svg {
         width: 100px;
       }
     }
-    
+
     .back {
       svg {
-        width: 14px;
-        height: 14px;
+        width: 13px;
+        height: 13px;
       }
       .back__text {
+        margin-top: 1.5px;
         font-size: 7px;
-        margin-top: 1px;
       }
     }
-    
+
     .path__scroll {
-      padding: 0 10px;
-      
+      padding: 0 12px;
       .path__item {
-        padding: 2px 10px;
+        padding: 3px 18px;
+        border-radius: 12px;
         font-size: 11px;
+        height: 24px;
       }
-      
       .path__delimiter {
         width: 5px;
         height: 10px;
         margin: 0 6px;
       }
-      
       .route__time.svelte-1puig2g {
-        font-size: 11px;
-      }
-      
-      .route__distance.svelte-1puig2g {
         font-size: 10px;
+        margin-bottom: -2px;
+      }
+      .route__delimiter.svelte-1puig2g {
+        padding: 0 7px;
+      }
+      .route__line.svelte-1puig2g {
+        width: 50px;
+      }
+      .route__icon.svelte-1puig2g {
+        width: 5px;
+        height: 10px;
+      }
+      .route__distance.svelte-1puig2g {
+        font-size: 9px;
+        margin-top: -2px;
       }
     }
   }
 
-  /* Medium screen responsive styles (860px - 1080px) */
-  @media screen and (min-width: 861px) and (max-width: 1080px) {
-    height: 50px;
-    margin: 0.8rem;
-    
+  /* Mobile styles (max-width: 860px) */
+  @media screen and (max-width: 860px) {
+    top: 0.3rem;
+    left: 0.3rem;
+    border-radius: 4px;
+
+    button {
+      padding: 2px 5px;
+      font-size: 8px;
+    }
+
     .logo {
-      margin-left: 15px;
-      margin-right: 0.9rem;
+      margin-left: 8px;
+      margin-right: 0.5rem;
       svg {
-        width: 130px;
+        width: 60px;
       }
     }
-    
+
     .back {
       svg {
-        width: 16px;
-        height: 16px;
+        width: 10px;
+        height: 10px;
       }
       .back__text {
-        font-size: 8px;
-        margin-top: 1.5px;
+        margin-top: 1px;
+        font-size: 5px;
       }
     }
-    
+
     .path__scroll {
-      padding: 0 15px;
-      
+      padding: 0 8px;
       .path__item {
-        padding: 3px 14px;
-        font-size: 13px;
+        padding: 2px 12px;
+        border-radius: 8px;
+        font-size: 7px;
+        height: 16px;
       }
-      
       .path__delimiter {
-        width: 6px;
-        height: 12px;
-        margin: 0 8px;
+        width: 4px;
+        height: 8px;
+        margin: 0 4px;
       }
-      
       .route__time.svelte-1puig2g {
-        font-size: 12px;
+        font-size: 7px;
+        margin-bottom: -2px;
       }
-      
+      .route__delimiter.svelte-1puig2g {
+        padding: 0 5px;
+      }
+      .route__line.svelte-1puig2g {
+        width: 30px;
+      }
+      .route__icon.svelte-1puig2g {
+        width: 4px;
+        height: 8px;
+      }
       .route__distance.svelte-1puig2g {
-        font-size: 11px;
+        font-size: 6px;
+        margin-top: -2px;
       }
     }
   }
 `;
-
 
 const Path = ({ collapsed, isFirst, isActive, title, onClick }) => (
   <>
@@ -498,24 +520,20 @@ const Delimiter = ({ className }) => (
   </div>
 );
 
-const Logo = () => {
-  const { roomId } = useRoomId();
-  const navigate = useNavigate();
-  
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    const targetPath = roomId ? `/?roomId=${roomId}` : '/';
-    navigate(targetPath);
-  };
-  
-  return (
-    <div className="logo-wrapper">
-      <a href="/" onClick={handleLogoClick}>
-        <img src={`${process.env.PUBLIC_URL}/inspire.png`} alt="Logo" />
-      </a>
-    </div>
-  );
-};
+const Logo = () => (
+  <div className="logo-wrapper">
+    <Link to="/">
+      <img src={`${process.env.PUBLIC_URL}/logo.png`} />
+    </Link>
+  </div>
+);
+export const Logo2 = () => (
+  <div className="logo-wrapper2">
+    <Link to="/">
+      <img src={`${process.env.PUBLIC_URL}/logo.png`} />
+    </Link>
+  </div>
+);
 
 export const RouteDetails = ({ landMarkRouteDetails }) => {
   const { time, distance, landmark_name } = landMarkRouteDetails;

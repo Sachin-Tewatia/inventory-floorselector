@@ -16,7 +16,7 @@ export default ReraNumber;
 
 const Style = styled.div`
   .rera-content {
-    background-color: #2f2f2fc5;
+    background-color: var(--background_panel);
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 4px;

@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { useInventories, useMapFilter } from "../../Hooks";
-import Slider, { Range } from "rc-slider";
+import { useMapFilter } from "../../Hooks";
+import { Range } from "rc-slider";
 import "rc-slider/assets/index.css";
-import { useContext } from "react";
 import { AppContext } from "../../Contexts/AppContext";
-import { getFormalCurrencyFromNum } from "../../Utility/function";
+import UnitStatusLegend from "../Atoms/UnitStatusLegend";
+import ExploreTowers from "./ExploreTowers";
 import { useRoomId } from "../../Hooks/useRoomId";
-import { emitSyncDebounced, SYNC_EVENTS, getReceivingSync } from "../../services/socketSync";
+import { SYNC_EVENTS, getReceivingSync, emitSyncDebounced } from "../../services/socketSync";
 
-const PRICE_OFFSET = 100000;
-
-function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
-  const { flatFilterSizeValues, setFlatFilterSizeValues, activeMapFilterIds: contextActiveMapFilterIds } =
+function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters = [], tower, showBandFilter = false }) {
+  const { flatFilterSizeValues, setFlatFilterSizeValues } =
     useContext(AppContext);
   const { roomId } = useRoomId();
 
@@ -43,6 +41,8 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
 
   const handleFilterClick = (id) => {
     let newFilters;
+    
+    // Calculate newFilters before updating state to avoid race conditions
     if (isFilterActive(id)) {
       // should be deactivated
       if (isAllFiltersActive()) {
@@ -51,28 +51,23 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
             .map((filter) => filter.id)
             .filter((_id) => _id !== id),
         ];
-        setActiveMapFilterIds(newFilters);
       } else {
-        setActiveMapFilterIds((old) => {
-          newFilters = old.filter((_id) => _id !== id);
-          return newFilters;
-        });
+        newFilters = activeMapFilterIds.filter((_id) => _id !== id);
       }
     } else {
-      setActiveMapFilterIds((old) => {
-        newFilters = [...old, id];
-        return newFilters;
-      });
+      newFilters = [...activeMapFilterIds, id];
     }
     
+    // Update state with the calculated newFilters
+    setActiveMapFilterIds(newFilters);
+    
     // Sync filter changes if not receiving sync
+    // emitSyncDebounced already handles debouncing, so no need for setTimeout
     if (!getReceivingSync() && roomId) {
-      setTimeout(() => {
-        emitSyncDebounced(SYNC_EVENTS.FILTERS, {
-          activeMapFilterIds: newFilters,
-          flatFilterSizeValues,
-        }, roomId, 100);
-      }, 50);
+      emitSyncDebounced(SYNC_EVENTS.FILTERS, {
+        activeMapFilterIds: newFilters,
+        flatFilterSizeValues,
+      }, roomId, 100);
     }
   };
 
@@ -91,30 +86,31 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
 
   return (
     <Style>
-      <div
-        class="filters-control align-start"
-        style={{ minHeight: "250px", height: "fit-content" }}
-      >
-        <div class="main-controls">
-          {" "}
-          <div class="available-title">{totalUnits} Units Total</div>{" "}
-          <div class="button-group">
-            {unitTypeFilters.map((filter) => (
-              <button
-                onClick={() => handleFilterClick(filter.id)}
-                class={`button green ${
-                  isFilterActive(filter.id) ? "active" : ""
-                }`}
-                value=""
-                style={{ "--paddings": "5px 8px" }}
-              >
-                {filter.title}
-              </button>
-            ))}
-          </div>{" "}
+      <div className="filters-container">
+        {/* Units + Active BHK */}
+        {/* <div className="units-header">
+          <span>{totalUnits} Units</span>
+        </div> */}
+
+        <div className="bhk-buttons">
+           <div className="units-header">
+            <span>{totalUnits} Units</span>
+           </div>
+          {unitTypeFilters.map((filter) => (
+            <button
+              key={filter.id}
+              onClick={() => handleFilterClick(filter.id)}
+              className={`button bhk-btn ${isFilterActive(filter.id) ? "active" : ""}`}
+            >
+              {filter.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Size Sq. Ft */}
+        <div className="section">
+          <div className="section-title">Size Sq. Ft.</div>
           <DoubleSlider
-            title={"Size"}
-            rangeLabel="Sq. Ft"
             value={flatFilterSizeValues}
             labelValues={flatFilterSizeValues}
             start={minMaxArea[0]}
@@ -122,27 +118,37 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
             handleOnSliderChange={handleSizeOnSliderChange}
           />
         </div>
-      </div>
-      <div className="el-showall">
-        {isAllFiltersActive() ? (
-          <button
-            className="button el-showall__button active"
-            onClick={onShowAllClicked}
-            value=""
-            style={{ "--paddings": "5px 8px" }}
-          >
-            Hide All
-          </button>
-        ) : (
-          <button
-            className="button el-showall__button"
-            onClick={onShowAllClicked}
-            value=""
-            style={{ "--paddings": "5px 8px" }}
-          >
-            Show All
-          </button>
-        )}
+
+        {/* Towers */}
+       {tower && <ExploreTowers currentTower={tower}/>}
+        {/* {towerFilters && towerFilters.length > 0 && (
+          <div className="section">
+            <div className="section-title">Towers</div>
+            <div className="button-group">
+              {towerFilters.map((tower) => (
+                <button key={tower.id} className="button tower-btn">
+                  {tower.title}
+                </button>
+              ))}
+            </div>
+          </div>
+        )} */}
+
+        {/* Unit Status Legend */}
+        <UnitStatusLegend/>
+
+        {/* Show/Hide All */}
+        <div className="section showall">
+          {isAllFiltersActive() ? (
+            <button className="button toggle-btn active" onClick={onShowAllClicked}>
+              Hide All
+            </button>
+          ) : (
+            <button className="button toggle-btn" onClick={onShowAllClicked}>
+              Show All
+            </button>
+          )}
+        </div>
       </div>
     </Style>
   );
@@ -150,355 +156,337 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits }) {
 
 export default UnitTypeFilter;
 
-export const DoubleSlider = ({
-  title,
-  rangeLabel,
-  start,
-  end,
-  handleOnSliderChange,
-  value,
-  labelValues,
-}) => {
+export const DoubleSlider = ({ start, end, handleOnSliderChange, value, labelValues }) => {
   return (
-    <div class="slider-group">
-      <div class="slider-group__title">{title + " " + rangeLabel}</div>{" "}
-      <div class="slider-group__body">
-        <div class="slider-group__body--prices">
-          <div class="input-minprice">{labelValues[0]}</div>{" "}
-          <div class="input-maxprice">{labelValues[1]}</div>
-        </div>{" "}
-        <div style={{ marginTop: "10px" }}>
-          <Range
-            // range
-            // disabled
-            min={start}
-            max={end}
-            allowCross={false}
-            value={value}
-            onChange={handleOnSliderChange}
-            railStyle={{
-              height: 2,
-            }}
-            // className="background-red"
-            handleStyle={[
-              {
-                backgroundColor: "var(--blue-theme)",
-                border: "1px solid var(--blue-theme)",
-              },
-              {
-                backgroundColor: "var(--blue-theme)",
-                border: "1px solid var(--blue-theme)",
-              },
-            ]}
-            trackStyle={[
-              {
-                background: "var(--blue-theme)",
-              },
-            ]}
-            dotStyle={{
-              backgroundColor: "var(--blue-theme)",
-            }}
-            activeDotStyle={{
-              backgroundColor: "var(--blue-theme)",
-            }}
-          />
-        </div>
+    <div className="slider-group">
+      <div className="slider-labels">
+        <span>{labelValues[0]}</span>
+        <span>{labelValues[1]}</span>
       </div>
+      <Range
+        min={start}
+        max={end}
+        allowCross={false}
+        step={0.1}
+        value={value}
+        onChange={handleOnSliderChange}
+        railStyle={{ height: 4, backgroundColor: "#444" }}
+        handleStyle={[
+          { backgroundColor: "var(--blue-theme)", border: "2px solid var(--blue-theme)" },
+          { backgroundColor: "var(--blue-theme)", border: "2px solid var(--blue-theme)" }
+        ]}
+        trackStyle={[{ background: "var(--blue-theme)", height: 4 }]}
+      />
     </div>
   );
 };
 
 const Style = styled.div`
-  .button.active.green {
-    color: var(--button_color_green);
-    background: var(--button_background_blue);
-    font-weight: 500;
+  .filters-container {
+    background: var(--background_panel);
+    backdrop-filter: var(--background_panel_blur);
+    padding: 1rem 10px; /* reduced padding */
+    border-radius: 6px; /* slightly smaller corners */
+    font-family: "Inter", sans-serif;
+    color: #fff;
+    width: 220px; /* narrower width */
+    z-index: 10;
+
+    @media screen and (min-width: 861px) and (max-width: 1080px) {
+      width: 200px;
+    }
+
+    @media screen and (max-width: 860px) {
+      width: 170px;
+    }
   }
-  .filters-control.align-start {
-    align-items: flex-start;
-  }
-  .filters-control {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    transition: min-height 0.2s ease-out;
-  }
-  .el-showall {
-    margin-top: 10px;
-    margin-bottom: 7px;
-  }
-  .filters-control .main-controls {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  .available-title {
-    font-size: 13px;
-    font-weight: 400;
+
+  .units-header {
     text-align: center;
-    margin-top: 9px;
-    color: var(--slide_area_span_color_hover);
+    margin: auto;
+    font-weight: 600;
+    font-size: 12px; /* smaller text */
+    color: #fff;
   }
-  .button-group {
-    margin-bottom: 20px;
-  }
-  .button-group {
-    margin-top: 11px;
-  }
-  .button-group :first-child {
-    border-top-left-radius: var(--radius);
-    border-top-right-radius: var(--radius);
-  }
-  .button-group {
-    border-radius: 0;
-    margin-bottom: 30px;
-  }
-  .slider-group {
-    margin-bottom: 30px;
-    margin-top: 1.2rem;
-    padding: 0 10px;
-  }
-  .slider-group__title {
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
-  .slider-group__title span {
-    margin: 0 5px;
-    color: #c7c7c7;
-  }
-  .slider-group__body--prices {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: #c7c7c7;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 15px;
-    margin: 6px 0;
-  }
-  .double-range-container {
+
+  .bhk-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem; /* reduced gap */
+    margin-bottom: 0.6rem;
     width: 100%;
-    height: 15px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    box-sizing: border-box;
-    white-space: nowrap;
   }
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 1px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #737373;
-  }
-  .body {
-    top: -1px;
-    position: absolute;
-    background-color: #c7c7c7;
-    bottom: -1px;
-  }
-  .body.active {
-    background: var(--blue-theme);
-  }
-  .handle {
-    position: absolute;
-    top: 50%;
-    width: var(--handleWidth);
-    height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #c7c7c7;
+
+  .bhk-btn {
+    flex: 1;
+    background: #2a2a2a;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 7px; /* button size driven by padding + content */
+    min-height: 30px;
     border-radius: 5px;
-    transform: translate(-50%, -50%);
+    font-size: 11px;
     cursor: pointer;
+    margin-right: 4px;
   }
-  .handle.active {
+
+  .bhk-btn.active {
     background: var(--blue-theme);
+    color: #000;
+    font-weight: bold;
   }
-  .dots {
-    position: relative;
-    width: 6px;
-    height: 5px;
-    margin-left: -1px;
-    pointer-events: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+
+  .section {
+    margin-top: 12px; /* tighter spacing */
   }
-  .dots__dot--1::before {
-    right: 0;
-  }
-  .dots__dot--2::before {
-    left: 0;
-  }
-  .dots__dot--1::before,
-  .dots__dot--1::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 1px;
-    height: 1px;
-    display: block;
-    background-color: #060606;
-  }
-  .dots__dot--2::after {
-    left: 100%;
-  }
-  .dots__dot--2::before,
-  .dots__dot--2::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    width: 1px;
-    height: 1px;
-    display: block;
-    background-color: #060606;
-  }
-  .slider-group__title-square {
-    cursor: pointer;
-  }
-  .views {
-    margin-bottom: 10px;
-    font-size: 12px;
+
+  .section-title {
+    font-size: 9px;
     color: #9f9f9f;
-  }
-  .views-body {
+    margin-bottom: 6px;
     display: flex;
     flex-direction: column;
-    padding: 7px;
-    background: rgba(70, 70, 70, 0.5);
-    border-radius: 8px;
   }
-  .views-edit {
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .view-btn {
+    background: #2a2a2a;
+    border: 1px solid #fff;
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+
+  .band-btn {
+    background: #2a2a2a;
+    border: 1px solid #fff;
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+
+  .button.active {
+    background: var(--blue-theme);
+    color: #fbf8f8;
+    font-weight: 400;
+  }
+
+  .slider-group {
+    margin-top: 12px;
+    padding: 0 0.3rem;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-bottom: 4px;
+    color: #aaa;
+  }
+
+  .legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #bbb;
+  }
+
+  .legend-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    color: #bdbdbd;
+    gap: 3px;
   }
 
-  /* Mobile responsive styles */
-  @media screen and (max-width: 860px) {
-    .filters-control.align-start {
-      min-height: 130px !important;
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot.available {
+    background: #00c853;
+  }
+  .dot.sold {
+    background: #d50000;
+  }
+  .dot.hold {
+    background: #00bcd4;
+  }
+
+  .showall {
+    text-align: center;
+  }
+
+  .toggle-btn {
+    background: #2a2a2a;
+    color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 6px; /* compact button */
+    font-size: 14px;
+  }
+
+  .toggle-btn.active {
+    background: linear-gradient(180deg, #4391a5 0%, #245663 100%);
+    font-weight: 400;
+  }
+
+  /* Tablet styles (861px - 1080px) */
+  @media screen and (min-width: 861px) and (max-width: 1080px) {
+    .filters-container {
+      width: 100%;
+      max-width: 200px;
+      padding: 0.7rem 8px;
     }
 
-    .available-title {
-      font-size: 7px;
-      margin-top: 0px;
+    .units-header {
+      font-size: 11px;
     }
 
-    .button-group {
-      margin-top: 4px;
-      margin-bottom: 11px;
+    .bhk-buttons {
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
     }
 
-    .button-group button {
+    .bhk-btn {
+      padding: 4px 6px;
+      min-height: 28px;
+      font-size: 10px;
+    }
+
+    .section {
+      margin-top: 10px;
+    }
+
+    .section-title {
       font-size: 8px;
-      padding: 2px 4px !important;
+      margin-bottom: 5px;
     }
 
     .slider-group {
-      margin-bottom: 8px;
-      margin-top: 0.5rem;
-      padding: 0 7px;
+      margin-top: 10px;
+      padding: 0 0.25rem;
     }
 
-    .slider-group__title {
-      font-size: 8px;
-      line-height: 10px;
-    }
-
-    .slider-group__body--prices {
-      font-size: 6px;
-      line-height: 8px;
-      margin: 4px 0;
-    }
-
-    .el-showall {
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-
-    .el-showall__button {
+    .slider-labels {
       font-size: 9px;
-      padding: 3px 5px !important;
+      margin-bottom: 4px;
     }
-    .rc-slider-handle {
-      width: 10px;
-      height: 10px;
-      margin-top: -4px;
+
+    .toggle-btn {
+      padding: 5px;
+      font-size: 12px;
+      min-height: 28px;
+    }
+  }
+
+  /* Mobile styles (max-width: 860px) */
+  @media screen and (max-width: 860px) {
+    .filters-container {
+      width: 100%;
+      max-width: 50%;
+      padding: 0.3rem 4px;
+      border-radius: 3px;
+    }
+
+    .units-header {
+      font-size: 7px;
+      margin-bottom: 0.15rem;
+    }
+
+    .bhk-buttons {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .bhk-btn {
+      padding: 2px 3px;
+      min-height: 18px;
+      font-size: 6px;
+      margin-right: 0;
+      border-radius: 3px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .section {
+      margin-top: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 6px;
+      margin-bottom: 2px;
+    }
+
+    .button-group {
+      gap: 2px;
+    }
+
+    .view-btn,
+    .band-btn {
+      padding: 2px 3px;
+      font-size: 5px;
+      min-height: 14px;
+      border-radius: 3px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .slider-group {
+      margin-top: 0.3rem;
+      padding: 0 0.15rem;
+    }
+
+    .slider-labels {
+      font-size: 5px;
+      margin-bottom: 2px;
+    }
+
+    .legend {
+      font-size: 5px;
+    }
+
+    .dot {
+      width: 3px;
+      height: 3px;
     }
     .rc-slider {
-      height: 2px;
+      width: 90% !important;
+      margin: 0 auto !important;
+    }
+    .rc-slider-handle {
+      width: 10px !important;
+      height: 10px !important;
+      border-radius: 50% !important;
+      background: var(--blue-theme) !important;
+      border: 2px solid var(--blue-theme) !important;
+      margin-top: -4px !important;
+    }
+
+    .rc-slider-step {
+      height: 2px !important;
     }
     .rc-slider-track {
-      height: 2px;
+      height: 2px !important;
     }
     .rc-slider-rail {
-      height: 2px;
-    }
-  }
-
-  /* Medium screen responsive styles (860px - 1080px) */
-  @media screen and (min-width: 861px) and (max-width: 1080px) {
-    .filters-control.align-start {
-      min-height: 180px !important;
+      height: 2px !important;
     }
 
-    .available-title {
-      font-size: 11px;
-      margin-top: 7px;
-    }
-
-    .button-group {
-      margin-top: 8px;
-      margin-bottom: 15px;
-    }
-
-    .button-group button {
-      font-size: 12px;
-      padding: 4px 7px !important;
-    }
-
-    .slider-group {
-      margin-bottom: 20px;
-      margin-top: 0.8rem;
-      padding: 0 10px;
-    }
-
-    .slider-group__title {
-      font-size: 11px;
-      line-height: 14px;
-    }
-
-    .slider-group__body--prices {
-      font-size: 12px;
-      line-height: 15px;
-      margin: 6px 0;
-    }
-
-    .el-showall {
-      margin-top: 10px;
-      margin-bottom: 6px;
-    }
-
-    .el-showall__button {
-      font-size: 12px;
-      padding: 5px 8px !important;
+    .toggle-btn {
+      padding: 2px;
+      font-size: 6px;
+      min-height: 14px;
+      border-radius: 3px;
+      -webkit-tap-highlight-color: transparent;
     }
   }
 `;

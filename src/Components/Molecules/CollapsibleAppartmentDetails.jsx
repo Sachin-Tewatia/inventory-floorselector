@@ -16,7 +16,7 @@ function CollapsibleAppartmentDetails({
     var body = bodyRef.current;
     if (body) {
       // Set dynamic height based on content
-      body.style.height = body.scrollHeight + "px";
+      body.style.height = (body.scrollHeight- 15 )+ "px";
     }
   }, [isOpen, children]);
 
@@ -102,7 +102,7 @@ const Style = styled.div`
   position: absolute;
   top: 6.5rem; /* top: 7rem; // initialy 130px */
   /* left: 14rem; // initialy 2rem */
-  left: 5rem;
+  left: 1rem;
   /* margin-top: 6rem; */
   display: flex;
   flex-direction: column;
