@@ -1,9 +1,11 @@
-/* Chat Container */
+/* Chat Container - compact width for last-2-messages view */
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 92%;
+    height: auto;
     width: 100%;
+    max-width: 280px;
+    /* min-height: 180px; */
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 12px;
@@ -143,12 +145,13 @@
     height: 14px;
 }
 
-/* Messages Area */
+/* Messages Area - compact for last 2 messages */
 .chat-messages {
-    flex: 1;
+    flex: 0 1 auto;
+    max-height: 200px;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 12px 10px;
+    padding:5px 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -384,13 +387,13 @@
     transform: scale(0.95);
 }
 
-/* Chat Widget Container */
+/* Chat Widget Container - compact for last-2-messages view */
 .chat-widget-container {
     position: fixed;
-    bottom: 30px;
+    bottom: 70px;
     right: 24px;
-    width: 320px;
-    height: 520px;
+    width: 280px;
+    /* height: 360px; */
     max-height: calc(100vh - 100px);
     z-index: 9998;
     opacity: 0;

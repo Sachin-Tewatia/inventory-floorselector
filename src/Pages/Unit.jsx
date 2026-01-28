@@ -135,11 +135,6 @@ function Unit() {
       <Navigator
         className="navigator"
         prevPages={[
-          // { title: "Delhi", path: "" },
-          // {
-          //   title: "Dwarka Expressway",
-          //   path: "",
-          // },
           {
             title: "Inspire",
             path: "/inspire",
@@ -226,15 +221,7 @@ function Unit() {
           src={`/up_arrow.svg`}
         />
       </button> */}
-      {isDuplex(tower, floor, unit_number) &&
-       (
-          <button
-            className="absolute bottom-[1rem] rounded-md right-[100px] cursor-pointer z-10  bg-[#363636] text-white px-4 py-2 "
-            onClick={handleUpperClick}
-          >
-            {upperUnit==11 ? "Upper" : "Lower"}
-          </button>
-        )}
+
       <Zoomable>
         <Flat
           // src={`${getTowerNumberForFlat(tower,floor).toLowerCase()}/${getFloorType(tower, upperUnit)}/${unit_number.toLowerCase()}`}
@@ -244,13 +231,6 @@ function Unit() {
           buttonClicked={buttonClicked}
           imageAnimation={imageAnimation}
         />
-        {/* /1/type2a/1.webp
-        [2,3,4,5,6,7,8,9,10].includes(upperUnit) && (
-          return 2
-
-          towerMao={
-            "T":"tyoe2"
-          } */}
       </Zoomable>
       {showVR && (
         <>

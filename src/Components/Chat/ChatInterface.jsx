@@ -278,7 +278,7 @@ const ChatInterface = () => {
       </div>
 
       <div className="chat-messages">
-        {messages.map((msg) => (
+        {messages.slice(-2).map((msg) => (
           <div key={msg.id} className={`message-wrapper ${msg.role}`}>
             <div className={`message ${msg.role}`}>
               <div className="message-content">{msg.content}</div>
