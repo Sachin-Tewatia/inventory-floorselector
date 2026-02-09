@@ -30,7 +30,7 @@ export const Explore = ({ active, onClick, unitDetails }) => {
         </div>
         <div className="row-line">
           <div className="left">
-            {Math.ceil(parseFloat(unitDetails?.bua))} {" Sq. Ft. of BUA"}
+            {Math.ceil(parseFloat(unitDetails?.area))} {" Sq. Ft. of area"}
           </div>
         </div>
         {/* <div className="row-line">

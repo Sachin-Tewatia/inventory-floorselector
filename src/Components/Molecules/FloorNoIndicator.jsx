@@ -97,7 +97,7 @@ export const FloorInfo = ({ exploreTop, floorData, tower }) => (
       </div>
       <div className="btn">Apartment No. {floorData?.unit_number} </div>
       <div className="btn" onclick={() => alert("ok")}>
-        {floorData?.bua} Sq. Ft.
+        {floorData?.area} Sq. Ft.
       </div>
       {/* <div className="btn" onclick={() => alert("ok")}>
           {`₹ ${getFormalCurrencyFromNum(

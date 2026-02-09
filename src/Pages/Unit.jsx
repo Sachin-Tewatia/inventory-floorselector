@@ -56,6 +56,7 @@ function Unit() {
   const [showVR, setShowVR] = useState(false);
   const [imageAnimation, setImageAnimation] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { roomId } = useRoomId();
 
   const { unit: unitId } = useParams();
@@ -199,6 +200,17 @@ function Unit() {
           />
         </CollapsibleAppartmentDetails>
       </div>
+      <button
+        type="button"
+        className="compare-btn"
+        onClick={() =>
+          navigate("/inspire/compare", {
+            state: { currentUnit: unit, upperUnit },
+          })
+        }
+      >
+        Compare with another unit
+      </button>
       {/* <button
         className={`absolute bottom-[30%] rounded-md right-[100px] cursor-pointer z-10 bg-[#363636] `}
         onClick={handleNextImage}
@@ -256,6 +268,7 @@ function Unit() {
 export default Unit;
 
 const CarouselPageStyle = styled.section`
+  position: relative;
   background: #857A66;
   // background: linear-gradient(
   //   68deg,
@@ -298,6 +311,27 @@ const CarouselPageStyle = styled.section`
     top: 7rem;
     left: 2rem;
     /* right: 100%; */
+  }
+
+  .compare-btn {
+    position: absolute;
+    right:11em;
+    bottom: 1rem;
+    z-index: 10;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--background_panel);
+    backdrop-filter: var(--background_panel_blur);
+    opacity: 0.8;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .compare-btn:hover {
+    opacity: 0.9;
   }
 
   .zoom-control {

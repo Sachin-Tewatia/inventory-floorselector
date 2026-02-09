@@ -212,7 +212,7 @@ function PaymentSuccess() {
             </tr>
             <tr>
               <td width="60%" align="left" bgcolor="#2A2A2A">
-                BUA
+                Area
               </td>
               <td width="40%" align="left" bgcolor="#2A2A2A">
                 {bookingDetails.area} Sq. Ft.

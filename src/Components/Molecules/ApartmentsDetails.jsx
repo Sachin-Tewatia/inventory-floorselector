@@ -62,9 +62,9 @@ function ApartmentsDetails({ selectedUnit, onVRClick, showVRBtn = false }) {
                     </div>
 
                     <div className="feature">
-                      <div className={`left `}>Total BUA</div>
+                      <div className={`left `}>Area</div>
                       <div className="right">
-                        {Math.ceil(parseFloat(unitDetails?.bua))} Sq. Ft.
+                        {Math.ceil(parseFloat(unitDetails?.area))} Sq. Ft.
                       </div>
                     </div>
 

@@ -52,7 +52,7 @@ const MultiForm = ({
         return (
           validateText(values?.firstName) &&
           validateText(values?.lastName) &&
-          validateMobileNumber(values?.phone) &&
+          validateMobileNumber(values?.phone, values?.phone_code || '+91') &&
           validateEmail(values?.email)
         );
       case 1:
@@ -156,13 +156,14 @@ const MultiForm = ({
         ref={sliderRef}
         dotPosition="right"
       >
-        {forms.map((Form, index) =>
-          index == currentStep ? (
-            <Form values={values} setValues={setValues} />
+        {forms.map((Form, index) => {
+          const isVisibleStep = index === Math.min(currentStep, forms.length - 1);
+          return isVisibleStep ? (
+            <Form key={index} values={values} setValues={setValues} />
           ) : (
-            <Form values={{}} setValues={() => { }} />
-          )
-        )}
+            <Form key={index} values={{}} setValues={() => { }} />
+          );
+        })}
         {/* <RMForm values={values} setValues={setValues} /> */}
         {/* <div className="inactive-form"></div> */}
         {/* <ReviewBooking

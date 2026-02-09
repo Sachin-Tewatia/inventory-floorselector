@@ -10,6 +10,7 @@ import {
   validateMobileNumber,
   validatePan,
   validateText,
+  getPhoneMaxLength,
 } from "./formValidator";
 import { generateOtp, getOtpStatus, resendOtp, verifyOtp } from "../../APIs";
 import { useContext } from "react";
@@ -90,13 +91,13 @@ export const CustomerForm = ({ values, setValues }) => {
             <input
               className={`${validateText(values?.firstName) ? "valid" : ""}`}
               type="text"
-              regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
               name="first_name"
               placeholder=""
-              onChange={(e) =>
-                setValues((prev) => ({ ...prev, firstName: e.target.value }))
-              }
-              value={values.firstName}
+              onChange={(e) => {
+                const v = e.target.value.replace(/[^A-Za-z\s\-']/g, '');
+                setValues((prev) => ({ ...prev, firstName: v }));
+              }}
+              value={values.firstName ?? ''}
               required={true}
             />
           </label>
@@ -107,13 +108,13 @@ export const CustomerForm = ({ values, setValues }) => {
             <input
               className={`${values.lastName && validateText(values?.lastName) ? "valid" : ""}`}
               type="text"
-              regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
               name="last_name"
               placeholder=""
-              onChange={(e) =>
-                setValues((prev) => ({ ...prev, lastName: e.target.value }))
-              }
-              value={values.lastName}
+              onChange={(e) => {
+                const v = e.target.value.replace(/[^A-Za-z\s\-']/g, '');
+                setValues((prev) => ({ ...prev, lastName: v }));
+              }}
+              value={values.lastName ?? ''}
               required={true}
             />
           </label>
@@ -148,8 +149,12 @@ export const CustomerForm = ({ values, setValues }) => {
                 <select
                   name="phone_code"
                   id="booking_form_phone_code"
-                  className={`${validateMobileNumber(values.phone) ? "valid" : ""
-                    }`}
+                  className={`${validateMobileNumber(values.phone, values.phone_code) ? "valid" : ""}`}
+                  value={values.phone_code ?? '+91'}
+                  onChange={(e) => {
+                    const code = e.target.value;
+                    setValues((prev) => ({ ...prev, phone_code: code }));
+                  }}
                 >
                   <option value="+91">+91</option>
                   <option value="+971">+971</option>
@@ -158,18 +163,19 @@ export const CustomerForm = ({ values, setValues }) => {
                 </select>
               </div>{" "}
               <input
-                className={`${validateMobileNumber(values.phone) ? "valid" : ""
-                  }`}
-                type="text"
+                className={`${validateMobileNumber(values.phone, values.phone_code) ? "valid" : ""}`}
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel-national"
                 name="phone_number"
                 placeholder=""
+                maxLength={getPhoneMaxLength(values.phone_code)}
                 onChange={(e) => {
-                  setValues((prev) => ({ ...prev, phone: e.target.value }));
-                  return validateMobileNumber(e.target.value)
-                    ? setPhoneNumber(e.target.value)
-                    : null;
+                  const v = e.target.value.replace(/\D/g, '');
+                  setValues((prev) => ({ ...prev, phone: v }));
+                  if (validateMobileNumber(v, values.phone_code ?? '+91')) setPhoneNumber(v);
                 }}
-                value={values.phone}
+                value={values.phone ?? ''}
                 style={{ marginTop: "7px" }}
                 required={true}
               />
@@ -269,19 +275,16 @@ export const CustomerForm = ({ values, setValues }) => {
       <div className="form-row">
         <div className="input-group">
           <label className="input-group-label">
-            <span className="title">Channel Partner*</span>{" "}
+            <span className="title">Channel Partner</span>{" "}
             <input
               type="text"
-              regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
               name="partner_details"
               placeholder=""
-              onChange={(e) =>
-                setValues((prev) => ({
-                  ...prev,
-                  partner_details: e.target.value,
-                }))
-              }
-              value={values.partner_details}
+              onChange={(e) => {
+                const v = e.target.value.replace(/[^A-Za-z\s\-'.]/g, '');
+                setValues((prev) => ({ ...prev, partner_details: v }));
+              }}
+              value={values.partner_details ?? ''}
               required={true}
             />
             {/* <Select
@@ -299,18 +302,17 @@ export const CustomerForm = ({ values, setValues }) => {
         </div>{" "}
         <div className="input-group">
           <label className="input-group-label">
-            <span className="title">RM (Saleperson)*</span>{" "}
+            <span className="title">RM (Saleperson)</span>{" "}
             <input
               type="text"
-              regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
               name="rm_name"
               placeholder={values.rm_name}
-              onChange={(e) =>
-                setValues((prev) => ({ ...prev, rm_name: e.target.value }))
-              }
-              value={values.rm_name}
+              onChange={(e) => {
+                const v = e.target.value.replace(/[^A-Za-z\s\-'.]/g, '');
+                setValues((prev) => ({ ...prev, rm_name: v }));
+              }}
+              value={values.rm_name ?? ''}
               required={true}
-            // disabled={true}
             />
           </label>
         </div>
@@ -364,17 +366,19 @@ export const RMForm = ({ values, setValues, onValid }) => {
             <span className="title">Cheque or Ref No.</span> <br />
             <input
               type="text"
-              regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
+              inputMode="numeric"
               name="ref_or_cheque"
               placeholder=""
+              maxLength={6}
               className={`${validateCheque(values?.ref_or_cheque) ? "valid" : ""}`}
-              onChange={(e) =>
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, '').slice(0, 6);
                 setValues((prev) => ({
                   ...prev,
-                  ref_or_cheque: e.target.value,
-                }))
-              }
-              value={values.checkDetails}
+                  ref_or_cheque: v,
+                }));
+              }}
+              value={values.ref_or_cheque ?? values.checkDetails ?? ''}
             />
           </label>
         </div>
@@ -424,7 +428,6 @@ export const RMForm = ({ values, setValues, onValid }) => {
         <div className="input-group">
           <DocUploader
             title={"Upload Cheque (if available)"}
-            // onChange={(e) => console.log(e)}
             onChange={(e) => setValues((prev) => ({ ...prev, cheque_pic: e }))}
           />
         </div>
@@ -542,20 +545,20 @@ export const KYCForm = ({ values, setValues, onValid }) => {
           <label className="input-group-label">
             <span className="title">Aadhar Number</span>{" "}
             <input
-              type="number"
-              regex="/^[0-9]{0,12}$/"
+              type="text"
+              inputMode="numeric"
               name="aadhar_number1"
               placeholder=""
-              maxLength="12"
+              maxLength={12}
               className={`${validateAadhaar(values?.kyc?.aadhar_number1) ? "valid" : ""}`}
-              onChange={(e) =>
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, '').slice(0, 12);
                 setValues((prev) => ({
                   ...prev,
-                  kyc: { ...prev.kyc, aadhar_number1: e.target.value },
-                }))
-              }
-              value={values.kyc?.aadhar_number1}
-            // required={true}
+                  kyc: { ...prev.kyc, aadhar_number1: v },
+                }));
+              }}
+              value={values.kyc?.aadhar_number1 ?? ''}
             />
           </label>
         </div>
@@ -572,17 +575,18 @@ export const KYCForm = ({ values, setValues, onValid }) => {
             <span className="title">Pan Number</span>{" "}
             <input
               type="text"
-              regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
               name="pan_number1"
               placeholder=""
+              maxLength={10}
               className={`${validatePan(values?.kyc?.pan_number1) ? "valid" : ""}`}
-              onChange={(e) =>
+              onChange={(e) => {
+                const v = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 10);
                 setValues((prev) => ({
                   ...prev,
-                  kyc: { ...prev.kyc, pan_number1: e.target.value },
-                }))
-              }
-              value={values.kyc?.pan_number1}
+                  kyc: { ...prev.kyc, pan_number1: v },
+                }));
+              }}
+              value={values.kyc?.pan_number1 ?? ''}
             />
           </label>
         </div>
@@ -601,18 +605,20 @@ export const KYCForm = ({ values, setValues, onValid }) => {
               <label className="input-group-label">
                 <span className="title">Aadhar Number</span>{" "}
                 <input
-                  type="number"
-                  regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
+                  type="text"
+                  inputMode="numeric"
                   name="aadhar_number2"
                   placeholder=""
-                  maxLength="12"
-                  onChange={(e) =>
+                  maxLength={12}
+                  className={`${validateAadhaar(values?.kyc?.aadhar_number2) ? "valid" : ""}`}
+                  onChange={(e) => {
+                    const v = e.target.value.replace(/\D/g, '').slice(0, 12);
                     setValues((prev) => ({
                       ...prev,
-                      kyc: { ...prev.kyc, aadhar_number2: e.target.value },
-                    }))
-                  }
-                  value={values.kyc?.aadhar_number2}
+                      kyc: { ...prev.kyc, aadhar_number2: v },
+                    }));
+                  }}
+                  value={values.kyc?.aadhar_number2 ?? ''}
                 />
               </label>
             </div>
@@ -632,16 +638,18 @@ export const KYCForm = ({ values, setValues, onValid }) => {
                 <span className="title">Pan Number</span>{" "}
                 <input
                   type="text"
-                  regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
                   name="pan_number2"
                   placeholder=""
-                  onChange={(e) =>
+                  maxLength={10}
+                  className={`${validatePan(values?.kyc?.pan_number2) ? "valid" : ""}`}
+                  onChange={(e) => {
+                    const v = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 10);
                     setValues((prev) => ({
                       ...prev,
-                      kyc: { ...prev.kyc, pan_number2: e.target.value },
-                    }))
-                  }
-                  value={values.kyc?.pan_number2}
+                      kyc: { ...prev.kyc, pan_number2: v },
+                    }));
+                  }}
+                  value={values.kyc?.pan_number2 ?? ''}
                 />
               </label>
             </div>

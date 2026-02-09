@@ -10,7 +10,7 @@ import CollapsiblePanel from "../Components/Molecules/CollapsiblePanel";
 import UnitTypeFilter from "../Components/Molecules/UnitTypeFilter";
 import { TowerSvg } from "../Data/TowerSvg";
 import Navigator from "../Components/Molecules/Navigator";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Amenities from "../Components/Atoms/Amenities";
 import TowerName from "../Components/Atoms/TowerName";
 import ExploreTowers from "../Components/Molecules/ExploreTowers";
@@ -25,11 +25,12 @@ import ReraNumber from "../Components/Molecules/ReraNumber";
 import Filters from "../Components/Molecules/Filters";
 import VrHome from "./VrHome";
 import { useRoomId } from "../Hooks/useRoomId";
-import { emitSync, SYNC_EVENTS, getReceivingSync } from "../services/socketSync";
+import { emitSync, SYNC_EVENTS, getReceivingSync, cancelSyncDebounce } from "../services/socketSync";
 import { useOverlayVisibilitySync } from "../Hooks/useOverlayVisibilitySync";
 
 function Tower(props) {
   const { tower } = useParams();
+  const location = useLocation();
   const [showOverlays, setShowOverlays] = useState(true);
   const navigate = useNavigate();
     const invalidTowers = ['cluster1', 'cluster2', 'cluster3', 'cluster4', 'cluster12', 'cluster13', 'cluster14'];
@@ -68,18 +69,23 @@ function Tower(props) {
   }, [navigate]);
 
   const minMaxArea = getMinMaxSBUInCombinedTowers(tower);
-
-  useEffect(() => {
-    setFlatFilterSizeValues(minMaxArea);
-    setActiveMapFilterIds([...unitTypeFilters.map((filter) => filter.id)]);
-  }, [tower]);
-
   const unitTypeFilters = getAllUnitTypesInCombinedTowers(tower).map(
     (type) => ({
       title: type,
       id: type,
     })
   );
+
+  useEffect(() => {
+    cancelSyncDebounce(SYNC_EVENTS.FILTERS);
+    const newFilters = unitTypeFilters.map((f) => f.id);
+    setFlatFilterSizeValues(minMaxArea);
+    setActiveMapFilterIds(newFilters);
+    if (!getReceivingSync() && roomId) {
+      emitSync(SYNC_EVENTS.FILTERS, { pathname: location.pathname, activeMapFilterIds: newFilters, flatFilterSizeValues: minMaxArea }, roomId);
+    }
+  }, [tower]);
+
   return (
     <Style>
       <Navigator
@@ -110,7 +116,7 @@ function Tower(props) {
         filter
       />
       {/* <UnitStatusLegend /> */}
-      {/* <div className="left-panels">
+      <div className="left-panels">
         <CollapsiblePanel className="filters" title={"Filters"}>
           <UnitTypeFilter
             minMaxArea={minMaxArea}
@@ -118,7 +124,7 @@ function Tower(props) {
             totalUnits={getAllUnitsInCombinedTowers(tower).length}
           />
         </CollapsiblePanel>
-      </div> */}
+      </div>
       <ExploreTowers currentTower={tower} />
       {/* <FloorSelector /> */}
       <div className="right-btn-group absolute flex gap-2  z-10 right-0 top-0">

@@ -86,10 +86,14 @@ function BookNow({
   const { user } = useContext(AppContext);
   const [values, setValues] = useState({
     firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    phone_code: "+91",
     unit_id: unitDetails?.id,
     rm_name: "",
     partner_details: "",
-    area: unitDetails?.bua,
+    area: unitDetails?.area,
     totalOwners: 1,
     tcb: "",
     kyc: {
@@ -160,11 +164,11 @@ function BookNow({
     }
   };
 
-  const Review = () => (
+  const Review = ({ values: reviewValues }) => (
     <ReviewBooking
-      bookingDetails={values}
-      onEdit={() => console.log(0)}
-      onBookingSuccess={() => console.log(4)}
+      bookingDetails={reviewValues ?? values}
+      onEdit={() => handleStepChange(0)}
+      onBookingSuccess={handleDetailsFilledSuccess}
     />
   );
 
@@ -206,10 +210,10 @@ function BookNow({
               )}
               {
                 <span className="">
-                  <span className="title ">Total BUA:</span>{" "}
+                  <span className="title ">Area:</span>{" "}
                   <span className="area svelte-wv78a7">
                     <span className="desc-value">
-                      {Number(unitDetails?.bua).toFixed(2)}
+                      {Number(unitDetails?.area).toFixed(2)}
                     </span>
                   </span>{" "}
                   <span className="area-change svelte-wv78a7">Sq. Ft.</span>
@@ -241,9 +245,7 @@ function BookNow({
             <MultiForm
               className="enquiry-form"
               sliderRef={sliderRef}
-              // forms={[CustomerForm, KYCForm, Review, RMForm]}
-              // forms={[CustomerForm, KYCForm, AddOnForm, RMForm]}
-              forms={[CustomerForm, KYCForm, RMForm]}
+              forms={[CustomerForm, KYCForm, RMForm, Review]}
               RMForm={RMForm}
               values={values}
               setValues={setValues}
@@ -354,6 +356,10 @@ const Style = styled.main`
   input[type="password"]:-webkit-autofill:hover,
   input[type="password"]:-webkit-autofill:focus,
   input[type="password"]:-webkit-autofill:active,
+  input[type="tel"]:-webkit-autofill,
+  input[type="tel"]:-webkit-autofill:hover,
+  input[type="tel"]:-webkit-autofill:focus,
+  input[type="tel"]:-webkit-autofill:active,
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus,
@@ -450,6 +456,7 @@ const Style = styled.main`
   input[type="number"],
   input[type="email"],
   input[type="password"],
+  input[type="tel"],
   select,
   textarea {
     background: var(--input_background);
@@ -471,6 +478,8 @@ const Style = styled.main`
     max-width: 400px;
     input {
       width: 100%;
+      background: var(--input_background);
+      color: var(--color_back);
     }
   }
 
@@ -810,6 +819,7 @@ const Style = styled.main`
   input[type="number"],
   input[type="email"],
   input[type="password"],
+  input[type="tel"],
   select,
   textarea {
     background: var(--input_background);
@@ -832,6 +842,7 @@ const Style = styled.main`
   input[type="number"],
   input[type="email"],
   input[type="password"],
+  input[type="tel"],
   select,
   textarea {
     background: var(--input_background);
@@ -1018,6 +1029,7 @@ const Style = styled.main`
     input[type="number"],
     input[type="email"],
     input[type="password"],
+    input[type="tel"],
     select,
     textarea {
       padding: 5px 8px !important;
@@ -1025,6 +1037,8 @@ const Style = styled.main`
       margin-top: 3px !important;
       border-radius: 3px !important;
       max-width: 100% !important;
+      background: var(--input_background) !important;
+      color: var(--color_back) !important;
     }
 
     .input-group input {

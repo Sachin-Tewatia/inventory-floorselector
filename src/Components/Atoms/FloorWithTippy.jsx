@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { getSVGID } from "../../Utility/function";
 import { getTowerFromCombinedTowersAndIndex } from "../../Utility/Constants";
 import { useInventories } from "../../Hooks";
+import { useMapFilter } from "../../Hooks";
 import { useRoomId } from "../../Hooks/useRoomId";
 import { emitSync, SYNC_EVENTS, getReceivingSync } from "../../services/socketSync";
 import { useTippyShowSync } from "../../Hooks/useTippyShowSync";
@@ -26,6 +27,8 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
   const location = useLocation();
   const clickTimers = useRef({});
   const { getUnitById } = useInventories();
+  const { flatFilterSizeValues } = useContext(AppContext);
+  const { activeMapFilterIds } = useMapFilter();
   const { inventoryRefreshTrigger } = useContext(AppContext);
   const { roomId } = useRoomId();
   const roomIdRef = useRef(roomId);
@@ -44,6 +47,14 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
   const extractTowerNumber = (towerString) => {
     const match = towerString.match(/\d+/);
     return match ? match[0] : "";
+  };
+
+  const isFloorActive = (towerName, area, unitType) => {
+    if (!flatFilterSizeValues || flatFilterSizeValues.length < 2) return true;
+    if (!activeMapFilterIds?.includes(unitType)) return false;
+    if (!(area <= flatFilterSizeValues[1] && area >= flatFilterSizeValues[0]))
+      return false;
+    return true;
   };
 
   const emitSyncEvent = (eventType, data) => {
@@ -79,9 +90,8 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
       for (const floor of floors) {
         if (!floor) continue;
 
-        floor.classList.remove("available", "sold", "hold", "mixed", "blocked");
-        floor.classList.add("active");
-        floor.style.setProperty('pointer-events', 'all', 'important');
+        floor.classList.remove("available", "sold", "hold", "mixed", "blocked", "active");
+        floor.style.setProperty('pointer-events', 'none', 'important');
         if (floor._tippy) floor._tippy.destroy();
 
         const unitID = `${towerCode}_${floor.id}`;
@@ -90,6 +100,18 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
           floor.style.display = 'none';
           continue;
         }
+
+        const area = flatDetails?.area ?? flatDetails?.area ?? 0;
+        const unitType = flatDetails?.unit_type || "";
+        const passesFilter = isFloorActive(currentTower, area, unitType);
+
+        if (!passesFilter) {
+          floor.style.display = 'none';
+          continue;
+        }
+
+        floor.classList.add("active");
+        floor.style.setProperty('pointer-events', 'all', 'important');
         floor.style.display = '';
         const floorNo = flatDetails?.floor;
         if (flatDetails?.status) floor.classList.add(flatDetails.status);
@@ -233,7 +255,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
       });
       clickTimers.current = {};
     };
-  }, [floorsData, tower, rotation, location.pathname, onFloorClick, isTouchDevice, inventoryRefreshTrigger]);
+  }, [floorsData, tower, rotation, location.pathname, onFloorClick, isTouchDevice, inventoryRefreshTrigger, flatFilterSizeValues, activeMapFilterIds]);
 
   const retryUntilReady = (fn, maxAttempts = 20) => {
     const attempt = (count = 0) => {

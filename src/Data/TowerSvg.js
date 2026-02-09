@@ -79,8 +79,8 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
   };
 
   const isFloorActive = (tower, area, unit_type) => {
+    if (!flatFilterSizeValues || flatFilterSizeValues.length < 2) return true;
     if (!activeMapFilterIds.includes(unit_type)) return false;
-
     if (!(area <= flatFilterSizeValues[1] && area >= flatFilterSizeValues[0]))
       return false;
     return true;

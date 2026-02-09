@@ -15,6 +15,7 @@ import { useBookings } from "./Hooks/booking";
 import Bookings from "./Pages/Bookings";
 import Users from "./Dashboard/Users";
 import Unit from "./Pages/Unit";
+import UnitCompare from "./Pages/UnitCompare";
 import VRTour from "./Pages/VRTour";
 // import PaymentSuccess from "./Pages/PaymentSuccess";
 import PaymentSuccess from "./Components/Moecules/PaymentSuccess";
@@ -206,6 +207,10 @@ function Router(props) {
 
             // </AdminOnlyPage>
           }
+        />
+        <Route
+          path="/inspire/compare"
+          element={<UnitCompare />}
         />
         <Route
           path="/inspire/vr-tour"

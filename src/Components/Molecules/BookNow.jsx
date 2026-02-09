@@ -4,6 +4,12 @@ import { CloseButton } from "../../Data/images/EnquireNowPopupSvgs";
 import Price from "../Atoms/Price";
 import { Select } from "antd";
 import { CHANNEL_PARTNER_LIST } from "../../Data/channelPartners";
+import {
+  validateText,
+  validateEmail,
+  validateMobileNumber,
+  getPhoneMaxLength,
+} from "../Moecules/formValidator";
 
 const RadioInput = ({ label, value, checked, setter }) => {
   return (
@@ -22,22 +28,20 @@ const RadioInput = ({ label, value, checked, setter }) => {
   );
 };
 
-const validateEmail = (email) => {
-  return email.match(
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-};
-const validateName = (name) => {
-  return name.match(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/);
-};
-
 function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneCode, setPhoneCode] = useState("+91");
   const [channelPartner, setChannelPartner] = useState("");
   const ref = React.useRef();
+
+  const isFormValid =
+    validateText(firstName) &&
+    validateText(lastName) &&
+    validateEmail(email) &&
+    validateMobileNumber(phoneNumber, phoneCode);
 
   const handleFormSubmit = (userDetails) => {
     handleBooking(unitDetails.id, userDetails);
@@ -64,14 +68,13 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (!isFormValid) return;
                 setIsOpen(false);
                 handleFormSubmit({
-                  firstName: firstName,
-                  lastName: lastName,
-                  email: email,
-                  mobile:
-                    document.getElementById("booking_form_phone_code").value +
-                    phoneNumber,
+                  firstName,
+                  lastName,
+                  email,
+                  mobile: phoneCode + phoneNumber,
                   flatId: unitDetails.id,
                   channelPartner,
                 });
@@ -82,15 +85,15 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                 <div className="description-secondary svelte-tipeeb">
                   <span className="svelte-tipeeb">
                     <span className="title svelte-tipeeb">Unit Number:</span>{" "}
-                    {unitDetails?.FlatNumber}
+                    {unitDetails?.unit}
                   </span>{" "}
                   <span className="svelte-tipeeb">
                     <span className="title svelte-tipeeb">Unit Type:</span>{" "}
-                    {unitDetails?.UnitType}
+                    {unitDetails?.unit_type}
                   </span>{" "}
                   <span className="svelte-tipeeb">
                     <span className="title svelte-tipeeb">Total Area:</span>{" "}
-                    <span className="area svelte-wv78a7">{Math.ceil(parseFloat(unitDetails?.SBU))} </span>{" "}
+                    <span className="area svelte-wv78a7">{Math.ceil(parseFloat(unitDetails?.area))} </span>{" "}
                     <span className="area-change svelte-wv78a7">Sq. Ft.</span>
                   </span>{" "}
 
@@ -105,10 +108,13 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                     <span>First Name</span>{" "}
                     <input
                       type="text"
-                      regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
                       name="first_name"
                       placeholder=""
-                      onChange={(e) => setFirstName(e.target.value)}
+                      className={validateText(firstName) ? "valid" : ""}
+                      onChange={(e) => {
+                        const v = e.target.value.replace(/[^A-Za-z\s\-']/g, "");
+                        setFirstName(v);
+                      }}
                       value={firstName}
                     />
                   </label>
@@ -118,10 +124,13 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                     <span>Last Name</span>{" "}
                     <input
                       type="text"
-                      regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
                       name="last_name"
                       placeholder=""
-                      onChange={(e) => setLastName(e.target.value)}
+                      className={validateText(lastName) ? "valid" : ""}
+                      onChange={(e) => {
+                        const v = e.target.value.replace(/[^A-Za-z\s\-']/g, "");
+                        setLastName(v);
+                      }}
                       value={lastName}
                     />
                   </label>
@@ -135,6 +144,7 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                       name="email"
                       type="email"
                       placeholder=""
+                      className={validateEmail(email) ? "valid" : ""}
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
                     />
@@ -145,7 +155,12 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                     <span>Phone Number</span>
                     <div className="row">
                       <div className="code-input" style={{ marginRight: "5px" }}>
-                        <select name="phone_code" id="booking_form_phone_code">
+                        <select
+                          name="phone_code"
+                          id="booking_form_phone_code"
+                          value={phoneCode}
+                          onChange={(e) => setPhoneCode(e.target.value)}
+                        >
                           <option value="+91">+91</option>
                           <option value="+971">+971</option>
                           <option value="+973">+973</option>
@@ -154,10 +169,16 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                       </div>{" "}
                       <div className="phone-input">
                         <input
-                          type="text"
+                          type="tel"
+                          inputMode="numeric"
                           name="phone_number"
                           placeholder=""
-                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          maxLength={getPhoneMaxLength(phoneCode)}
+                          className={validateMobileNumber(phoneNumber, phoneCode) ? "valid" : ""}
+                          onChange={(e) => {
+                            const v = e.target.value.replace(/\D/g, "").slice(0, getPhoneMaxLength(phoneCode));
+                            setPhoneNumber(v);
+                          }}
                           value={phoneNumber}
                           style={{ marginTop: "7px" }}
                         />
@@ -181,7 +202,7 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                         .toLowerCase()
                         .includes(input.toLowerCase())
                     }
-                    options={CHANNEL_PARTNER_LIST}
+                    // options={CHANNEL_PARTNER_LIST}
                     onChange={(e) => setChannelPartner(e)}
                     value={channelPartner}
                   />
@@ -191,21 +212,14 @@ function BookNow({ isOpen, setIsOpen, unitDetails, handleBooking }) {
                 <div className="input-group payment-info">
                   Please pay the Blocking amount to Block your Unit. Please note
                   that the Unit will be blocked for 48 hours. To confirm your
-                  booking, please contact our Sales Team now - 1234567890.
+                  booking, please contact our Sales Team now - 
                 </div>
               </div>{" "}
               <div className="submit-btn svelte-tipeeb">
                 <button
-                  className={`button submit svelte-ynf51n ${validateName(firstName) &&
-                      validateName(lastName) &&
-                      validateEmail(email) &&
-                      phoneNumber.length === 10
-                      ? // &&
-                      // gender
-                      "enabled"
-                      : "disabled"
-                    } `}
-                  value=""
+                  type="submit"
+                  disabled={!isFormValid}
+                  className={`button submit svelte-ynf51n ${isFormValid ? "enabled" : "disabled"}`}
                   style={{ paddings: "5px 8px" }}
                 >
                   Block Now
@@ -272,6 +286,10 @@ const Style = styled.div`
   input[type="text"]:-webkit-autofill:hover,
   input[type="text"]:-webkit-autofill:focus,
   input[type="text"]:-webkit-autofill:active,
+  input[type="tel"]:-webkit-autofill,
+  input[type="tel"]:-webkit-autofill:hover,
+  input[type="tel"]:-webkit-autofill:focus,
+  input[type="tel"]:-webkit-autofill:active,
   input[type="number"]:-webkit-autofill,
   input[type="number"]:-webkit-autofill:hover,
   input[type="number"]:-webkit-autofill:focus,
@@ -296,6 +314,10 @@ const Style = styled.div`
     -webkit-text-fill-color: #bdbdbd !important;
     border: 1px solid #5f5f5f;
   }
+  input[type="tel"] {
+    background: var(--input_background, #2a2a2a) !important;
+    color: var(--color_back, #bdbdbd) !important;
+  }
   input[type="radio"]:checked + .fake-radio + span {
     color: var(--input_radio_checked_color);
   }
@@ -319,6 +341,10 @@ const Style = styled.div`
   }
   .input-group input {
     margin-top: 5px;
+  }
+  input.valid,
+  input[type="tel"].valid {
+    border-color: #0ad476dd !important;
   }
 
   input[type="radio"] {

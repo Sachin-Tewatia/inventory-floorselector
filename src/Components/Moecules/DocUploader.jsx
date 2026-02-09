@@ -7,19 +7,32 @@ import { Image, message } from "antd";
 import { useEffect } from "react";
 import { useId } from "react";
 
+// JPG, PDF, PNG only for all document uploads (Aadhar, Pan, Cheque)
+const ALLOWED_DOC_TYPES = ["application/pdf", "image/png", "image/jpeg"];
+const ALLOWED_DOC_EXTENSIONS = [".pdf", ".png", ".jpg", ".jpeg"];
+const ACCEPT_DOCS = ".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg";
+
 function DocUploader({ title, onChange, value }) {
   const id = useId();
 
   const [docs, setDocs] = useState([]);
 
-  const handleFileUpload = async (files) => {
-    //validate file type
+  const isAllowedFile = (file) => {
+    const byType = ALLOWED_DOC_TYPES.includes(file.type);
+    const name = (file.name || "").toLowerCase();
+    const byExt = ALLOWED_DOC_EXTENSIONS.some((ext) => name.endsWith(ext));
+    return byType || byExt;
+  };
 
-    for (const file of files)
-      if (!["application/pdf", "image/png", "image/jpeg"].includes(file.type)) {
-        message.error(`Invalid File Type : ${file.type}`);
+  const handleFileUpload = async (files) => {
+    for (const file of files) {
+      if (!isAllowedFile(file)) {
+        message.error(
+          "Only JPG, PDF and PNG are supported. Please upload a valid file."
+        );
         return;
       }
+    }
 
     for (const file of files) {
       file.id = `${Date.now()}${Math.random()}`;
@@ -64,8 +77,7 @@ function DocUploader({ title, onChange, value }) {
           type="file"
           id={`file-uploader-${id}`}
           style={{ display: "none" }}
-          // regex="/[-!$%^&amp;*()_+|~=`{}\[\]:&quot;;'<>?,.\/0-9]/g"
-          placeholder=""
+          accept={ACCEPT_DOCS}
           onChange={(e) => handleFileUpload(e.target.files)}
         />
         <br />

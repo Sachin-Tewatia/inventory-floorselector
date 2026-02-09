@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { useMapFilter } from "../../Hooks";
 import { Range } from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -10,12 +11,19 @@ import { useRoomId } from "../../Hooks/useRoomId";
 import { SYNC_EVENTS, getReceivingSync, emitSyncDebounced } from "../../services/socketSync";
 
 function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters = [], tower, showBandFilter = false }) {
+  const location = useLocation();
   const { flatFilterSizeValues, setFlatFilterSizeValues } =
     useContext(AppContext);
   const { roomId } = useRoomId();
-console.log("minMaxArea", minMaxArea);
   const { activeMapFilterIds, isFilterActive, setActiveMapFilterIds } =
     useMapFilter();
+
+  const filtersSyncData = (overrides = {}) => ({
+    pathname: location.pathname,
+    activeMapFilterIds,
+    flatFilterSizeValues,
+    ...overrides,
+  });
 
   const isAllFiltersActive = () =>
     activeMapFilterIds.length == unitTypeFilters.length;
@@ -30,19 +38,11 @@ console.log("minMaxArea", minMaxArea);
       setActiveMapFilterIds(newFilters);
     }
 
-    // Sync filter changes if not receiving sync
-    if (!getReceivingSync() && roomId) {
-      emitSyncDebounced(SYNC_EVENTS.FILTERS, {
-        activeMapFilterIds: newFilters,
-        flatFilterSizeValues,
-      }, roomId, 100);
-    }
+    if (!getReceivingSync() && roomId) emitSyncDebounced(SYNC_EVENTS.FILTERS, filtersSyncData({ activeMapFilterIds: newFilters }), roomId, 100);
   };
 
   const handleFilterClick = (id) => {
     let newFilters;
-    
-    // Calculate newFilters before updating state to avoid race conditions
     if (isFilterActive(id)) {
       // should be deactivated
       if (isAllFiltersActive()) {
@@ -61,27 +61,12 @@ console.log("minMaxArea", minMaxArea);
     // Update state with the calculated newFilters
     setActiveMapFilterIds(newFilters);
     
-    // Sync filter changes if not receiving sync
-    // emitSyncDebounced already handles debouncing, so no need for setTimeout
-    if (!getReceivingSync() && roomId) {
-      emitSyncDebounced(SYNC_EVENTS.FILTERS, {
-        activeMapFilterIds: newFilters,
-        flatFilterSizeValues,
-      }, roomId, 100);
-    }
+    if (!getReceivingSync() && roomId) emitSyncDebounced(SYNC_EVENTS.FILTERS, filtersSyncData({ activeMapFilterIds: newFilters }), roomId, 100);
   };
 
-  //size handler
   const handleSizeOnSliderChange = (value) => {
     setFlatFilterSizeValues(value);
-
-    // Sync size filter changes with debouncing (since slider changes rapidly)
-    if (!getReceivingSync() && roomId) {
-      emitSyncDebounced(SYNC_EVENTS.FILTERS, {
-        activeMapFilterIds,
-        flatFilterSizeValues: value,
-      }, roomId, 300);
-    }
+    if (!getReceivingSync() && roomId) emitSyncDebounced(SYNC_EVENTS.FILTERS, filtersSyncData({ flatFilterSizeValues: value }), roomId, 300);
   };
 
   return (

@@ -5,6 +5,13 @@ import axios from "axios";
 import { baseURL, PROJECT_ID } from "../APIs";
 import { message, Select } from "antd";
 import { set } from "firebase/database";
+import {
+  validateText,
+  validateEmail,
+  validateMobileNumber,
+  getPhoneMaxLength,
+  validatePassword,
+} from "../Components/Moecules/formValidator";
 
 export const CloseButton = () => (
   <svg
@@ -44,18 +51,6 @@ const RadioInput = ({ label, value, checked, setter }) => {
   );
 };
 
-const validateEmail = (email) => {
-  return email.match(
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-};
-const validateName = (name) => {
-  return name.match(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/);
-};
-const validatePassowrd = (password) => {
-  return password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/);
-};
-
 function UserForm({
   isOpen,
   setIsOpen,
@@ -68,10 +63,19 @@ function UserForm({
   const [userLastName, setUserLastName] = useState("");
   const [emailUser, setEmailUser] = useState("");
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
+  const [phoneCode, setPhoneCode] = useState("+91");
   const [passwordUser, setPasswordUser] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [role, setRole] = useState("");
   const ref = React.useRef();
+
+  const isFormValid =
+    validateText(userFirstName) &&
+    validateText(userLastName) &&
+    validateEmail(emailUser) &&
+    validateMobileNumber(userPhoneNumber, phoneCode) &&
+    validatePassword(passwordUser) &&
+    !!role;
 
   const handleFormSubmit = async (userDetails) => {
     // let booking_details = isBooking ? { type: "booking" } : {};
@@ -110,20 +114,16 @@ function UserForm({
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (!isFormValid) return;
                 setIsOpen(false);
                 handleFormSubmit({
                   firstName: userFirstName,
                   lastName: userLastName,
                   email: emailUser,
-                  phone:
-                    document.getElementById("booking_form_phone_code").value +
-                    userPhoneNumber,
-                  role: role,
+                  phone: phoneCode + userPhoneNumber,
+                  role,
                   password: passwordUser,
                   employee_id: employeeId,
-                  // partner_details: partnerDetails,
-                  // rm_details: rmDetails,
-                  // ref_or_check: checkDetails,
                 });
               }}
             >
@@ -188,9 +188,13 @@ function UserForm({
                       type="text"
                       name="userFirstName"
                       placeholder=""
-                      onChange={(e) => setUserFirstName(e.target.value)}
+                      className={validateText(userFirstName) ? "valid" : ""}
+                      onChange={(e) => {
+                        const v = e.target.value.replace(/[^A-Za-z\s\-']/g, "");
+                        setUserFirstName(v);
+                      }}
                       value={userFirstName}
-                      required={true}
+                      required
                     />
                   </label>
                 </div>{" "}
@@ -201,9 +205,13 @@ function UserForm({
                       type="text"
                       name="userLastName"
                       placeholder=""
-                      onChange={(e) => setUserLastName(e.target.value)}
+                      className={validateText(userLastName) ? "valid" : ""}
+                      onChange={(e) => {
+                        const v = e.target.value.replace(/[^A-Za-z\s\-']/g, "");
+                        setUserLastName(v);
+                      }}
                       value={userLastName}
-                      required={true}
+                      required
                     />
                   </label>
                 </div>
@@ -216,9 +224,10 @@ function UserForm({
                       name="email"
                       type="email"
                       placeholder=""
+                      className={validateEmail(emailUser) ? "valid" : ""}
                       onChange={(e) => setEmailUser(e.target.value)}
                       value={emailUser}
-                      required={true}
+                      required
                     />
                   </label>
                 </div>{" "}
@@ -227,7 +236,12 @@ function UserForm({
                     <span className="title">Phone Number*</span>
                     <div className="row">
                       <div className="code-input" style={{ marginRight: "5px" }}>
-                        <select name="phone_code" id="booking_form_phone_code">
+                        <select
+                          name="phone_code"
+                          id="booking_form_phone_code"
+                          value={phoneCode}
+                          onChange={(e) => setPhoneCode(e.target.value)}
+                        >
                           <option value="+91">+91</option>
                           <option value="+971">+971</option>
                           <option value="+973">+973</option>
@@ -236,13 +250,19 @@ function UserForm({
                       </div>{" "}
                       <div className="phone-input">
                         <input
-                          type="text"
+                          type="tel"
+                          inputMode="numeric"
                           name="phone_number"
                           placeholder=""
-                          onChange={(e) => setUserPhoneNumber(e.target.value)}
+                          maxLength={getPhoneMaxLength(phoneCode)}
+                          className={validateMobileNumber(userPhoneNumber, phoneCode) ? "valid" : ""}
+                          onChange={(e) => {
+                            const v = e.target.value.replace(/\D/g, "").slice(0, getPhoneMaxLength(phoneCode));
+                            setUserPhoneNumber(v);
+                          }}
                           value={userPhoneNumber}
                           style={{ marginTop: "7px" }}
-                          required={true}
+                          required
                         />
                       </div>
                     </div>
@@ -257,12 +277,11 @@ function UserForm({
                       type="password"
                       name="password"
                       placeholder="Enter Password"
-                      regex="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/"
+                      className={validatePassword(passwordUser) ? "valid" : ""}
                       onChange={(e) => setPasswordUser(e.target.value)}
                       value={passwordUser}
-                      //   style={{ marginTop: "7px" }}
-                      required={true}
-                      autoComplete={false}
+                      required
+                      autoComplete="new-password"
                     />
                   </label>
                   <span>Contains 8 letters 'A-Z','a-z','1-9' and '$#&@'</span>
@@ -309,9 +328,9 @@ function UserForm({
               </div>{" "} */}
               <div className="submit-btn svelte-tipeeb">
                 <button
-                  className={`button submit svelte-ynf51n enable ${validatePassowrd(passwordUser) ? "" : "disabled"
-                    }`}
-                  value=""
+                  type="submit"
+                  disabled={!isFormValid}
+                  className={`button submit svelte-ynf51n ${isFormValid ? "enabled" : "disabled"}`}
                   style={{ paddings: "5px 8px" }}
                 >
                   Create User
@@ -378,6 +397,10 @@ background-color: red !important ;
   input[type="text"]:-webkit-autofill:hover,
   input[type="text"]:-webkit-autofill:focus,
   input[type="text"]:-webkit-autofill:active,
+  input[type="tel"]:-webkit-autofill,
+  input[type="tel"]:-webkit-autofill:hover,
+  input[type="tel"]:-webkit-autofill:focus,
+  input[type="tel"]:-webkit-autofill:active,
   input[type="number"]:-webkit-autofill,
   input[type="number"]:-webkit-autofill:hover,
   input[type="number"]:-webkit-autofill:focus,
@@ -425,6 +448,15 @@ background-color: red !important ;
   }
   .input-group input {
     margin-top: 5px;
+  }
+  input.valid,
+  input[type="tel"].valid,
+  input[type="password"].valid {
+    border-color: #0ad476dd !important;
+  }
+  input[type="tel"] {
+    background: var(--input_background, #2a2a2a) !important;
+    color: var(--color_back, #bdbdbd) !important;
   }
 
   input[type="radio"] {

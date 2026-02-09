@@ -25,17 +25,8 @@ export const SYNC_EVENTS = {
   PANEL_VISIBILITY: 'panelVisibility',
 };
 
-/**
- * Emit sync event with roomId from URL
- * @param {string} eventType - Type of sync event (use SYNC_EVENTS constants)
- * @param {object} data - Data to sync
- * @param {string} roomId - Optional room ID (uses current room if not provided)
- */
 export const emitSync = (eventType, data, roomId = null) => {
-  if (isReceivingSync) {
-    console.log('🔄 Skipping emit - currently receiving sync');
-    return;
-  }
+  if (isReceivingSync) return;
 
   const socket = getSocket();
   if (!socket || !socket.connected) {
@@ -51,43 +42,21 @@ export const emitSync = (eventType, data, roomId = null) => {
     return;
   }
 
-  const syncEvent = {
+  socket.emit("sync_event", {
     event: eventType,
-    rmId: targetRoomId, // Room ID from URL
-    sessionId: sessionStorage.getItem('sessionId') || `session_${Date.now()}`, // Optional session tracking
+    rmId: targetRoomId,
+    sessionId: sessionStorage.getItem('sessionId') || `session_${Date.now()}`,
     timestamp: Date.now(),
     data,
-  };
-  
-  console.log(`📤 Emitting sync event:`, {
-    type: eventType,
-    room: targetRoomId,
-    socketId: socket.id,
-    data
   });
-  
-  socket.emit("sync_event", syncEvent);
-  
-  console.log('✅ Sync event emitted successfully');
 };
 
-/**
- * Set receiving flag (to prevent circular updates)
- * @param {boolean} value - True if currently receiving sync, false otherwise
- */
 export const setReceivingSync = (value) => {
   isReceivingSync = value;
 };
 
-/**
- * Get receiving flag status
- * @returns {boolean} True if currently receiving sync
- */
 export const getReceivingSync = () => isReceivingSync;
 
-/**
- * Debounce helper for rapid sync events (like slider changes)
- */
 let debounceTimers = {};
 
 export const emitSyncDebounced = (eventType, data, roomId = null, delay = 300) => {
@@ -101,5 +70,12 @@ export const emitSyncDebounced = (eventType, data, roomId = null, delay = 300) =
     emitSync(eventType, data, roomId);
     delete debounceTimers[eventType];
   }, delay);
+};
+
+export const cancelSyncDebounce = (eventType) => {
+  if (debounceTimers[eventType]) {
+    clearTimeout(debounceTimers[eventType]);
+    delete debounceTimers[eventType];
+  }
 };
 
