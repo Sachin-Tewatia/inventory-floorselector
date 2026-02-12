@@ -92,27 +92,45 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
     const towerCode = getTowerCodeFromURL();
 
     for (const towerRef of towersRef) {
-      const towerId = getSVGID(towerRef.id);
-      const currentTower = getTowerFromCombinedTowersAndIndex(
-        tower,
-        parseInt(towerId) - 1
-      );
-
-      const floors = towerRef.children;
-
-      for (let i = 0; i < floors.length; i++) {
-        const floor = floors[i];
-        // Use the towerCode to construct the unit ID
-        const unitID = `${towerCode}_${floor.id}`;
+      // Check if the element is a path (flat structure) or a group (nested structure)
+      if (towerRef.tagName === 'path' || towerRef.tagName === 'PATH') {
+        // Flat structure - direct path elements
+        const floor = towerRef;
+        // Use ID directly if it starts with 't', otherwise valid legacy logic
+        const unitID = floor.id.startsWith('t') ? floor.id : `${towerCode}_${floor.id}`;
         
         const flat = getUnitById(unitID);
-        let floorNo = parseInt(getSVGID(floor.id));
-
+        
         if (
-          isFloorActive(currentTower, flat?.area || 0, flat?.unit_type || "")
+          isFloorActive(null, flat?.area || 0, flat?.unit_type || "")
         ) {
           floor.classList.add("active");
         } else floor.classList.remove("active");
+        
+      } else {
+        // Nested structure (Group -> Group -> Paths) logic
+        const towerId = getSVGID(towerRef.id);
+        const currentTower = getTowerFromCombinedTowersAndIndex(
+          tower,
+          parseInt(towerId) - 1
+        );
+  
+        const floors = towerRef.children;
+  
+        for (let i = 0; i < floors.length; i++) {
+          const floor = floors[i];
+          // Use the towerCode to construct the unit ID
+          const unitID = `${towerCode}_${floor.id}`;
+          
+          const flat = getUnitById(unitID);
+          let floorNo = parseInt(getSVGID(floor.id));
+  
+          if (
+            isFloorActive(currentTower, flat?.area || 0, flat?.unit_type || "")
+          ) {
+            floor.classList.add("active");
+          } else floor.classList.remove("active");
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -32,7 +32,7 @@ function Tower(props) {
   const { tower } = useParams();
   const [showOverlays, setShowOverlays] = useState(true);
   const navigate = useNavigate();
-    const invalidTowers = ['cluster1', 'cluster2', 'cluster3', 'cluster4', 'cluster12', 'cluster13', 'cluster14'];
+    const invalidTowers = [ 'cluster2', 'cluster3', 'cluster4', 'cluster12', 'cluster13', 'cluster14'];
    if(invalidTowers.includes(tower)) navigate('/');
   const { setActiveMapFilterIds } = useMapFilter();
   const { setFlatFilterSizeValues,isFullScreen,setFullScreen } = useContext(AppContext);

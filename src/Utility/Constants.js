@@ -35,7 +35,7 @@ export const COMPASS_ANGLES = {
     T11: 250,
     T12: 275,
     T13: 300,
-    T14: 325
+    T14: 325,
   },
   floors: {
     "Tower-01": {
@@ -121,7 +121,7 @@ export const COMBINED_TOWERS_MAP = {
   cluster11: ["T11"],
   cluster12: ["T12"],
   cluster13: ["T13"],
-  cluster14: ["T14"]
+  cluster14: ["T14"],
 };
 
 export const FLAT_SVG_NO_MAP = {

@@ -2,7 +2,11 @@ import axios from "axios";
 import { message } from "antd";
 import inventoryJSON from "./inventories.json";
 import { inventories, setInventories } from "../Data/inventories";
-import { getPublicLandmarks, getPublicNearbyPlacesByCategory, getAllPublicMapData } from "./mapAdmin";
+import {
+  getPublicLandmarks,
+  getPublicNearbyPlacesByCategory,
+  getAllPublicMapData,
+} from "./mapAdmin";
 import {
   hospital_icon,
   hotel_icon,
@@ -13,7 +17,7 @@ import {
 // const inventories = [];
 
 const OTP_TOKEN = "";
-export const PROJECT_ID = "salarpuria";
+export const PROJECT_ID = "satya_levante";
 export const UNIT_TYPE = "flat";
 export const getInventories = () => inventories;
 
@@ -27,10 +31,11 @@ export const fetchMapLandmarks = async () => {
 
     if (allData && allData.landmarks && Array.isArray(allData.landmarks)) {
       const transformedData = {};
-      allData.landmarks.forEach(landmark => {
+      allData.landmarks.forEach((landmark) => {
         // ONLY use map_element_id (title-independent!)
         if (landmark.map_element_id) {
-          transformedData[landmark.map_element_id] = landmark.description || "No description available";
+          transformedData[landmark.map_element_id] =
+            landmark.description || "No description available";
         }
       });
 
@@ -52,7 +57,7 @@ export const fetchMapDistances = async () => {
 
       // Process landmarks first (they have both distance and description)
       if (allData.landmarks && Array.isArray(allData.landmarks)) {
-        allData.landmarks.forEach(item => {
+        allData.landmarks.forEach((item) => {
           if (item.distance !== undefined && item.map_element_id) {
             transformedData[item.map_element_id] = item.distance;
           }
@@ -61,9 +66,13 @@ export const fetchMapDistances = async () => {
 
       // Process other categories - only add if not already exists (landmarks take priority)
       Object.entries(allData).forEach(([category, items]) => {
-        if (category !== 'landmarks' && Array.isArray(items)) {
-          items.forEach(item => {
-            if (item.distance !== undefined && item.map_element_id && !transformedData[item.map_element_id]) {
+        if (category !== "landmarks" && Array.isArray(items)) {
+          items.forEach((item) => {
+            if (
+              item.distance !== undefined &&
+              item.map_element_id &&
+              !transformedData[item.map_element_id]
+            ) {
               transformedData[item.map_element_id] = item.distance;
             }
           });
@@ -90,17 +99,18 @@ export const fetchMapDescriptions = async () => {
 
       // Process landmarks first (they have descriptions)
       if (allData.landmarks && Array.isArray(allData.landmarks)) {
-        allData.landmarks.forEach(item => {
+        allData.landmarks.forEach((item) => {
           if (item.map_element_id) {
-            transformedData[item.map_element_id] = item.description || "No description available";
+            transformedData[item.map_element_id] =
+              item.description || "No description available";
           }
         });
       }
 
       // Process other categories - only add if not already exists (landmarks take priority)
       Object.entries(allData).forEach(([category, items]) => {
-        if (category !== 'landmarks' && Array.isArray(items)) {
-          items.forEach(item => {
+        if (category !== "landmarks" && Array.isArray(items)) {
+          items.forEach((item) => {
             // Only add if not already exists (landmarks take priority)
             if (item.map_element_id && !transformedData[item.map_element_id]) {
               transformedData[item.map_element_id] = "No description available";
@@ -134,7 +144,7 @@ export const fetchMapTitles = async () => {
       // Process all categories to get titles
       Object.entries(allData).forEach(([category, items]) => {
         if (Array.isArray(items)) {
-          items.forEach(item => {
+          items.forEach((item) => {
             if (item.map_element_id && item.title) {
               // Use the first occurrence (landmarks will be processed first due to API structure)
               if (!transformedData[item.map_element_id]) {
@@ -163,23 +173,39 @@ export const fetchMapFilters = async () => {
     if (allData) {
       const transformedFilters = [];
       const categoryConfig = {
-        landmarks: { title: "Landmarks", className: "landmark", icon: landmark_icon },
+        landmarks: {
+          title: "Landmarks",
+          className: "landmark",
+          icon: landmark_icon,
+        },
         hotels: { title: "Hotels", className: "hotel", icon: hotel_icon },
-        schools: { title: "Education", className: "education", icon: school_icon },
-        hospitals: { title: "Healthcare", className: "hospital", icon: hospital_icon },
-        malls: { title: "Shopping", className: "retail", icon: malls_icon }
+        schools: {
+          title: "Education",
+          className: "education",
+          icon: school_icon,
+        },
+        hospitals: {
+          title: "Healthcare",
+          className: "hospital",
+          icon: hospital_icon,
+        },
+        malls: { title: "Shopping", className: "retail", icon: malls_icon },
         // Removed metros - they shouldn't be in filters
       };
 
-      Object.keys(categoryConfig).forEach(category => {
-        if (allData[category] && Array.isArray(allData[category]) && allData[category].length > 0) {
+      Object.keys(categoryConfig).forEach((category) => {
+        if (
+          allData[category] &&
+          Array.isArray(allData[category]) &&
+          allData[category].length > 0
+        ) {
           const config = categoryConfig[category];
           transformedFilters.push({
             id: `map-filter-${category}`,
             title: config.title,
             className: config.className,
             icon: config.icon,
-            landmarks: () => []
+            landmarks: () => [],
           });
         }
       });
@@ -195,12 +221,11 @@ export const fetchMapFilters = async () => {
   return { success: false, data: null };
 };
 
-
 export const testMapAPIConnectivity = async () => {
   const results = {};
   const testEndpoints = [
-    { key: 'landmarks', fn: () => getPublicLandmarks() },
-    { key: 'allData', fn: () => getAllPublicMapData() },
+    { key: "landmarks", fn: () => getPublicLandmarks() },
+    { key: "allData", fn: () => getAllPublicMapData() },
   ];
 
   for (const { key, fn } of testEndpoints) {
@@ -208,14 +233,18 @@ export const testMapAPIConnectivity = async () => {
       const data = await fn();
       results[key] = {
         success: true,
-        dataLength: Array.isArray(data) ? data.length : (data ? Object.keys(data).length : 0),
-        fullData: data
+        dataLength: Array.isArray(data)
+          ? data.length
+          : data
+            ? Object.keys(data).length
+            : 0,
+        fullData: data,
       };
     } catch (error) {
       results[key] = {
         success: false,
         error: error.response?.status || error.code,
-        message: error.response?.data?.message || error.message
+        message: error.response?.data?.message || error.message,
       };
     }
   }
@@ -309,7 +338,7 @@ export const updateInventoryAPI = async (inventory) => {
         ...inventory,
         project_id: PROJECT_ID,
       },
-      { headers }
+      { headers },
     );
     const { status } = res;
     return status;
@@ -329,7 +358,7 @@ export const updateBookingAPI = async (id, details) => {
     const res = await axios.put(
       `${baseURL}/bookings/${PROJECT_ID}/${id}`,
       details,
-      { headers }
+      { headers },
     );
     const { status: resStatus } = res;
     return resStatus;
@@ -349,7 +378,7 @@ export const exportInventoryAPI = async () => {
 
     const res = await axios.get(
       `${baseURL}/csv/download?project_id=${PROJECT_ID}`,
-      { headers }
+      { headers },
     );
     const { status } = res;
     return { status, data: res.data };
@@ -369,7 +398,7 @@ export const exportBookingsAPI = async () => {
 
     const res = await axios.get(
       `${baseURL}/csv/download-bookings?project_id=${PROJECT_ID}`,
-      { headers }
+      { headers },
     );
     const { status } = res;
     return { status, data: res.data };

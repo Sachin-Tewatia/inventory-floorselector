@@ -70,11 +70,9 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
     const towersRef = ref.current.children;
 
     for (const towerRef of towersRef) {
-      const currentTower = getTowerFromCombinedTowersAndIndex(tower, parseInt(towerRef.id) - 1);
-      const towerNumber = extractTowerNumber(currentTower);
-      const floors = towerRef.children;
-
-      for (const floor of floors) {
+      // Check if the element is a path (flat structure)
+      if (towerRef.tagName === 'path' || towerRef.tagName === 'PATH') {
+        const floor = towerRef;
         if (!floor) continue;
 
         floor.classList.remove("available", "sold", "hold", "mixed");
@@ -82,10 +80,18 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
         floor.style.setProperty('pointer-events', 'all', 'important');
         if (floor._tippy) floor._tippy.destroy();
 
-        const unitID = `${towerCode}_${floor.id}`;
+        // Use ID directly if it starts with 't', otherwise legacy logic
+        const unitID = floor.id.startsWith('t') ? floor.id : `${towerCode}_${floor.id}`;
+        
         const flatDetails = getUnitById(unitID);
         const floorNo = flatDetails?.floor;
+        const currentTower = flatDetails?.tower ? `Tower ${flatDetails.tower.replace('t', '')}` : ''; // Best effort tower name
+        
         if (flatDetails?.status) floor.classList.add(flatDetails.status);
+        
+        // ... (rest of tippy setup for this floor - refactored to function or copied)
+        // Since we can't easily refactor to a function inside this replace block efficiently for now, 
+        // I will inline the setup logic which is identical to the nested loop inner body.
         
         const instance = tippy(floor, {
           offset: [0, 35],
@@ -119,6 +125,7 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
         floor.addEventListener('mouseleave', handleMouseLeave);
         hoverHandlers.set(floor.id, { element: floor, enter: handleMouseEnter, leave: handleMouseLeave });
 
+        const towerNumber = extractTowerNumber(towerCode); 
         const navPath = `/inspire/tower/cluster${towerNumber}/floor/${floorNo}`;
         
         if (isTouchDevice) {
@@ -156,6 +163,96 @@ function FloorsWithTippy({ children, floorsData, tower, rotation, onFloorClick }
         }
 
         TippyInstances.push(instance);
+
+      } else {
+        // Nested structure logic (Group -> Group -> Paths)
+        const currentTower = getTowerFromCombinedTowersAndIndex(tower, parseInt(towerRef.id) - 1);
+        const towerNumber = extractTowerNumber(currentTower);
+        const floors = towerRef.children;
+
+        for (const floor of floors) {
+          if (!floor) continue;
+
+          floor.classList.remove("available", "sold", "hold", "mixed");
+          floor.classList.add("active");
+          floor.style.setProperty('pointer-events', 'all', 'important');
+          if (floor._tippy) floor._tippy.destroy();
+
+          const unitID = `${towerCode}_${floor.id}`;
+          const flatDetails = getUnitById(unitID);
+          const floorNo = flatDetails?.floor;
+          if (flatDetails?.status) floor.classList.add(flatDetails.status);
+          
+          const instance = tippy(floor, {
+            offset: [0, 35],
+            content: ReactDOMServer.renderToStaticMarkup(
+              <FloorNoIndicator tower={currentTower} floorData={flatDetails} />
+            ),
+            trigger: 'manual',
+            allowHTML: true,
+            onShow: () => {
+              if (currentShowingElementId && currentShowingElementId !== floor.id && ref.current) {
+                const prevFloor = document.getElementById(currentShowingElementId);
+                if (prevFloor && ref.current.contains(prevFloor)) {
+                  prevFloor.classList.remove('tippy-showing');
+                }
+              }
+              floor.classList.add('tippy-showing');
+              currentShowingElementId = floor.id;
+            },
+            onHide: () => {
+              floor.classList.remove('tippy-showing');
+              if (currentShowingElementId === floor.id) currentShowingElementId = null;
+              emitSyncEvent(SYNC_EVENTS.TIPPY_HIDE, { elementId: floor.id });
+            },
+          });
+
+          tippyInstanceMap.set(floor.id, instance);
+
+          const handleMouseEnter = () => setTippyShowing(floor, floor.id, true);
+          const handleMouseLeave = () => setTippyShowing(floor, floor.id, false);
+          floor.addEventListener('mouseenter', handleMouseEnter);
+          floor.addEventListener('mouseleave', handleMouseLeave);
+          hoverHandlers.set(floor.id, { element: floor, enter: handleMouseEnter, leave: handleMouseLeave });
+
+          const navPath = `/inspire/tower/cluster${towerNumber}/floor/${floorNo}`;
+          
+          if (isTouchDevice) {
+            floor.onclick = (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const now = Date.now();
+              const lastClick = clickTimers.current[floor.id];
+              
+              if (lastClick && now - lastClick < 300) {
+                clearTimeout(clickTimers.current[floor.id + '_timeout']);
+                delete clickTimers.current[floor.id];
+                onFloorClick?.(navPath);
+              } else {
+                clickTimers.current[floor.id] = now;
+                if (singleton) {
+                  singleton.show(instance);
+                } else {
+                instance.show();
+                }
+                setTippyShowing(floor, floor.id, true);
+                emitSyncEvent(SYNC_EVENTS.TIPPY_SHOW, { elementId: floor.id });
+                clickTimers.current[floor.id + '_timeout'] = setTimeout(() => {
+                  delete clickTimers.current[floor.id];
+                }, 300);
+              }
+            };
+          } else {
+            floor.onclick = (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setTippyShowing(floor, floor.id, true);
+              onFloorClick?.(navPath);
+            };
+          }
+
+          TippyInstances.push(instance);
+        }
       }
     }
 
