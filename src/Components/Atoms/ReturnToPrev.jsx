@@ -1,10 +1,24 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { track } from "../../analytics/track";
 
 function ReturnToPrev({ text = "Return To Tower", to = "" }) {
+  const location = useLocation();
+  
+  const handleBackClick = (e) => {
+    e.stopPropagation();
+    
+    // ✅ Track back navigation
+    track("back_navigation", {
+      from: location.pathname,
+      to: to,
+      buttonText: text
+    });
+  };
+  
   return (
-    <Link to={to} onClick={(e) => e.stopPropagation()} className="no-dec">
+    <Link to={to} onClick={handleBackClick} className="no-dec">
       <Style id="return-to-tower">
         <div>{text}</div>
         <div className="back__icon">

@@ -50,6 +50,7 @@ import VrHome from "./VrHome";
 import { useRoomId } from "../Hooks/useRoomId";
 import { emitSync, SYNC_EVENTS, getReceivingSync } from "../services/socketSync";
 import { useOverlayVisibilitySync } from "../Hooks/useOverlayVisibilitySync";
+import { track } from "../analytics/track";
 
 function Floor() {
 
@@ -112,6 +113,23 @@ function Floor() {
 
   // Handle unit click events to trigger zoom-out animation
   const handleUnitClick = useCallback((navPath) => {
+
+        // ✅ Track unit selection
+    if (navPath) {
+      const unitMatch = navPath.match(/\/unit\/(\w+)/);
+      const unitId = unitMatch ? unitMatch[1] : null;
+      
+      track("unit_select", {
+        page: "floor",
+        tower: currentTower,
+        floor: currentFloor,
+        unit: unitId,
+        from: location.pathname,
+        to: navPath
+      });
+    }
+    
+
     setPendingNavigation(navPath);
     setZoomOutAnimation(true);
 

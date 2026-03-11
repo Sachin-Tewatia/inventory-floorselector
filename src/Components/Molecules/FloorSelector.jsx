@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { TOWERS, TOWERS_LIST, getTowerNumberFromName, COMMBINED_TOWERS_LIST } from "../../Data";
 import { getFormalNameFromNumber } from "../../Utility/function";
-import { COMBINED_TOWERS_MAP, getCombinedTowerFromTower } from "../../Utility/Constants";
+import { COMBINED_TOWERS_MAP, COMMBINED_TOWERS_LIST, getCombinedTowerFromTower } from "../../Utility/Constants";
 import { useEffect } from "react";
 import { useInventories } from "../../Hooks";
+import { track } from "../../analytics/track";
 
 function FloorSelector({ currentTower, currentFloor,towerName }) {
   const [selectedFloor, setSelectedFloor] = useState(currentFloor);
@@ -45,11 +45,34 @@ function FloorSelector({ currentTower, currentFloor,towerName }) {
 
   const handleSelectedFloor = (e, floor) => {
     e.stopPropagation();
+    
+    // ✅ Track floor filter selection
+    if (floor !== selectedFloor) {
+      track("filter_change", {
+        filterType: "floor",
+        floor: floor,
+        tower: currentTower,
+        from: selectedFloor,
+        to: floor,
+        page: "floor"
+      });
+    }
     setSelectedFloor(floor);
   };
 
   const handleSelectedTower = (e, tower) => {
     e.stopPropagation();
+    
+     // ✅ Track tower filter selection
+     if (tower !== selectedTower) {
+       track("filter_change", {
+         filterType: "tower",
+         tower: tower,
+         from: selectedTower,
+         to: tower,
+         page: "floor"
+       });
+     }
     setSelectedTower(tower);
   };
 

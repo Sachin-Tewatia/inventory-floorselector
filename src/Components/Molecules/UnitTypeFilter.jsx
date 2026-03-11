@@ -9,6 +9,7 @@ import UnitStatusLegend from "../Atoms/UnitStatusLegend";
 import ExploreTowers from "./ExploreTowers";
 import { useRoomId } from "../../Hooks/useRoomId";
 import { SYNC_EVENTS, getReceivingSync, emitSyncDebounced } from "../../services/socketSync";
+import { track } from "../../analytics/track";
 
 function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters = [], tower, showBandFilter = false }) {
   const location = useLocation();
@@ -43,6 +44,8 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters =
 
   const handleFilterClick = (id) => {
     let newFilters;
+    const clickedFilter = unitTypeFilters.find(f => f.id === id);
+    const filterTitle = clickedFilter ? clickedFilter.title : id;
     if (isFilterActive(id)) {
       // should be deactivated
       if (isAllFiltersActive()) {
@@ -60,12 +63,30 @@ function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters =
     
     // Update state with the calculated newFilters
     setActiveMapFilterIds(newFilters);
+
+     // ✅ Track BHK filter change
+    track("filter_change", {
+      filterType: "bhk",
+      bhk: filterTitle,
+      action: isFilterActive(id) ? "deselect" : "select",
+      filterValue: filterTitle
+    });
     
     if (!getReceivingSync() && roomId) emitSyncDebounced(SYNC_EVENTS.FILTERS, filtersSyncData({ activeMapFilterIds: newFilters }), roomId, 100);
   };
 
   const handleSizeOnSliderChange = (value) => {
     setFlatFilterSizeValues(value);
+    // ✅ Track price/size slider change (debounced to avoid too many events)
+    // Note: This will fire frequently, but Lambda handles it efficiently
+    track("filter_change", {
+      filterType: "size",
+      minSize: value[0],
+      maxSize: value[1],
+      minPrice: value[0] * PRICE_OFFSET, // Convert to approximate price if needed
+      maxPrice: value[1] * PRICE_OFFSET
+    });
+    
     if (!getReceivingSync() && roomId) emitSyncDebounced(SYNC_EVENTS.FILTERS, filtersSyncData({ flatFilterSizeValues: value }), roomId, 300);
   };
 

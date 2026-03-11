@@ -6,6 +6,7 @@ import { adminLogin } from "../APIs";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../Contexts/AppContext";
+import { Logo2 } from "../Components/Molecules/Navigator";
 // import Footer from "../Footer/Footer";
 
 function Login({ setIsLogin, title }) {
@@ -50,9 +51,10 @@ function Login({ setIsLogin, title }) {
 
   return (
     <Style>
-      <div className="logo-container">
+      {/* <div className="logo-container">
         <img src="/inspire.png" alt="Logo" className="logo" />
-      </div>
+      </div> */}
+      <Logo2/>
       <div className="login-page">
         <div className="form">
           <div className="title">Admin / Rm Login</div>

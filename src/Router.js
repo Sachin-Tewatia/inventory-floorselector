@@ -34,11 +34,18 @@ import VrHome from "./Pages/VrHome";
 import SocketRoomManager from "./Components/SocketRoomManager";
 import Disclaimer from "./Components/Molecules/Disclaimer";
 import ChatContainer from "./Components/Chat/ChatContainer";
-
+import { usePageTracking } from "./analytics/usePageTracking";
 import TwentyKm from "./Map/pages/TwentyKm.jsx";
 import Earth_Video from "./Map/pages/Earth_Video.jsx";
 import MapAdminDashboard from "./Dashboard/MapAdmin/MapAdminDashboard";
 import MapAdminManagement from "./Dashboard/MapAdmin/MapAdminManagement";
+
+
+// Component to track page time - must be inside BrowserRouter
+function PageTimeTracker() {
+  usePageTracking();
+  return null;
+}
 
 function Router(props) {
   const { fetchInventories, inventoriesList, getAllUnitsInFloor } =
@@ -57,6 +64,8 @@ function Router(props) {
 
   return inventoriesList.length > 0 ? (
     <BrowserRouter>
+      {/* Page time tracking */}
+      <PageTimeTracker />
       {/* Manages socket room connections based on URL roomId */}
       <SocketRoomManager />
       <Disclaimer />

@@ -20,6 +20,7 @@ import { useRoomId } from "../Hooks/useRoomId";
 import { emitSync, SYNC_EVENTS, getReceivingSync } from "../services/socketSync";
 import { useImageNavigationSync } from "../Hooks/useImageNavigationSync";
 import { useVideoPlaybackSync } from "../Hooks/useVideoPlaybackSync";
+import { track } from "../analytics/track";
 
 export const TowerSvg = ({ tower, onVideoComplete }) => {
   const {
@@ -234,6 +235,21 @@ export const TowerSvg = ({ tower, onVideoComplete }) => {
 
   // Handle floor click to play video and navigate
   const handleFloorClick = useCallback((navPath) => {
+
+      // ✅ Track floor selection
+    if (navPath) {
+      const floorMatch = navPath.match(/\/floor\/(\w+)/);
+      const floor = floorMatch ? floorMatch[1] : null;
+      
+      track("floor_select", {
+        page: "tower",
+        tower: tower,
+        floor: floor,
+        from: location.pathname,
+        to: navPath
+      });
+    }
+
     // Play video locally
     playVideo(navPath);
 

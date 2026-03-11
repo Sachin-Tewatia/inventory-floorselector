@@ -1,8 +1,8 @@
 import { io } from "socket.io-client";
+import { PROJECT_ID } from "./APIs";
 
 const SocketBaseUrl= "https://api.floorselector.convrse.ai"
 // const SocketBaseUrl= "http://localhost:8000"
-export const PROJECT_ID = "salarpuria";
 
 // Don't create socket immediately - wait for authentication
 let socket = null;

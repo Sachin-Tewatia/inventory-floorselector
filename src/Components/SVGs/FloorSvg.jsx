@@ -30,6 +30,7 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
   const singleton = useRef(null);
   const selectedPathRef = useRef(null);
   const { roomId } = useRoomId();
+  const hasMouseMovedRef = useRef(false);
   const roomIdRef = useRef(roomId);
   const tippyInstanceMap = useRef(new Map());
   const tippySetupComplete = useRef(false);
@@ -56,6 +57,18 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
       else flatSvg.classList.remove("active");
     }
   }, [flatFilterPriceValues, flatFilterSizeValues, activeMapFilterIds, units]);
+
+    useEffect(() => {
+    const handleMouseMove = () => {
+      hasMouseMovedRef.current = true;
+    };
+  
+    window.addEventListener("mousemove", handleMouseMove, { once: true });
+  
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   const emitSyncEvent = useRef((eventType, data) => {
     if (!getReceivingSync() && roomIdRef.current) {
@@ -254,7 +267,12 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
         };
       } else {
         const handleMouseEnter = () => {
-          if (flatSvg._tippy && singleton.current) showTippy(flatSvg._tippy);
+          // Ignore fake hover triggered during initial render
+          if (!hasMouseMovedRef.current) return;
+        
+          if (flatSvg._tippy && singleton.current) {
+            showTippy(flatSvg._tippy);
+          }
         };
         
         const handleMouseLeave = () => {
@@ -396,7 +414,7 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
     onSync: ({ elementId }) => {
       if (!elementId) return;
       retryUntilReady(() => {
-        const flatSvg = ref.current?.querySelector(`path#${elementId}`);
+        const flatSvg = ref.current?.querySelector(`path[id="${elementId}"]`);
         const instance = tippyInstanceMap.current.get(elementId);
         if (flatSvg && instance && singleton.current) {
           if (selectedPathRef.current && selectedPathRef.current !== flatSvg) {
@@ -421,7 +439,7 @@ function FloorSvg({ isActive, units, tower, floor, combinedTower, onUnitClick })
     onSync: ({ elementId }) => {
       if (!elementId) return;
       retryUntilReady(() => {
-        const flatSvg = ref.current?.querySelector(`path#${elementId}`);
+        const flatSvg = ref.current?.querySelector(`path[id="${elementId}"]`);
         const instance = tippyInstanceMap.current.get(elementId);
         
         if (singleton.current) {

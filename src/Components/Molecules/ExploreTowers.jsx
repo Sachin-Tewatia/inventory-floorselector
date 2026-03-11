@@ -10,31 +10,60 @@ import {
   COMBINED_TOWERS_MAP,
   getCombinedTowerFromTower,
 } from "../../Utility/Constants";
+// ✅ Analytics
+import { track } from "../../analytics/track";
 
 function ExploreTowers({ currentTower }) {
+
+  // ✅ Track tower change safely + debug log
+  const handleTowerClick = (nextTower) => {
+    try {
+      console.log("Tower clicked:", {
+        from: currentTower,
+        to: nextTower
+      });
+
+      if (!currentTower) return;
+      if (currentTower === nextTower) return;
+
+      track("tower_change", {
+        from: currentTower,
+        to: nextTower
+      });
+
+    } catch (err) {
+      console.error("tower_change tracking failed", err);
+    }
+  };
+
   return (
     <Style className="overlay-can-fade-out">
       <div className="title">Explore Towers</div>
       <div className="towers">
         {COMMBINED_TOWERS_LIST.map((tower) =>
-          COMBINED_TOWERS_MAP[tower].map((tower) => (
-            <Link
-              to={`/inspire/tower/${getCombinedTowerFromTower(tower)}`}
-              className="no-dec towerlink"
-              key={tower}
-            >
-              <div
-                className={
-                  COMBINED_TOWERS_MAP[currentTower].includes(tower)
-                    ? "tower active"
-                    : "tower"
-                }
+          COMBINED_TOWERS_MAP[tower].map((tower) => {
+            const combinedTower = getCombinedTowerFromTower(tower);
+
+            return (
+              <Link
+                to={`/inspire/tower/${combinedTower}`}
+                className="no-dec towerlink"
+                key={tower}
+                onClick={() => handleTowerClick(combinedTower)}   // ✅ tracking here
               >
-                {/* {getTowerNumberFromName(tower)} */}
-                {tower}
-              </div>
-            </Link>
-          ))
+                <div
+                  className={
+                    COMBINED_TOWERS_MAP[currentTower].includes(tower)
+                      ? "tower active"
+                      : "tower"
+                  }
+                >
+                  {/* {getTowerNumberFromName(tower)} */}
+                  {tower}
+                </div>
+              </Link>
+            );
+          })
         )}
       </div>
     </Style>

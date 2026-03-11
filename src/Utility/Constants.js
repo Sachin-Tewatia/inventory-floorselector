@@ -107,11 +107,18 @@ export const COMPASS_ANGLES = {
   },
 };
 
+export const COMMBINED_TOWERS_LIST = [
+  "cluster5",
+  "cluster6", 
+  "cluster7", 
+  "cluster8", 
+  "cluster9", 
+  "cluster10",
+  "cluster11"
+];
+
+
 export const COMBINED_TOWERS_MAP = {
-  cluster1: ["T1"],
-  cluster2: ["T2"],
-  cluster3: ["T3"],
-  cluster4: ["T4"],
   cluster5: ["T5"],
   cluster6: ["T6"],
   cluster7: ["T7"],
@@ -119,9 +126,6 @@ export const COMBINED_TOWERS_MAP = {
   cluster9: ["T9"],
   cluster10: ["T10"],
   cluster11: ["T11"],
-  cluster12: ["T12"],
-  cluster13: ["T13"],
-  cluster14: ["T14"]
 };
 
 export const FLAT_SVG_NO_MAP = {

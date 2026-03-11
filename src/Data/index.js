@@ -35,16 +35,6 @@ import {
 import { COMBINED_TOWERS_MAP } from "../Utility/Constants";
 import { s } from "framer-motion/client";
 
-export const COMMBINED_TOWERS_LIST = [
-  "cluster5",
-  "cluster6", "cluster7", "cluster8", "cluster9", "cluster10",
-  "cluster11"
-];
-// export const COMMBINED_TOWERS_LIST = [
-//   "cluster1", "cluster2", "cluster3", "cluster4", "cluster5", 
-//   "cluster6", "cluster7", "cluster8", "cluster9", "cluster10",
-//   "cluster11", "cluster12", "cluster13", "cluster14"
-// ];
 
 export const TOWERS_SVGS = {
   T1: "M560.5 387L502.5 456L498 460.5V467L493 469L489 471.5L422.5 539.5L403 561.5L407 568.5L445 600H452L460 604.5L463.5 606L489 612.5L484 618.5L487 626.5L488 631.5L489.5 635L530.5 667.5L534 668.5H536L539.5 667.5L543 664L547.5 663.5L551.5 666L555 665H557.5L560.5 667.5L596.5 673.5L688 690L688.5 690.5L693.5 695.5L697 698L699.5 699.5H701L706 701H710.5L716.5 698.5L801 594L793 586.5L791 583.5L709 508.5L694 495.5L691.5 492L692.5 490V486L652 453.5L646 449H642L640.5 447.5L620 428.5L566.5 387L563.5 386L560.5 387Z",
