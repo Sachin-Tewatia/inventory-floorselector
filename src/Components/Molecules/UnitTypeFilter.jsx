@@ -11,6 +11,7 @@ import { useRoomId } from "../../Hooks/useRoomId";
 import { SYNC_EVENTS, getReceivingSync, emitSyncDebounced } from "../../services/socketSync";
 import { track } from "../../analytics/track";
 
+let PRICE_OFFSET = 1000000;
 function UnitTypeFilter({ unitTypeFilters, minMaxArea, totalUnits, viewFilters = [], tower, showBandFilter = false }) {
   const location = useLocation();
   const { flatFilterSizeValues, setFlatFilterSizeValues } =

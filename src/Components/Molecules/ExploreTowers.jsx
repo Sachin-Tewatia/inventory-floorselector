@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
-  COMMBINED_TOWERS_LIST,
   TOWERS_LIST,
   getTowerNumberFromName,
 } from "../../Data";
 import {
   COMBINED_TOWERS_MAP,
+  COMMBINED_TOWERS_LIST,
   getCombinedTowerFromTower,
 } from "../../Utility/Constants";
 // ✅ Analytics
